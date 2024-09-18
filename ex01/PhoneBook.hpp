@@ -1,17 +1,17 @@
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
-
-#include <vector>
+#include <iostream> 
+#include "Contact.hpp"
 
 class PhoneBook
 {
 	private:
-		std::vector< int > arr[8];
-		void add_numbers(const PhoneBook& phonebook);
+		Contact _contact_list[8];
 	public:
-		PhoneBook() = default;
-		~PhoneBook() = default;
+		PhoneBook(void) = default;
+		~PhoneBook(void) = default;
 };
 
 #endif
+
