@@ -11,13 +11,13 @@ PhoneBook::~PhoneBook(void)
 	return ;
 }
 void PhoneBook::create_list(void){
-	for (int i = 0; i <= 8; i++)
+	for (int i = 0; i < 8; i++)
 		_contact_list[i].index = i;
 }
 
 void PhoneBook::add_contact(void)
 {
-	Contact cur_contact = this->_contact_list[counter % 9];
+	Contact cur_contact = _contact_list[counter % 9];
 	std::cout << CYAN << "ADDING NEW CONTACT..." << RESET << std::endl;
 	std::cout << "Enter first name:" << std::endl;
 	std::cin >> cur_contact.first_name;
@@ -30,6 +30,35 @@ void PhoneBook::add_contact(void)
 	std::cout << "Enter darkest secret:" << std::endl;
 	std::cin >> cur_contact.darkest_secret;
 	std::cout << BLUE << "CONTACT SAVED SUCCESSFULLY!" << RESET << std::endl;
+	//add the check for an empty field
+}
+
+void PhoneBook::search_contact(void)
+{
+	std::string first_name;
+	std::string last_name;
+	std::string nickname;
+	int chars_left = 0;
+	int i = 0;
+	//display_contacts
+	std::cout << CYAN << "CURRENT CONTACTS:" << RESET << std::endl;
+	while (i < 8)
+	{
+		std::cout << "        " << _contact_list[i].index << " | ";
+		first_name = _contact_list[i].first_name;
+		if (first_name.length() >= 7)
+		{
+			first_name = first_name.substr(first_name[0], 8);
+			first_name[8] = '.';
+		}
+		chars_left = 8 - first_name.length();
+		while (chars_left--)
+			std::cout << " ";
+		std::cout << first_name << " | ";
+		i++;
+	}
+	
+
 }
 
 //add a function to push contacts

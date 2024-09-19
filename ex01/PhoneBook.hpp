@@ -27,6 +27,7 @@ class PhoneBook
 		bool exited;
 		void create_list(void);
 		void add_contact(void);
+		void search_contact(void);
 };
 
 

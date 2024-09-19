@@ -18,7 +18,8 @@ int main()
 			my_phone_book.counter++;
 		}
 		else if (!input_cmd. compare("SEARCH"))
-			std::cout << "Lets search some contacts" << std::endl;
+			// std::cout << "Lets search some contacts" << std::endl;
+			my_phone_book.search_contact();
 	}
 	return (0);
 }
