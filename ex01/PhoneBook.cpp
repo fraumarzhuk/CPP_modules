@@ -5,32 +5,40 @@ PhoneBook::PhoneBook(void)
 {
 	exited = false;
 	counter = 0;
+	create_list();
 }
 PhoneBook::~PhoneBook(void)
 {
 	return ;
 }
 void PhoneBook::create_list(void){
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i <= 8; i++)
 		_contact_list[i].index = i;
 }
 
 void PhoneBook::add_contact(void)
 {
-	Contact cur_contact = _contact_list[counter % 9];
+	Contact& cur_contact = _contact_list[counter % 8];
 	std::cout << CYAN << "ADDING NEW CONTACT..." << RESET << std::endl;
-	std::cout << "Enter first name:" << std::endl;
-	std::cin >> cur_contact.first_name;
-	std::cout << "Enter last name:" << std::endl;
-	std::cin >> cur_contact.last_name;
-	std::cout << "Enter nickname:" << std::endl;
-	std::cin >> cur_contact.nickname;
-	std::cout << "Enter phone_number:" << std::endl;
-	std::cin >> cur_contact.phone_number;
-	std::cout << "Enter darkest secret:" << std::endl;
-	std::cin >> cur_contact.darkest_secret;
+	save_input("first name", cur_contact.first_name);
+	save_input("last name", cur_contact.last_name);
+	save_input("nickname", cur_contact.nickname);
+	save_input("phone number", cur_contact.phone_number);
+	save_input("darkest secret", cur_contact.darkest_secret);
 	std::cout << BLUE << "CONTACT SAVED SUCCESSFULLY!" << RESET << std::endl;
-	//add the check for an empty field
+	counter++;
+}
+void PhoneBook::save_input(std::string value, std::string& placeholder)
+{
+	while (1)
+	{
+		std::cout << "Enter " << value << ":" << std::endl;
+		std::getline(std::cin, placeholder);
+		if (placeholder.empty()) //add check for spaces(chars and nums?)
+			std::cout << RED <<"Fields can't be empty!"<< RESET << std::endl;
+		else
+			break ;
+	}
 }
 
 void PhoneBook::search_contact(void)
@@ -38,7 +46,6 @@ void PhoneBook::search_contact(void)
 	std::string first_name;
 	std::string last_name;
 	std::string nickname;
-	int chars_left = 0;
 	int i = 0;
 	//display_contacts
 	std::cout << CYAN << "CURRENT CONTACTS:" << RESET << std::endl;
@@ -46,19 +53,30 @@ void PhoneBook::search_contact(void)
 	{
 		std::cout << "        " << _contact_list[i].index << " | ";
 		first_name = _contact_list[i].first_name;
-		if (first_name.length() >= 7)
-		{
-			first_name = first_name.substr(first_name[0], 8);
-			first_name[8] = '.';
-		}
-		chars_left = 8 - first_name.length();
-		while (chars_left--)
-			std::cout << " ";
-		std::cout << first_name << " | ";
+		display_in_column(first_name);
+		last_name = _contact_list[i].last_name;
+		display_in_column(last_name);
+		nickname = _contact_list[i].nickname;
+		display_in_column(nickname);
+		std::cout << std::endl;
 		i++;
 	}
 	
 
+}
+void PhoneBook::display_in_column(std::string field_name)
+{
+	int chars_left = 0;
+	if (field_name.length() > 8)
+	{
+		field_name = field_name.substr(0, 7);
+		field_name += '.';
+	}
+	chars_left = 8 - field_name.length();
+	while (chars_left-- > 0)
+		std::cout << " ";
+	std::cout << field_name <<  " | ";
+	
 }
 
 //add a function to push contacts

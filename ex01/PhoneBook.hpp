@@ -28,6 +28,8 @@ class PhoneBook
 		void create_list(void);
 		void add_contact(void);
 		void search_contact(void);
+		void display_in_column(std::string field_name);
+		void save_input(std::string value, std::string& placeholder);
 };
 
 
