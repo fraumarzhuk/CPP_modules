@@ -2,15 +2,14 @@
 #define CONTACT_HPP
 
 #include <iostream> 
-#include "PhoneBook.hpp"
 
 class Contact
 {
 	private:
 		int _delete_later;
 	public:
-		Contact(void) = default;
-		~Contact(void) = default;
+		Contact(void);
+		~Contact(void);
 		int index;
 		std::string first_name;
 		std::string last_name;
