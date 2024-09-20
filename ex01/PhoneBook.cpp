@@ -31,25 +31,33 @@ void PhoneBook::add_contact(void)
 	counter++;
 }
 
+
 void PhoneBook::save_input(std::string value, std::string& placeholder)
 {
-	while (1)
-	{
-		// std::cout << "Enter " << value << ":" << std::endl;
-		// std::getline(std::cin, placeholder);
-		// if (placeholder.empty() || !is_valid_input(placeholder, 1)) //add check for spaces(chars and nums?)
-		// 	std::cout << RED <<"Fields can't be empty!"<< RESET << std::endl;
-		// else
-		// 	break ;
-		std::cout << "Enter " << value << ":" << std::endl;
-		std::getline(std::cin, placeholder);
-		if (value == "phone number" && !is_valid_input(placeholder, 2))
-			std::cout << RED <<"Number shouldn't contain letters!"<< RESET << std::endl;
-		else if (placeholder.empty() || !is_valid_input(placeholder, 1))
-			std::cout << RED <<"Field can't be empty or contain numbers!"<< RESET << std::endl;
+    while (true)
+    {
+        std::cout << "Enter " << value << ":" << std::endl;
+        std::getline(std::cin, placeholder);
+
+        if (placeholder.empty() || !is_valid_input(placeholder, 0))
+            std::cout << RED << "Field can't be empty!" << RESET << std::endl;
+        else if (value == "phone number")
+        {
+            if (!is_valid_input(placeholder, 2))
+                std::cout << RED << "Number shouldn't contain letters!" << RESET << std::endl;
+            else
+                break;
+        }
+        else if (value == "first name" || value == "last name")
+        {
+            if (!is_valid_input(placeholder, 1))
+                std::cout << RED << "Field can't contain numbers!" << RESET << std::endl;
+            else
+                break;
+        }
 		else
 			break ;
-	}
+    }
 }
 
 void PhoneBook::search_contact(void)
@@ -81,11 +89,11 @@ void PhoneBook::search_contact(void)
 		else
 			std::cout << RED <<"Incorrect value. Please try again." <<  RESET << std::endl;
 	}
-	std::cout << _contact_list[i].first_name << std::endl;
-	std::cout << _contact_list[i].last_name << std::endl;
-	std::cout << _contact_list[i].nickname << std::endl;
-	std::cout << _contact_list[i].phone_number << std::endl;
-	std::cout << _contact_list[i].darkest_secret << std::endl;
+	std::cout << "First name: " << _contact_list[i].first_name << std::endl;
+	std::cout << "Last name: " << _contact_list[i].last_name << std::endl;
+	std::cout << "Nickname: " << _contact_list[i].nickname << std::endl;
+	std::cout << "Phone number: " << _contact_list[i].phone_number << std::endl;
+	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl;
 
 }
 
@@ -116,13 +124,14 @@ int PhoneBook::is_valid_input(std::string input, int option)
 	}
 	if (option == 0)
 		return (found);
-	else if (option == 1) //is only alphas
+	i = 0;
+	if (option == 1) //is only alphas
 	{
 		while (input[i])
 		{
-			if (!isalpha(input[i]) && input[i] != ' ')
+			if (!isalpha(input[i]) && input[i] != '-')
 				return (0);
-			i++; 
+			i++;
 		}
 	}
 	else if (option == 2) // is only numericals
@@ -131,7 +140,7 @@ int PhoneBook::is_valid_input(std::string input, int option)
 		{
 			if (!isdigit(input[i]) && input[i] != ' ' && input[i] != '+')
 				return (0);
-			i++; 
+			i++;
 		}
 	}
 	return (found);
