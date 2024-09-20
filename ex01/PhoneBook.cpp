@@ -28,6 +28,7 @@ void PhoneBook::add_contact(void)
 	save_input("phone number", cur_contact.phone_number);
 	save_input("darkest secret", cur_contact.darkest_secret);
 	std::cout << BLUE << "CONTACT SAVED SUCCESSFULLY!" << RESET << std::endl;
+	cur_contact.contact_filled = true;
 	counter++;
 }
 
@@ -55,7 +56,6 @@ void PhoneBook::search_contact(void)
 	std::string index;
 	int i = 0;
 	int got_input = 0;
-	std::stringstream ss;
 	//display_contacts
 	std::cout << CYAN << "CURRENT CONTACTS:" << RESET << std::endl;
 	while (i < 8)
@@ -72,19 +72,19 @@ void PhoneBook::search_contact(void)
 	{
 		std::cout << "Enter the index of the contact:" << std::endl;
 		std::getline(std::cin, index);
-    	ss << index;
-   	 	ss >> i;  
-		if (i >= 0 && i <= 7)
+		i = atoi(index.c_str());
+		if (is_valid_input(index, 2) && i >= 0 && i <= 7)
 			got_input = 1;
+		else if (!_contact_list[i].contact_filled)
+			std::cout << "This contact is empty." << std::endl << std::endl;
 		else
-			std::cout << RED <<"Incorrect value. Please try again." <<  RESET << std::endl;
+			std::cout << RED <<"Incorrect value: " << i << " Please try again." <<  RESET << std::endl;
 	}
 	std::cout << "First name: " << _contact_list[i].first_name << std::endl;
 	std::cout << "Last name: " << _contact_list[i].last_name << std::endl;
 	std::cout << "Nickname: " << _contact_list[i].nickname << std::endl;
 	std::cout << "Phone number: " << _contact_list[i].phone_number << std::endl;
-	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl;
-
+	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl << std::endl;
 }
 
 void PhoneBook::display_in_column(std::string field_name)

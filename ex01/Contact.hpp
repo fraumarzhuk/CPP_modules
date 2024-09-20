@@ -11,6 +11,7 @@ class Contact
 		Contact(void);
 		~Contact(void);
 		int index;
+		int contact_filled;
 		std::string first_name;
 		std::string last_name;
 		std::string nickname;
