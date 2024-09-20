@@ -6,8 +6,8 @@ int main()
 	PhoneBook my_phone_book;
 	std::string input_cmd;
 
-	std::cout << "Welcome to the PhoneBook!" << std::endl;
-	std::cout << "Availiable cmds: ADD, SEARCH, EXIT" << std::endl;
+	std::cout << MAGENTA << "☎️ WELCOME TO THE PHONEBOOK! ☎️ " << RESET << std::endl;
+	std::cout << BLUE <<"Availiable cmds: ADD, SEARCH, EXIT" << RESET << std::endl;
 	while (!my_phone_book.exited)
 	{
 		std::cout << "Enter your command: " << std::endl;

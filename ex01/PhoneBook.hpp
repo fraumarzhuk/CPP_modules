@@ -30,6 +30,7 @@ class PhoneBook
 		void search_contact(void);
 		void display_in_column(std::string field_name);
 		void save_input(std::string value, std::string& placeholder);
+		int is_valid_input(std::string input, int option);
 };
 
 
