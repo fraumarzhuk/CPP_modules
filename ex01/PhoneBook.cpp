@@ -41,20 +41,10 @@ void PhoneBook::save_input(std::string value, std::string& placeholder)
 
         if (placeholder.empty() || !is_valid_input(placeholder, 0))
             std::cout << RED << "Field can't be empty!" << RESET << std::endl;
-        else if (value == "phone number")
-        {
-            if (!is_valid_input(placeholder, 2))
+        else if (value == "phone number" && !is_valid_input(placeholder, 2))
                 std::cout << RED << "Number shouldn't contain letters!" << RESET << std::endl;
-            else
-                break;
-        }
-        else if (value == "first name" || value == "last name")
-        {
-            if (!is_valid_input(placeholder, 1))
+        else if ((value == "first name" || value == "last name") && !is_valid_input(placeholder, 1))
                 std::cout << RED << "Field can't contain numbers!" << RESET << std::endl;
-            else
-                break;
-        }
 		else
 			break ;
     }
