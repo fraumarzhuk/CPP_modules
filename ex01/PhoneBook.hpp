@@ -1,7 +1,8 @@
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
-#include <iostream> 
+#include <iostream>
+#include <cstdlib>
 #include "Contact.hpp"
 
 #define RESET   "\033[0m"

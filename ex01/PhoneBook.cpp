@@ -38,8 +38,8 @@ void PhoneBook::save_input(std::string value, std::string& placeholder)
     while (true)
     {
         std::cout << "Enter " << value << ":" << std::endl;
-        std::getline(std::cin, placeholder);
-
+        if (!std::getline(std::cin, placeholder))
+			exit(1);
         if (placeholder.empty() || !is_valid_input(placeholder, 0))
             std::cout << RED << "Field can't be empty!" << RESET << std::endl;
         else if (value == "phone number" && !is_valid_input(placeholder, 2))
@@ -71,7 +71,8 @@ void PhoneBook::search_contact(void)
 	while (!got_input)
 	{
 		std::cout << "Enter the index of the contact:" << std::endl;
-		std::getline(std::cin, index);
+		if (!std::getline(std::cin, index))
+			exit(1);
 		i = atoi(index.c_str());
 		if (is_valid_input(index, 2) && i >= 0 && i <= 7)
 			got_input = 1;

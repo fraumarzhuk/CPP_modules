@@ -1,5 +1,5 @@
 NAME = phonebook
-CC = c++ -std=c++98
+CXX = c++ -std=c++98
 FLAGS = -Wall -Werror -Wextra -g
 
 SRC = *.cpp
@@ -13,7 +13,7 @@ PURPLE	:= \033[35;1m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CXX) $(FLAGS) $(SRC) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
