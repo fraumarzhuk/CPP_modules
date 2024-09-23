@@ -21,35 +21,10 @@ void PhoneBook::create_list(void){
 void PhoneBook::add_contact(void) 
 {
 	Contact& cur_contact = _contact_list[counter % 8];
-	std::cout << CYAN << "ADDING NEW CONTACT..." << RESET << std::endl;
-	save_input("first name", cur_contact.first_name);
-	save_input("last name", cur_contact.last_name);
-	save_input("nickname", cur_contact.nickname);
-	save_input("phone number", cur_contact.phone_number);
-	save_input("darkest secret", cur_contact.darkest_secret);
-	std::cout << BLUE << "CONTACT SAVED SUCCESSFULLY!" << RESET << std::endl;
-	cur_contact.contact_filled = true;
+	cur_contact.save_contact_values();
 	counter++;
 }
 
-
-void PhoneBook::save_input(std::string value, std::string& placeholder)
-{
-    while (true)
-    {
-        std::cout << "Enter " << value << ":" << std::endl;
-        if (!std::getline(std::cin, placeholder))
-			exit(1);
-        if (placeholder.empty() || !is_valid_input(placeholder, 0))
-            std::cout << RED << "Field can't be empty!" << RESET << std::endl;
-        else if (value == "phone number" && !is_valid_input(placeholder, 2))
-                std::cout << RED << "Number shouldn't contain letters!" << RESET << std::endl;
-        else if ((value == "first name" || value == "last name") && !is_valid_input(placeholder, 1))
-                std::cout << RED << "Field can't contain numbers!" << RESET << std::endl;
-		else
-			break ;
-    }
-}
 
 void PhoneBook::search_contact(void)
 {
@@ -61,83 +36,23 @@ void PhoneBook::search_contact(void)
 	while (i < 8)
 	{
 		if (_contact_list[i].contact_filled)
-		{
-			std::cout << "        " << _contact_list[i].index << " | ";
-			display_in_column(_contact_list[i].first_name);
-			display_in_column(_contact_list[i].last_name);
-			display_in_column(_contact_list[i].nickname);
-			std::cout << std::endl;
-		}
+			_contact_list[i].display_contact_values(false);
 		i++;
 	}
 	//display detailed
 	while (!got_input)
 	{
 		std::cout << "Enter the index of the contact:" << std::endl;
-		if (!std::getline(std::cin, index))
+		if (!std::getline(std::cin, index) || !index.compare("EXIT"))
 			exit(1);
 		i = atoi(index.c_str());
-		if (is_valid_input(index, 2) && i >= 0 && i <= 7)
+		if (_contact_list[i].is_valid_input(index, NUM) && i >= 0 && i <= 7)
 			got_input = 1;
 		else if (!_contact_list[i].contact_filled)
 			std::cout << "This contact is empty." << std::endl << std::endl;
 		else
 			std::cout << RED <<"Incorrect value: " << i << " Please try again." <<  RESET << std::endl;
 	}
-	std::cout << std::endl << GREEN << "^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V" << RESET << std::endl << std::endl;
-	std::cout << "First name: " << _contact_list[i].first_name << std::endl;
-	std::cout << "Last name: " << _contact_list[i].last_name << std::endl;
-	std::cout << "Nickname: " << _contact_list[i].nickname << std::endl;
-	std::cout << "Phone number: " << _contact_list[i].phone_number << std::endl;
-	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl;
-	std::cout << std::endl << GREEN << "^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V" << RESET << std::endl << std ::endl;
+	_contact_list[i].display_contact_values(true);
 }
 
-void PhoneBook::display_in_column(std::string field_name)
-{
-	int chars_left = 0;
-	if (field_name.length() > 8)
-	{
-		field_name = field_name.substr(0, 7);
-		field_name += '.';
-	}
-	chars_left = 8 - field_name.length();
-	while (chars_left-- > 0)
-		std::cout << " ";
-	std::cout << field_name <<  " | ";
-	
-}
-
-int PhoneBook::is_valid_input(std::string input, int option)
-{
-	int found = 0;
-	int i = 0;
-	while (input[i])
-	{
-		if (isalpha(input[i]) || isdigit(input[i]))
-			found = 1;
-		i++;
-	}
-	if (option == 0)
-		return (found);
-	i = 0;
-	if (option == 1) //is only alphas
-	{
-		while (input[i])
-		{
-			if (!isalpha(input[i]) && input[i] != '-')
-				return (0);
-			i++;
-		}
-	}
-	else if (option == 2) // is only numericals
-	{
-		while (input[i])
-		{
-			if (!isdigit(input[i]) && input[i] != ' ' && input[i] != '+')
-				return (0);
-			i++;
-		}
-	}
-	return (found);
-}

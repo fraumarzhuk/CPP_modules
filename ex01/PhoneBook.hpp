@@ -15,6 +15,7 @@
 #define CYAN    "\033[36m"      /* Cyan */
 #define WHITE   "\033[37m"      /* White */
 
+
 class Contact;
 
 class PhoneBook
@@ -29,9 +30,6 @@ class PhoneBook
 		void create_list(void);
 		void add_contact(void);
 		void search_contact(void);
-		void display_in_column(std::string field_name);
-		void save_input(std::string value, std::string& placeholder);
-		int is_valid_input(std::string input, int option);
 };
 
 
