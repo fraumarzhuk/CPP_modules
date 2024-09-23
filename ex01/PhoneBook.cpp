@@ -60,11 +60,14 @@ void PhoneBook::search_contact(void)
 	std::cout << CYAN << "CURRENT CONTACTS:" << RESET << std::endl;
 	while (i < 8)
 	{
-		std::cout << "        " << _contact_list[i].index << " | ";
-		display_in_column(_contact_list[i].first_name);
-		display_in_column(_contact_list[i].last_name);
-		display_in_column(_contact_list[i].nickname);
-		std::cout << std::endl;
+		if (_contact_list[i].contact_filled)
+		{
+			std::cout << "        " << _contact_list[i].index << " | ";
+			display_in_column(_contact_list[i].first_name);
+			display_in_column(_contact_list[i].last_name);
+			display_in_column(_contact_list[i].nickname);
+			std::cout << std::endl;
+		}
 		i++;
 	}
 	//display detailed
@@ -81,11 +84,13 @@ void PhoneBook::search_contact(void)
 		else
 			std::cout << RED <<"Incorrect value: " << i << " Please try again." <<  RESET << std::endl;
 	}
+	std::cout << std::endl << GREEN << "^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V" << RESET << std::endl << std::endl;
 	std::cout << "First name: " << _contact_list[i].first_name << std::endl;
 	std::cout << "Last name: " << _contact_list[i].last_name << std::endl;
 	std::cout << "Nickname: " << _contact_list[i].nickname << std::endl;
 	std::cout << "Phone number: " << _contact_list[i].phone_number << std::endl;
-	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl << std::endl;
+	std::cout << "Darkest secret: " <<_contact_list[i].darkest_secret << std::endl;
+	std::cout << std::endl << GREEN << "^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V" << RESET << std::endl << std ::endl;
 }
 
 void PhoneBook::display_in_column(std::string field_name)
