@@ -79,7 +79,7 @@ int Contact::is_valid_input(std::string input, int option)
 	{
 		while (input[i])
 		{
-			if (!isalpha(input[i]) && input[i] != '-')
+			if (!isalpha(input[i]) && input[i] != '-' && input[i] != ' ')
 				return (0);
 			i++;
 		}

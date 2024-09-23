@@ -44,8 +44,8 @@ void PhoneBook::search_contact(void)
 		std::cout << "Enter the index of the contact:" << std::endl;
 		if (!std::getline(std::cin, index) || !index.compare("EXIT"))
 			exit(1);
-		i = atoi(index.c_str());
-		if (_contact_list[i].is_valid_input(index, NUM) && i >= 0 && i <= 7)
+		i = strtol(index.c_str(), (char **) NULL, 10);
+		if (_contact_list[i].is_valid_input(index, NUM) && i >= 0 && i <= 7 && i < counter)
 			got_input = 1;
 		else if (!_contact_list[i].contact_filled)
 			std::cout << "This contact is empty." << std::endl << std::endl;
