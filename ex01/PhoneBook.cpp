@@ -25,7 +25,6 @@ void PhoneBook::add_contact(void)
 	counter++;
 }
 
-
 void PhoneBook::search_contact(void)
 {
 	std::string index;

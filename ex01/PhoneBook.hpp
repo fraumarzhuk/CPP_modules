@@ -15,7 +15,6 @@
 #define CYAN    "\033[36m"      /* Cyan */
 #define WHITE   "\033[37m"      /* White */
 
-
 class Contact;
 
 class PhoneBook
@@ -31,7 +30,6 @@ class PhoneBook
 		void add_contact(void);
 		void search_contact(void);
 };
-
 
 #endif
 

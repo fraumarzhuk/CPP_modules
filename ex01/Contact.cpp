@@ -24,7 +24,7 @@ void Contact::display_contact_values(bool index_given)
 	}
 	else
 	{
-		std::cout << "        " << this->index << " | ";
+		std::cout <<  std::setw(8)  << this->index << " | ";
 		display_in_column(this->_first_name);
 		display_in_column(this->_last_name);
 		display_in_column(this->_nickname);
@@ -75,7 +75,7 @@ int Contact::is_valid_input(std::string input, int option)
 	if (option == NOT_EMPTY)
 		return (found);
 	i = 0;
-	if (option == ALPHA) //is only alphas
+	if (option == ALPHA)
 	{
 		while (input[i])
 		{
@@ -98,15 +98,10 @@ int Contact::is_valid_input(std::string input, int option)
 
 void Contact::display_in_column(std::string field_name)
 {
-	int chars_left = 0;
 	if (field_name.length() > 8)
 	{
 		field_name = field_name.substr(0, 7);
 		field_name += '.';
 	}
-	chars_left = 8 - field_name.length();
-	while (chars_left-- > 0)
-		std::cout << " ";
-	std::cout << field_name <<  " | ";
-	
+	std::cout << std::setw(8) << field_name << " | ";
 }

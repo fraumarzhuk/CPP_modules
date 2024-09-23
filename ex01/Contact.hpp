@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 
 #define RESET   "\033[0m"
 #define BLACK   "\033[30m"      /* Black */
