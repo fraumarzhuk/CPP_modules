@@ -7,9 +7,9 @@ int Account::_totalNbWithdrawals = 0;
 
 Account::Account(int initial_deposit) : _amount(initial_deposit)
 {
-	// this->_amount = initial_deposit;
 	this->_accountIndex = _nbAccounts;
 	_nbAccounts++;
+	_totalAmount += initial_deposit;
 	_displayTimestamp();
 	std::cout << "index:" << RED << _accountIndex << RESET << ";";
 	std::cout << "amount:" << RED << _amount << RESET << ";";
@@ -77,11 +77,11 @@ void	Account::makeDeposit( int deposit )
 	std::cout << "index:"<< RED << this->_accountIndex << RESET << ";";
 	std::cout << "p_amount:"<< RED << this->_amount << RESET << ";";
 	std::cout << "deposit:"<< RED << deposit << RESET << ";";
-	this->_amount += deposit;
 	_totalNbDeposits++;
 	this->_nbDeposits++;
+	this->_amount += deposit;
 	_totalAmount += deposit;
-	std::cout << "amount:"<< RED << _totalAmount << RESET << ";";
+	std::cout << "amount:"<< RED << this->_amount << RESET << ";";
 	std::cout << "nb_deposits:"<< RED << this->_nbDeposits<< RESET << std::endl;
 }
 
@@ -89,15 +89,15 @@ bool	Account::makeWithdrawal( int withdrawal )
 {
 	_displayTimestamp();
 	std::cout << "index:"<< RED << this->_accountIndex << RESET << ";";
-	std::cout << "p_amount:"<< RED << _totalAmount << RESET << ";";
-	if (withdrawal < _amount)
+	std::cout << "p_amount:"<< RED << this->_amount << RESET << ";";
+	if (withdrawal < this->_amount)
 	{
 		std::cout << "withdrawal:"<< RED << withdrawal << RESET << ";";
-		this->_amount -= withdrawal;
 		_totalNbWithdrawals++;
 		this->_nbWithdrawals++;
+		this->_amount -= withdrawal;
 		_totalAmount -= withdrawal;
-		std::cout << "amount:"<< RED << _amount << RESET << ";";
+		std::cout << "amount:"<< RED << this->_amount << RESET << ";";
 		std::cout << "nb_withdrawals:"<< RED << this->_nbWithdrawals << RESET << std::endl;;
 		return (true);
 	}
