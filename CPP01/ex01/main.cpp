@@ -9,4 +9,6 @@ int main(){
 	Zombie *horde = zombieHorde(n, "random");
 	for (int i = 0; i < n; i++)
 		horde[i].announce();
+	delete[] horde; // Clean up heap memory
+	return (0);
 }
