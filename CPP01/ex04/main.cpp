@@ -21,7 +21,6 @@ int main(int argc, char **argv){
 		while ((pos = cur_line.find(str1, pos)) != -1) {
 			cur_line.erase(pos, str1.length());
 			cur_line.insert(pos, str2);
-			pos += str2.length();
 		}
 		outfile << cur_line << std::endl;
 	}
