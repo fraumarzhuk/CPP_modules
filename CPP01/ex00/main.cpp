@@ -2,6 +2,7 @@
 #include "newZombie.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <cstdlib>
 #include <string>
 
 int main(){
@@ -11,7 +12,6 @@ int main(){
 	Zombie stack_zombies_arr[5];
 	std::cout << INDIGO200 << "Allocating Zombie on stack" << RESET <<std:: endl;
 	for (int i = 0; i < 5; i++){
-		//stack_zombies_arr[i] = Zombie(zombie_names[i]);
 		stack_zombies_arr[i].setName(zombie_names[i]);
 		stack_zombies_arr[i].announce();
 	}
@@ -22,7 +22,7 @@ int main(){
 		amount = strtol(input.c_str(), (char **) NULL, 10);
 	}
 	Zombie* heap_zombies[amount];
-	std::cout << INDIGO200 << "Allocating Zombie on heap" << std:: endl;
+	std::cout << INDIGO200 << "Allocating Zombie on heap" << RESET <<std:: endl;
 	for (int i = 0; i < amount; i++){
 		heap_zombies[i] = newZombie(zombie_names[i % 5]);
 		heap_zombies[i]->announce();

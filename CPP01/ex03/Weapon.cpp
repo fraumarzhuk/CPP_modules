@@ -2,13 +2,10 @@
 
 Weapon::Weapon(): _type("Not set") {}
 
-Weapon::Weapon(std::string name) :_type(name)
-{
-}
+Weapon::Weapon(std::string name) :_type(name){}
 
-Weapon::~Weapon()
-{
-}
+Weapon::~Weapon(){}
+
 const std::string &Weapon::getType() const{
 	return this->_type;
 }
