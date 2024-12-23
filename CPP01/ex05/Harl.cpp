@@ -34,7 +34,7 @@ void Harl::complain(std::string level) {
 		i++;
 	if (i == NUM_LEVELS)
 	{
-		std::cout << "Attention! Thanks for attention. You have been warned" << std::endl;
+		std::cout << CYAN100 << "Incorrect complain request" << RESET << std::endl;
 		return ;
 
 	}
