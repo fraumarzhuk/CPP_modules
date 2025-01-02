@@ -5,6 +5,8 @@
 #include "colors.hpp"
 
 void replaceWords(std::string str1, std::string str2, std::string infile_name){
+if (str1.length() < 1)
+	exit(1);
 std::ifstream infile(infile_name.c_str());
 	if (!infile){
 		std::cerr << AMBER200 << "Error opening infile" << RESET << std::endl;
@@ -21,6 +23,8 @@ std::ifstream infile(infile_name.c_str());
 		while ((pos = cur_line.find(str1, pos)) != -1) {
 			cur_line.erase(pos, str1.length());
 			cur_line.insert(pos, str2);
+			pos += str2.length();
+			//std::cout << "here2" << std::endl;
 		}
 		outfile << cur_line << std::endl;
 	}

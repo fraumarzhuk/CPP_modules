@@ -8,5 +8,6 @@ int main(void)
 	complainer.complain("info");
 	complainer.complain("warning");
 	complainer.complain("error");
+	complainer.complain("errosdgr");
 	return (0);
 }

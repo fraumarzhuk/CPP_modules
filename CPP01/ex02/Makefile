@@ -1,8 +1,8 @@
 NAME = brain
-CC = c++ -std=c++98
-FLAGS = -Wall -Werror -Wextra -g
+CXX = c++ -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -g
 
-SRC = *.cpp
+SRC = $(wildcard *.cpp)
 OBJ = $(SRC:.cpp=.o)
 
 RED 	:= \033[1;31m
@@ -13,7 +13,7 @@ PURPLE	:= \033[35;1m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(SRC) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
