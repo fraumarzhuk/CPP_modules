@@ -2,7 +2,7 @@
 #define FIXED_HPP
 #include "colors.hpp"
 #include <iostream>
-
+#include <cmath>
 
 class Fixed{
 private:
