@@ -3,15 +3,14 @@
 
 int main()
 {
-	ClapTrap clap("First");
-	ClapTrap clap2("Second");
+	ClapTrap clap("Clappy");
+	ClapTrap clap2("Cloppy");
 
 	clap.attack("Patrik");
 	clap.takeDamage(10);
 	clap.beRepaired(5); 
 
 	clap2.attack("Bob");
-	clap2 = clap;
 	clap2.takeDamage(10);
 	clap2.beRepaired(5);
 	std::cout << BG_EMERALD400  << "CREATING A ROBOT SCAVTRAP" << RESET <<std::endl;
