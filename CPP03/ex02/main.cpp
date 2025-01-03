@@ -1,5 +1,5 @@
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
@@ -13,9 +13,13 @@ int main()
 	clap2.attack("Bob");
 	clap2.takeDamage(10);
 	clap2.beRepaired(5);
-	std::cout << BG_EMERALD400  << "CREATING A ROBOT SCAVTRAP" << RESET <<std::endl;
-	ScavTrap robot("Roboto");
-	std::cout << "HitPoints: " << robot.getHitPoints() << std::endl;
-	robot.beRepaired(3);
-
+	std::cout << BG_EMERALD400 PINK800 << "CREATING FRAGTRAP" << RESET <<std::endl;
+	FragTrap john("John");
+	std::cout << "HitPoints: " << john.getHitPoints() << std::endl;
+	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
+	john.attack("an object");
+	std::cout << "HitPoints: " << john.getHitPoints() << std::endl;
+	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
+	john.beRepaired(3);
+	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
 }
