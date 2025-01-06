@@ -35,3 +35,6 @@ DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other), ScavTrap(ot
 void DiamondTrap::attack(std::string target){
 	ScavTrap::attack(target);
 }
+void DiamondTrap::whoAmI(){
+	std::cout << BLUE600 << "Diamond trap names: " << RESET << this->_name + " and " + this->_clap_trap_name << std::endl;
+}

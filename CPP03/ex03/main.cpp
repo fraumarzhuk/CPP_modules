@@ -22,6 +22,7 @@ int main()
 	// std::cout << "HitPoints: " << john.getHitPoints() << std::endl;
 	// std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
 	john.attack("an object");
+	john.whoAmI();
 	// std::cout << "HitPoints: " << john.getHitPoints() << std::endl;
 	// std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
 	// john.beRepaired(3);
