@@ -33,3 +33,7 @@ ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other){
 void ScavTrap::guardGate(){
 	std::cout << LIME400 << "ScavTrap is now in GateKeeper mode" << RESET << std::endl;
 }
+void ScavTrap::attack(std::string target){
+		std::cout << PURPLE300 << "ScavTrap " + this->getName() + " attacks " + target + " , causing " << this->getAttackDamage() << " points of damage!"<< RESET << std::endl;
+		this->setEnergyPoints(this->getEnergyPoints() - 1);
+}

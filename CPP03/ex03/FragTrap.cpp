@@ -32,3 +32,8 @@ FragTrap::FragTrap(const FragTrap &other): ClapTrap(other){
 void FragTrap::highFivesGuys(void){
 	std::cout << PINK200 <<"FragTrap: "<< RESET << "👋🏻🙏🏻👋🏻" << std::endl;
 }
+
+void FragTrap::attack(std::string target){
+		std::cout << PINK200 << "FragTrap " + this->getName() + " attacks " + target + " , causing " << this->getAttackDamage() << " points of damage!"<< RESET << std::endl;
+		this->setEnergyPoints(this->getEnergyPoints() - 1);
+}

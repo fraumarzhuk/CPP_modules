@@ -13,6 +13,7 @@ public:
 	DiamondTrap(const DiamondTrap &other);
 	DiamondTrap &operator=(const DiamondTrap &other);
 	~DiamondTrap();
+	void attack(std::string target);
 };
 
 

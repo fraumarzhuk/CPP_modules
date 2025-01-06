@@ -8,6 +8,7 @@ DiamondTrap::DiamondTrap(std::string name): ScavTrap(name), FragTrap(name){
 	this->setHitPoints(FragTrap::getHitPoints());
 	this->setEnergyPoints(ScavTrap::getEnergyPoints());
 	this->setAttackDamage(FragTrap::getAttackDamage());
+	std::cout << BLUE600 << "💎 DiamondTrap: "<< RESET << "default constructor called" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(){
@@ -30,4 +31,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other){
 DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other), ScavTrap(other), FragTrap(other) {
 	std::cout << BLUE600 <<"💎 DiamondTrap: "<< RESET << "Copy constructor called" << std::endl;
 	*this = other;
+}
+void DiamondTrap::attack(std::string target){
+	ScavTrap::attack(target);
 }
