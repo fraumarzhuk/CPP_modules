@@ -1,22 +1,24 @@
 #include "ClapTrap.hpp"
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-	ClapTrap clap("Clappy");
-	ClapTrap clap2("Cloppy");
+	// ClapTrap clap("Clappy");
+	// ClapTrap clap2("Cloppy");
 
-	clap.attack("Patrik");
-	clap.takeDamage(10);
-	clap.beRepaired(5); 
+	// clap.attack("Patrik");
+	// clap.takeDamage(10);
+	// clap.beRepaired(5); 
 
-	clap2.attack("Bob");
-	clap2.takeDamage(10);
-	clap2.beRepaired(5);
+	// clap2.attack("Bob");
+	// clap2.takeDamage(10);
+	// clap2.beRepaired(5);
 	std::cout << BG_EMERALD400 PINK800 << "CREATING FRAGTRAP" << RESET <<std::endl;
-	FragTrap john("John");
-	ScavTrap bella;
+	DiamondTrap john("John");
+	std::cout << "Damage Points: " << john.getAttackDamage() << std::endl;
+	john.attack("Target");
 	std::cout << "HitPoints: " << john.getHitPoints() << std::endl;
 	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
 	john.attack("an object");
