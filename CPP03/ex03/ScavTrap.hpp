@@ -5,6 +5,10 @@
 #include <iostream>
 
 class ScavTrap : virtual public ClapTrap {
+	protected:
+		static const int _hp = 100;
+		static const int _ad = 20;
+		static const int _ep = 50;
 	public:
 		ScavTrap(std::string name = "default");
 		void guardGate();
@@ -13,6 +17,8 @@ class ScavTrap : virtual public ClapTrap {
 		~ScavTrap();
 
 		void attack(std::string target);
+
+		void restore_default_values();
 };
 
 #endif

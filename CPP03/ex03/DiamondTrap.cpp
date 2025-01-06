@@ -4,10 +4,10 @@
 
 DiamondTrap::DiamondTrap(std::string name): ScavTrap(name), FragTrap(name){
 	this->_name = name;
-	this->_clap_trap_name = ClapTrap::getName() + " _clap_name";
-	this->setHitPoints(FragTrap::getHitPoints());
-	this->setEnergyPoints(ScavTrap::getEnergyPoints());
-	this->setAttackDamage(FragTrap::getAttackDamage());
+	ClapTrap::_name = name + "_clap_name";
+	// this->_hitPoints = FragTrap::getHitPoints();
+	// this->_attackDamage = FragTrap::getAttackDamage();
+	this->_energyPoints = ScavTrap::_hp;
 	std::cout << BLUE600 << "💎 DiamondTrap: "<< RESET << "default constructor called" << std::endl;
 }
 

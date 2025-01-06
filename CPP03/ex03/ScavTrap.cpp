@@ -3,9 +3,9 @@
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name){
 	std::cout << PURPLE300 << "ScavTrap: "<< RESET << "default constructor called" << std::endl;
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
+	this->setHitPoints(_hp);
+	this->setEnergyPoints(_ep);
+	this->setAttackDamage(_ad);
 }
 
 ScavTrap::~ScavTrap(){
@@ -36,4 +36,10 @@ void ScavTrap::guardGate(){
 void ScavTrap::attack(std::string target){
 		std::cout << PURPLE300 << "ScavTrap " + this->getName() + " attacks " + target + " , causing " << this->getAttackDamage() << " points of damage!"<< RESET << std::endl;
 		this->setEnergyPoints(this->getEnergyPoints() - 1);
+}
+
+void ScavTrap::restore_default_values(){
+	this->setHitPoints(100);
+	this->setEnergyPoints(100);
+	this->setAttackDamage(30);
 }

@@ -37,3 +37,9 @@ void FragTrap::attack(std::string target){
 		std::cout << PINK200 << "FragTrap " + this->getName() + " attacks " + target + " , causing " << this->getAttackDamage() << " points of damage!"<< RESET << std::endl;
 		this->setEnergyPoints(this->getEnergyPoints() - 1);
 }
+
+void FragTrap::restore_default_values(){
+	this->setHitPoints(100);
+	this->setEnergyPoints(100);
+	this->setAttackDamage(30);
+}

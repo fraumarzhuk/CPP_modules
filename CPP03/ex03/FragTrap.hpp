@@ -11,6 +11,7 @@ public:
 	~FragTrap();
 	void attack(std::string target);
 	void highFivesGuys(void);
+	void restore_default_values();
 };
 
 #endif
