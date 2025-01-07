@@ -1,0 +1,51 @@
+{
+
+	"Header Orthodox Cannonical Form": {
+		"prefix": ["class", "hclass"],
+		"body": [
+			"class $TM_FILENAME_BASE",
+			"{",
+			"private:",
+			"public:",
+			"    $TM_FILENAME_BASE();",
+			"    $TM_FILENAME_BASE(const $TM_FILENAME_BASE &other);",
+			"    $TM_FILENAME_BASE &operator= (const $TM_FILENAME_BASE &other);",
+			"    ~$TM_FILENAME_BASE();",
+			"};",
+			""
+		],
+		"description": "Create an Orthodox Cannonical Form in your header"
+	},
+	"CPP Orthodox Cannocial Form": {
+		"prefix": ["class", "cclass"],
+		"body": [
+			"",
+			"$TM_FILENAME_BASE::$TM_FILENAME_BASE()",
+			"{",
+				"std::cout << \"Constructor called\" << std::endl;",
+			"}",
+			"",
+			"$TM_FILENAME_BASE::$TM_FILENAME_BASE(const $TM_FILENAME_BASE &other)",
+			"{",
+			"    std::cout << \"Copy constructor called\" << std::endl;",
+			"    *this = other;",
+			"}",
+			"",
+			"$TM_FILENAME_BASE &$TM_FILENAME_BASE::operator = (const $TM_FILENAME_BASE &other)",
+			"{",
+			"    std::cout << \"Copy assignment operator called\" << std::endl;",
+			"    if (this != &other)",
+			"    {",
+			"        //assign;",
+			"    }",
+			"    return (*this);",
+			"}",
+			"",
+			"$TM_FILENAME_BASE::~$TM_FILENAME_BASE()",
+			"{",
+			"    std::cout << \"Destructor called\" << std::endl;",
+			"}",
+			""
+		]
+	}
+}
