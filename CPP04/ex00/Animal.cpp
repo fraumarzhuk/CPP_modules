@@ -3,7 +3,7 @@
 
 Animal::Animal()
 {
-std::cout << "Constructor called" << std::endl;
+std::cout << "Animal Constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal &other)
@@ -25,4 +25,9 @@ Animal &Animal::operator = (const Animal &other)
 Animal::~Animal()
 {
 	std::cout << "Destructor called" << std::endl;
+}
+
+void Animal::makeSound() const 
+{
+	std::cout << _type << ": *makes a random animal sound*" << std::endl;
 }

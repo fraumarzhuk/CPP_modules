@@ -1,4 +1,4 @@
-NAME = diamond
+NAME = animals
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g
 
