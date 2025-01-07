@@ -4,21 +4,18 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-class ScavTrap : virtual public ClapTrap {
+class ScavTrap : virtual public ClapTrap{
 	protected:
 		static const int _hp = 100;
-		static const int _ad = 20;
 		static const int _ep = 50;
+		static const int _atk = 20;
 	public:
 		ScavTrap(std::string name = "default");
 		void guardGate();
 		ScavTrap(const ScavTrap &other);
 		ScavTrap &operator=(const ScavTrap &other);
 		~ScavTrap();
-
-		void attack(std::string target);
-
-		void restore_default_values();
+		void attack(const std::string &target);
 };
 
 #endif

@@ -3,15 +3,16 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap{
-private:
+protected:
+	static const int _hp = 100;
+	static const int _ep = 100;
+	static const int _atk = 30;
 public:
 	FragTrap(std::string name="default");
 	FragTrap(const FragTrap &original);
 	FragTrap &operator= (const FragTrap &original);
 	~FragTrap();
-	void attack(std::string target);
 	void highFivesGuys(void);
-	void restore_default_values();
 };
 
 #endif

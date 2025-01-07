@@ -22,4 +22,5 @@ int main()
 	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
 	john.beRepaired(3);
 	std::cout << "EnergyPoints: " << john.getEnergyPoints() << std::endl;
+	john.highFivesGuys();
 }
