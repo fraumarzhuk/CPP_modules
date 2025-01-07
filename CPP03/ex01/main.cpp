@@ -17,6 +17,12 @@ int main()
 	std::cout << BG_EMERALD400  << "CREATING A ROBOT SCAVTRAP" << RESET <<std::endl;
 	ScavTrap robot("Roboto");
 	std::cout << "HitPoints: " << robot.getHitPoints() << std::endl;
+	std::cout << "EnergyPoints: " << robot.getEnergyPoints() << std::endl;
+	std::cout << "Attack Damage: " << robot.getAttackDamage() << std::endl;
 	robot.beRepaired(3);
-
+	std::cout << "HitPoints: " << robot.getHitPoints() << std::endl;
+	robot.takeDamage(20);
+	robot.takeDamage(100);
+	robot.takeDamage(3);	
+	robot.guardGate();
 }

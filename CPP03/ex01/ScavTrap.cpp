@@ -3,9 +3,9 @@
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name){
 	std::cout << PURPLE300 << "ScavTrap: "<< RESET << "default constructor called" << std::endl;
-	this->setHitPoints(100); //change? to _hitpoints = 10?
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
 }
 
 ScavTrap::~ScavTrap(){
@@ -16,13 +16,22 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other){
 	std::cout << CYAN300 <<"ScavTrap: "<< RESET <<  "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		this->setName(other.getName());
-		this->setAttackDamage(other.getAttackDamage());
-		this->setEnergyPoints(other.getEnergyPoints());
-		this->setHitPoints(other.getHitPoints());
+		this->_name = other._name;
+		this->_attackDamage = other._attackDamage;
+		this->_energyPoints = other._energyPoints;
+		this->_hitPoints = other._hitPoints;
 
 	}
 	return (*this);
+}
+
+void ScavTrap::attack(const std::string &target){
+	if (this->_energyPoints > 0){
+		std::cout << PURPLE300 << "ScavTrap " + this->_name + " attacks " + target + " , causing " << this->_attackDamage << " points of damage!"<< RESET << std::endl;
+		this->_energyPoints--;
+	}
+	else
+		std::cout << RED200 << "Low on energy 🪫" << RESET << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
@@ -32,9 +41,4 @@ ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other) {
 
 void ScavTrap::guardGate(){
 	std::cout << LIME400 << "ScavTrap is now in GateKeeper mode" << RESET << std::endl;
-}
-
-void ScavTrap::attack(std::string target){
-		std::cout << PURPLE300 << "ScavTrap " + this->getName() + " attacks " + target + " , causing " << this->getAttackDamage() << " points of damage!"<< RESET << std::endl;
-		this->setEnergyPoints(this->getEnergyPoints() - 1);
 }
