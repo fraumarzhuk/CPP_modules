@@ -1,12 +1,13 @@
 #include "WrongCat.hpp"
 
 
-WrongCat::WrongCat()
+WrongCat::WrongCat(): WrongAnimal()
 {
-std::cout << "Wrong cat constructor called" << std::endl;
+	_type = "Wrong Cat";
+	std::cout << "Wrong cat constructor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &other)
+WrongCat::WrongCat(const WrongCat &other): WrongAnimal()
 {
 	std::cout << "Wrong cat copy constructor called" << std::endl;
 	*this = other;
@@ -25,4 +26,8 @@ WrongCat &WrongCat::operator = (const WrongCat &other)
 WrongCat::~WrongCat()
 {
 	std::cout << "Wrong cat destructor called" << std::endl;
+}
+void WrongCat::makeSound() const 
+{
+	std::cout << _type << ": meow meow bark meow" << std::endl;
 }

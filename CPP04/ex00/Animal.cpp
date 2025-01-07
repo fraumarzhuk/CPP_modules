@@ -1,7 +1,7 @@
 #include "Animal.hpp"
 
 
-Animal::Animal()
+Animal::Animal(std::string type): _type(type)
 {
 std::cout << "Animal Constructor called" << std::endl;
 }
@@ -30,4 +30,14 @@ Animal::~Animal()
 void Animal::makeSound() const 
 {
 	std::cout << _type << ": *makes a random animal sound*" << std::endl;
+}
+
+std::string Animal::getType() const
+{
+	return _type;
+}
+
+void Animal::setType(const std::string &type)
+{
+	_type = type;
 }

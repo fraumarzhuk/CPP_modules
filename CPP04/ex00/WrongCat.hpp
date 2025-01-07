@@ -1,9 +1,10 @@
 #ifndef WRONG_ANIMAL_HPP
 #define WRONG_ANIMAL_HPP
 #include "colors.hpp"
+#include "WrongAnimal.hpp"
 #include <iostream>
 
-class WrongCat
+class WrongCat: public WrongAnimal
 {
 private:
 public:
@@ -11,6 +12,8 @@ public:
 	WrongCat(const WrongCat &other);
 	WrongCat &operator= (const WrongCat &other);
 	~WrongCat();
+
+	void makeSound() const;
 };
 
 

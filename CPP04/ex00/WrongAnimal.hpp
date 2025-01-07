@@ -1,17 +1,20 @@
-#ifndef WRONG_ANIMAL_HPP
-#define WRONG_ANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 #include "colors.hpp"
 #include <iostream>
 
 
 class WrongAnimal
 {
-private:
+protected:
+	std::string _type;
 public:
-	WrongAnimal();
+	WrongAnimal(std::string type="Wrong animal");
 	WrongAnimal(const WrongAnimal &other);
 	WrongAnimal &operator= (const WrongAnimal &other);
 	~WrongAnimal();
+
+	void makeSound() const;
 };
 
 #endif
