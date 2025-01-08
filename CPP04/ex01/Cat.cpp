@@ -1,16 +1,17 @@
 #include "Cat.hpp"
 
-
 Cat::Cat(): Animal()
 {
 	std::cout << VIOLET500 << "Cat constructor called" << RESET << std::endl;
 	_type = "Cat 🐱";
+	_brain = new Brain();
 }
 
 Cat::Cat(const Cat &other): Animal()
 {
 	std::cout << VIOLET500 <<  "Cat copy constructor called" << RESET << std::endl;
-	*this = other;
+	_type = other._type;
+	_brain = new Brain(*other._brain);
 }
 
 Cat &Cat::operator = (const Cat &other)
@@ -18,13 +19,16 @@ Cat &Cat::operator = (const Cat &other)
 	std::cout << VIOLET500 << "Cat copy assignment operator called" << RESET << std::endl;
 	if (this != &other)
 	{
-		this->_type = other._type;
+		_type = other._type;
+		delete _brain;
+		_brain = new Brain(*other._brain);
 	}
 	return (*this);
 }
 
 Cat::~Cat()
 {
+	delete _brain;
 	std::cout << VIOLET500 << "Cat destructor called" << RESET << std::endl;
 }
 

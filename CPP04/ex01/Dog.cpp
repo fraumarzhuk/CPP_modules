@@ -5,6 +5,7 @@ Dog::Dog(): Animal()
 {
 	std::cout << AMBER500 << "Dog constructor called" << RESET << std::endl;
 	_type = "Dog 🐶";
+	_brain = new Brain();
 }
 
 Dog::Dog(const Dog &other): Animal()
@@ -25,6 +26,7 @@ Dog &Dog::operator = (const Dog &other)
 
 Dog::~Dog()
 {
+	delete _brain;
 	std::cout << AMBER500 << "Dog destructor called" << RESET << std::endl;
 }
 void Dog::makeSound() const 
