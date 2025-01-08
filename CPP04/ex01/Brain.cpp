@@ -25,3 +25,15 @@ Brain::~Brain()
 {
 	std::cout << CYAN300 << "Brain destructor called" << RESET << std::endl;
 }
+void Brain::setIdea(int index, const std::string &idea)
+{
+	if (index >= 0 && index < 100)
+		this->ideas[index] = idea;
+}
+
+std::string Brain::getIdea(int index) const
+{
+	if (index >= 0 && index < 100)
+		return this->ideas[index];
+	return "";
+}

@@ -36,3 +36,13 @@ void Cat::makeSound() const
 {
 	std::cout << VIOLET500 << _type << FUCHSIA400 <<": *mew meooow meow MEAUAW!!! miu.*" << RESET << std::endl;
 }
+
+Brain* Cat::getBrain() const
+{
+	return _brain;
+}
+
+void Cat::setBrain(const Brain &brain)
+{
+	*_brain = brain;
+}

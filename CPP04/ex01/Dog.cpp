@@ -33,3 +33,13 @@ void Dog::makeSound() const
 {
 	std::cout << AMBER500 <<  _type << ORANGE400 <<": *bark bark bark awoooo*" << RESET << std::endl;
 }
+
+Brain* Dog::getBrain() const
+{
+	return _brain;
+}
+
+void Dog::setBrain(const Brain &brain)
+{
+	*_brain = brain;
+}
