@@ -1,11 +1,11 @@
 #include "Cure.hpp"
 
-Cure::Cure(std::string const & type)
+Cure::Cure(std::string const & type): AMateria(type)
 {
 std::cout << "Constructor called" << std::endl;
 }
 
-Cure::Cure(const Cure &other)
+Cure::Cure(const Cure &other): AMateria()
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = other;

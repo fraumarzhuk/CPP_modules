@@ -6,7 +6,7 @@
 
 //concrete
 
-class Ice
+class Ice: public AMateria
 {
 protected:
 public:

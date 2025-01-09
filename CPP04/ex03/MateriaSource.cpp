@@ -1,20 +1,25 @@
 #include "MateriaSource.hpp"
 
-
-MateriaSource::MateriaSource()
+IMateriaSource::IMateriaSource()
 {
-std::cout << "Constructor called" << std::endl;
+std::cout << "IMateriaSource Constructor called" << std::endl;
+}
+
+
+MateriaSource::MateriaSource(): IMateriaSource()
+{
+std::cout << "MateriaSource Constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "MateriaSource Copy constructor called" << std::endl;
 	*this = other;
 }
 
 MateriaSource &MateriaSource::operator = (const MateriaSource &other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "MateriaSource Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		//assign;
@@ -24,5 +29,5 @@ MateriaSource &MateriaSource::operator = (const MateriaSource &other)
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "MateriaSource Destructor called" << std::endl;
 }

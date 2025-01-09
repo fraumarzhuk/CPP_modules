@@ -6,16 +6,15 @@
 #include <iostream>
 
 //concrete
-
-class Cure
+class Cure: public AMateria
 {
 protected:
 public:
 	Cure(std::string const & type);
-	
 	std::string const & getType() const;
 	Cure* clone() const;
 	void use(ICharacter& target);
 };
 
 #endif
+

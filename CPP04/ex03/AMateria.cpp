@@ -1,17 +1,18 @@
-#include "Ice.hpp"
+#include "AMateria.hpp"
 
-Ice::Ice(std::string const & type): AMateria(type)
+
+AMateria::AMateria(std::string const & type)
 {
 std::cout << "Constructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &other): AMateria()
+AMateria::AMateria(const AMateria &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
-Ice &Ice::operator = (const Ice &other)
+AMateria &AMateria::operator = (const AMateria &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
@@ -21,7 +22,7 @@ Ice &Ice::operator = (const Ice &other)
 	return (*this);
 }
 
-Ice::~Ice()
+AMateria::~AMateria()
 {
 	std::cout << "Destructor called" << std::endl;
 }

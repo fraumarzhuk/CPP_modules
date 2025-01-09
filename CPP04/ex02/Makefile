@@ -1,4 +1,4 @@
-NAME = ./animals
+NAME = ./materials
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g
 
