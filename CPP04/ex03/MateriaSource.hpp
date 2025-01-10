@@ -4,6 +4,7 @@
 #include "colors.hpp"
 #include <iostream>
 
+class AMateria;
 //Interface
 class IMateriaSource
 {
@@ -16,9 +17,13 @@ class IMateriaSource
 //concrete
 class MateriaSource: public IMateriaSource
 {
+protected:
+	AMateria *slots[4];
 public:
 	MateriaSource();
 	~MateriaSource();
+	MateriaSource(const MateriaSource &other);
+	MateriaSource &operator= (const MateriaSource &other);
 	void learnMateria(AMateria*);
 	AMateria* createMateria(std::string const & type);
 };

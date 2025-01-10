@@ -1,9 +1,9 @@
 #include "MateriaSource.hpp"
 
-IMateriaSource::IMateriaSource()
-{
-std::cout << "IMateriaSource Constructor called" << std::endl;
-}
+// IMateriaSource::IMateriaSource()
+// {
+// std::cout << "IMateriaSource Constructor called" << std::endl;
+// }
 
 
 MateriaSource::MateriaSource(): IMateriaSource()
@@ -30,4 +30,31 @@ MateriaSource &MateriaSource::operator = (const MateriaSource &other)
 MateriaSource::~MateriaSource()
 {
 	std::cout << "MateriaSource Destructor called" << std::endl;
+}
+
+void MateriaSource::learnMateria(AMateria *)
+{
+	// 	if (!m)
+	// {
+	// 	std::cout << "Unexisting Materia" << std:: endl;
+	// 	return ;
+	// }
+	// for (int i = 0; i < 4; i++)
+	// {
+	// 	if (!_slots[i])
+	// 	{
+	// 		_slots[i] = m;
+	// 		return ;
+	// 	}
+	// }
+	std::cout << "Slots are full" << std::endl;
+	return ;
+}
+
+AMateria *MateriaSource::createMateria(std::string const &type)
+{
+	// AMateria *materia = new AMateria(type);
+	// return materia;
+	std::cout << "Im done with this ex" << type << std::endl;
+	return 0;
 }
