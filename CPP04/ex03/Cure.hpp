@@ -10,11 +10,12 @@ class Cure: public AMateria
 {
 protected:
 public:
-	Cure(std::string const & type);
-	std::string const & getType() const;
+	Cure(std::string const & type="cure");
+	Cure &operator = (const AMateria &other);
+	Cure(const Cure &other);
 	Cure* clone() const;
 	void use(ICharacter& target);
+	~Cure();
 };
 
 #endif
-

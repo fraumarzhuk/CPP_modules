@@ -10,11 +10,11 @@ class Ice: public AMateria
 {
 protected:
 public:
-	Ice(std::string const & type);
-	
-	std::string const & getType() const;
+	Ice(std::string const & type="ice");
+	Ice &operator = (const AMateria &other);
 	Ice* clone() const;
 	void use(ICharacter& target);
+	~Ice();
 };
 
 #endif

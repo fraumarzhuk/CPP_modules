@@ -4,18 +4,21 @@
 #include "colors.hpp"
 #include <iostream>
 
-//interface
+//apparently not an interface
+class ICharacter;
 
 class AMateria
 {
 protected:
-	const std::string _type;
+	std::string _type; //leave mutable?
 public:
-	AMateria(std::string const & type);
-	AMateria &operator = (const AMateria &other);
+	AMateria(std::string const & type="default");
+	//clone default?
+	virtual AMateria &operator = (const AMateria &other) = 0;
 	std::string const & getType() const;
 	virtual AMateria* clone() const = 0;
-	virtual void use(ICharacter& target);
+	virtual void use(ICharacter& target) = 0;
+	virtual ~AMateria();
 };
 
 #endif

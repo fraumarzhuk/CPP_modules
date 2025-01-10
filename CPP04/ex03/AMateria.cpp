@@ -1,28 +1,21 @@
 #include "AMateria.hpp"
 
 
-AMateria::AMateria(std::string const & type)
+AMateria::AMateria(std::string const & type): _type(type)
 {
-std::cout << "Constructor called" << std::endl;
-}
-
-AMateria::AMateria(const AMateria &other)
-{
-	std::cout << "Copy constructor called" << std::endl;
-	*this = other;
-}
-
-AMateria &AMateria::operator = (const AMateria &other)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &other)
-	{
-		//assign;
-	}
-	return (*this);
+std::cout << "AMateria constructor called" << std::endl;
 }
 
 AMateria::~AMateria()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "AMateria  destructor called" << std::endl;
 }
+
+std::string const &AMateria::getType() const{
+	return (this->_type);
+}
+
+// void AMateria::use(ICharacter& target)
+// {
+// 	std::cout << "virtual function with " << target << std::endl;
+// }
