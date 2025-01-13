@@ -18,7 +18,8 @@ class IMateriaSource
 class MateriaSource: public IMateriaSource
 {
 protected:
-	AMateria *slots[4];
+	AMateria *_slots[4];
+	int _index; //static?
 public:
 	MateriaSource();
 	~MateriaSource();

@@ -6,7 +6,7 @@
 // }
 
 
-MateriaSource::MateriaSource(): IMateriaSource()
+MateriaSource::MateriaSource(): IMateriaSource(), _index(0)
 {
 std::cout << "MateriaSource Constructor called" << std::endl;
 }
@@ -32,29 +32,24 @@ MateriaSource::~MateriaSource()
 	std::cout << "MateriaSource Destructor called" << std::endl;
 }
 
-void MateriaSource::learnMateria(AMateria *)
+void MateriaSource::learnMateria(AMateria *materia)
 {
-	// 	if (!m)
-	// {
-	// 	std::cout << "Unexisting Materia" << std:: endl;
-	// 	return ;
-	// }
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	if (!_slots[i])
-	// 	{
-	// 		_slots[i] = m;
-	// 		return ;
-	// 	}
-	// }
-	std::cout << "Slots are full" << std::endl;
-	return ;
+		if (!materia)
+	{
+		std::cout << "Unexisting Materia" << std:: endl;
+		return ;
+	}
+	_slots[_index % 4] = materia;
+	_index++;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
-	// AMateria *materia = new AMateria(type);
-	// return materia;
-	std::cout << "Im done with this ex" << type << std::endl;
-	return 0;
+	AMateria *materia;
+	for (int i=0; i < 4; i++)
+	{
+		if (_slots[i]->getType() == type)
+			materia = _slots[i]->clone();
+	}
+	return materia;
 }
