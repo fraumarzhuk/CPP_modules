@@ -1,12 +1,13 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
 	if (grade > 150)
 		throw GradeTooLowException();
 	if (grade < 1)
 		throw GradeTooHighException();
+	
 	std::cout << "Bureaucrat Constructor called" << std::endl;
 }
 
@@ -28,18 +29,32 @@ int Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade()
 {
 	if ((_grade - 1) < 1)
+	{
 		throw GradeTooHighException();
+		return ;
+	}
 	else
+	{
 		_grade--;
+		return ;
+	}
 	std::cout << LIME200 << _name << "Grade incremented to: " << _grade << RESET << std::endl;
 }
 
 void Bureaucrat::decrementGrade()
 {
+	std::cout << "cur grade: " << this->getGrade() << std::endl;
 	if ((_grade + 1) > 150)
+	{
+		std::cout << "here" << std::endl;
 		throw GradeTooLowException();
+		return ;
+	}
 	else
+	{
 		_grade++;
+		return ;
+	}
 	std::cout << PINK300 << _name << "Grade decremented to: " << _grade << RESET << std::endl;
 }
 
