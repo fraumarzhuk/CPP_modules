@@ -2,6 +2,7 @@
 #define BUREAUCRAT_HPP
 #include <iostream>
 #include "colors.hpp"
+#include "Form.hpp"
 
 //exception classes dont have to be designed in ocf
 class Bureaucrat
@@ -20,6 +21,7 @@ public:
 	/*members*/
 	void incrementGrade();
 	void decrementGrade();
+	void beSigned(const Form &form);
 
 	/*exceptions*/
 	class GradeTooHighException: public std::exception

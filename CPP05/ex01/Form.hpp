@@ -1,25 +1,29 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 #include <iostream>
 #include "colors.hpp"
+#include "Bureaucrat.hpp"
 
-//exception classes dont have to be designed in ocf
-class Bureaucrat
+class Form
 {
 private:
 	const std::string _name;
-	int _grade;
+	const int grade_to_sign;
+	const int grade_to_execute;
+	bool _is_signed;
 public:
-	Bureaucrat(std::string name="random clerk", int grade=150);
-	~Bureaucrat();
+
+	Form();
+	Form(const Form &other);
+	Form &operator= (const Form &other);
+	~Form();
+
+	/*setters*/
 
 	/*getters*/
-	const std::string &getName() const;
-	int getGrade() const;
 
 	/*members*/
-	void incrementGrade();
-	void decrementGrade();
+	void beSigned(const Bureaucrat &buro);
 
 	/*exceptions*/
 	class GradeTooHighException: public std::exception
@@ -33,8 +37,7 @@ public:
 		public:
 			const char* what() const throw() { return "Grade is too low!"; }
 	};
+
+
 };
-
-std::ostream &operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
-
 #endif

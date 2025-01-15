@@ -1,4 +1,4 @@
-NAME = ./buro
+NAME = ./form
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
