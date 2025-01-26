@@ -1,6 +1,6 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource(): _index(0)
+MateriaSource::MateriaSource()
 {
 std::cout << "MateriaSource Constructor called" << std::endl;
 }

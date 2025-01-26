@@ -2,13 +2,12 @@
 #define MATERIASOURCE_HPP
 #include <iostream>
 #include "colors.hpp"
-#include "IMateriasource.hpp"
+#include "IMateriaSource.hpp"
 
 class MateriaSource: public IMateriaSource
 {
 private:
 	AMateria *_to_learn[4];
-	int _index;
 public:
 	MateriaSource();
 	~MateriaSource();
