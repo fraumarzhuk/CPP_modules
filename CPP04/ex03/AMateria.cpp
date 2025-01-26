@@ -5,7 +5,7 @@ AMateria::AMateria(std::string const &type): _type(type)
 	std::cout << "AMateria Constructor called" << std::endl;
 }
 
-AMateria::AMateria(const AMateria &other)
+AMateria::AMateria(const AMateria &other): _type(other._type)
 {
 	std::cout << " AMateria Copy constructor called" << std::endl;
 	*this = other;
