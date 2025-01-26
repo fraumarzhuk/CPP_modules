@@ -1,39 +1,37 @@
 #include "Cure.hpp"
 
-Cure::Cure(std::string const & type): AMateria(type)
+Cure::Cure(): AMateria("Cure")
 {
-	this->_type = "cure";
-	std::cout << "Cure constructor called" << std::endl;
+	std::cout << "Cure Constructor called" << std::endl;
 }
 
-Cure::Cure(const Cure &other): AMateria(other._type)
+Cure::Cure(const Cure &other) : AMateria(other)
 {
-	std::cout << "Cure copy constructor called" << std::endl;
+	std::cout << "Cure Copy constructor called" << std::endl;
 	*this = other;
 }
 
-Cure &Cure::operator =(const AMateria &other) // keep Cure?
+Cure &Cure::operator = (const Cure &other)
 {
-	std::cout << "Cure copy assignment operator called" << std::endl;
+	std::cout << "Cure Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		//assign;
+		*this = other;
 	}
 	return (*this);
 }
 
-Cure::~Cure()
-{
-	std::cout << "Cure Destructor called" << std::endl;
-}
-
 Cure *Cure::clone() const
 {
-	Cure *cure_clone = new Cure("cure");
-	return (cure_clone);
-	//allocated on heap, delete later
+	Cure *new_cure = new Cure();
+	return new_cure;
 }
 
-void Cure::use(ICharacter& target){
-	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+void Cure::use(ICharacter& target) {
+  std::cout << "Cure: * heals " << target.getName()<< "'s wounds *\n";
+}
+
+Cure::~Cure()
+{
+	std::cout << " Cure Destructor called" << std::endl;
 }
