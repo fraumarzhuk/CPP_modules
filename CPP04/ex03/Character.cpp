@@ -38,7 +38,6 @@ Character::~Character()
 			delete _slots[i];
 			_slots[i] = nullptr;
 		}
-		_slots[i] = _slots[i]->clone();
 	}
 	std::cout << " Character Destructor called" << std::endl;
 }
