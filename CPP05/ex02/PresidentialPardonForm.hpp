@@ -11,7 +11,7 @@ private:
 public:
 	PresidentialPardon(Bureaucrat &target);
 	Bureaucrat &getTarget() const;
-	//override execute
+	void execute(const Bureaucrat &executor) const;
 	~PresidentialPardon();
 };
 #endif

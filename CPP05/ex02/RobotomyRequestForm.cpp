@@ -1,6 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(Bureaucrat &target): AForm("ShrubberyForm", 25, 5), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(Bureaucrat &target): AForm("RobotomyRequestForm", 72, 45), _target(target), _robotomize(false)
 {
 	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
@@ -18,4 +18,16 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other): AFor
 RobotomyRequestForm::~RobotomyRequestForm()
 {
 	std::cout << " RobotomyRequestForm Destructor called" << std::endl;
+}
+void RobotomyRequestForm::execute(const Bureaucrat &executor) const
+{
+	std::cout << "** DRILLLL drilll dRiLl **" << std::endl;
+	if (_robotomize)
+		std::cout << _target << " has been successfuly robotomized!" << std::endl;
+	else
+	{
+		std::cout << "robotomy failed" << std::endl;
+		_robotomize = !_robotomize;
+	}
+	
 }

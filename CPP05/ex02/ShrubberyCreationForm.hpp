@@ -11,7 +11,7 @@ private:
 public:
 	ShrubberyCreationForm(Bureaucrat &target);
 	Bureaucrat &getTarget() const;
-	//override execute
+	void execute(const Bureaucrat &executor) const;
 	~ShrubberyCreationForm();
 };
 #endif
