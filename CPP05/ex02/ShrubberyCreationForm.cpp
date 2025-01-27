@@ -5,19 +5,15 @@ ShrubberyCreationForm::ShrubberyCreationForm(Bureaucrat &target): AForm("Shrubbe
 	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other): AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute())
+Bureaucrat &ShrubberyCreationForm::getTarget() const
 {
-	std::cout << " ShrubberyCreationForm Copy constructor called" << std::endl;
-	*this = &other;
+	return (_target);
 }
 
-// ShrubberyCreationForm &ShrubberyCreationForm::operator = (const ShrubberyCreationForm &other)
-// {
-// 	std::cout << "ShrubberyCreationForm Copy assignment operator called" << std::endl;
-// 	if (this != &other)
-// 			std::cout << PINK300 << "Cannot assign the AForm sry" <<  RESET << std::endl;
-// 	return (*this);
-// }
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other): AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()), _target(other.getTarget())
+{
+	std::cout << " ShrubberyCreationForm Copy constructor called" << std::endl;
+}
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {

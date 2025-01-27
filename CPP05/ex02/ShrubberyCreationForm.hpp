@@ -7,8 +7,10 @@
 class ShrubberyCreationForm: public AForm
 {
 private:
+	Bureaucrat &_target;
 public:
 	ShrubberyCreationForm(Bureaucrat &target);
+	Bureaucrat &getTarget() const;
 	//override execute
 	~ShrubberyCreationForm();
 };
