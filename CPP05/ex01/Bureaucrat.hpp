@@ -4,6 +4,8 @@
 #include "colors.hpp"
 #include "Form.hpp"
 
+
+class Form;
 //exception classes dont have to be designed in ocf
 class Bureaucrat
 {
@@ -21,7 +23,7 @@ public:
 	/*members*/
 	void incrementGrade();
 	void decrementGrade();
-	void beSigned(const Form &form);
+	void signForm(Form &form);
 
 	/*exceptions*/
 	class GradeTooHighException: public std::exception

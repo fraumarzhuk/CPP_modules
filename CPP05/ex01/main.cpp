@@ -2,52 +2,32 @@
 
 
 
-int main()
-{
+int main() {
+	{
+	Bureaucrat	andor("Tamas", 42);
+	std::cout << andor << std::endl;
 
-	Bureaucrat stepan("Stepan", 1);
-	Bureaucrat oleg("Oleg", 150);
-	std::cout << "Creating classes with incorrect values:" << std::endl;
-	try
-	{
-		Bureaucrat chris("Chris", 160);
+	try {
+		Form	whatchamin("Whatchamean", 0, 20);
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	
-	try
-	{
-		Bureaucrat random("Random", 0);
-	}
-	catch(const std::exception& e)
-	{
+	catch ( std::exception& e ) {
 		std::cerr << e.what() << std::endl;
 	}
 
-	std::cout << "Trying incrementd and decrement with max and min grades: " << std::endl;
-	try
-	{
-		oleg.decrementGrade();
+	try {
+		Form	france("France is the best country", 70, 65);
+		std::cout << france << std::endl;
+		andor.signForm(france);
+		Form	germany("Germany is the best country", 7, 2); //couldnt sign.WHY
+		std::cout << germany << std::endl;
+		andor.signForm(germany);
+		Form	hungary("Hungary is the best country", 42, 2);
+		std::cout << hungary << std::endl;
+		andor.signForm(hungary);
+		andor.signForm(hungary); // doesnt catch the error WHY
 	}
-	catch (const Bureaucrat::GradeTooLowException &e)
-	{
-		std::cerr<< e.what() << std::endl;
+	catch ( std::exception& e ) {
+		std::cerr << e.what() << std::endl;
 	}
-
-
-	try
-	{
-		stepan.incrementGrade();
 	}
-	catch (const Bureaucrat::GradeTooHighException &e)
-	{
-		std::cerr<< e.what() << std::endl;
-	}
-	std::cout << "Stepan's grade: "<< stepan.getGrade() << std::endl;
-	std::cout << " Oleg's grade: " << oleg.getGrade() << std::endl;
-
-	std::cout << "Trying incrementd and decrement with max and min grades: " << std::endl;
-
 }
