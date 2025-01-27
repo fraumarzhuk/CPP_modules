@@ -52,14 +52,11 @@ bool Form::getIsSigned() const
 void Form::beSigned(const Bureaucrat &buro)
 {
 	if (_is_signed)
-	{
-		std::cerr << PINK200 << "Form " << _name << " has already been signed" << RESET << std::endl;
-		return ;
-	}
-	if (buro.getGrade() > _grade_to_sign )
+		throw Form::FormAlreadySignedException();
+	else if (buro.getGrade() > _grade_to_sign )
 		throw Form::GradeTooLowException();
-	else if ( buro.getGrade() < _grade_to_sign )
-		throw Form::GradeTooHighException();
+	// else if ( buro.getGrade() < _grade_to_sign )
+	// 	throw Form::GradeTooHighException();
 	_is_signed = true;
 
 }
