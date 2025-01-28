@@ -14,8 +14,6 @@ class Intern
 {
 private:
     typedef AForm* (Intern::*FormTypes)(const std::string &target);
-    FormTypes form_types[NUM_FORMS] = {&Intern::makeShrubbyForm, &Intern::makePresidentialForm, &Intern::makeRobotomyForm};
-    std::string form_names[NUM_FORMS] = {"shrubbery creation", "presidential pardon", "robotomy request"};
 	AForm *makeShrubbyForm(const std::string &target_name);
 	AForm *makePresidentialForm(const std::string &target_name);
 	AForm *makeRobotomyForm(const std::string &target_name);

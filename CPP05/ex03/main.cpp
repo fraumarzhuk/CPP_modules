@@ -1,84 +1,17 @@
 #include <iostream>
-#include "ShrubberyCreationForm.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
+
+#include "Intern.hpp"
 
 int main() {
+	Intern test;
+	test.makeForm("shrubbery creation", "buro");
+	test.makeForm("presidential pardon", "bubu");
+	test.makeForm("robotomy request", "buro2");
+	test.makeForm("random form", "buro2");
 
-    {
-        ShrubberyCreationForm Shrubby("Schrubby");
-        Bureaucrat MegaRights("Signable", 130);
-        Bureaucrat NoRights("Nonsignabe", 146);
-        try
-        {
-            Shrubby.beSigned(NoRights);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-        try
-        {
-            Shrubby.beSigned(MegaRights);
-            MegaRights.executeForm(Shrubby);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-    }
-    std::cout << std::endl;
-	std::cout << std::endl;
+	Bureaucrat buro2("buro2");
+	AForm *robo_form = test.makeForm("robotomy request", "buro2");
+	// buro2.signForm(robo_form);
+	// robo_form->execute(buro2);
 
-    {
-        PresidentialPardonForm President("President Form");
-        Bureaucrat MegaRights("I can sign", 4);
-        Bureaucrat NoRights("I cant sign", 26);
-        try
-        {
-            President.beSigned(NoRights);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-        try
-        {
-            President.beSigned(MegaRights);
-            MegaRights.executeForm(President);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-    }
-    std::cout << std::endl;
-	std::cout << std::endl;
-
-    {
-        RobotomyRequestForm RobotForm("Robotomy Form");
-        Bureaucrat MegaRights("I can sign", 44);
-        Bureaucrat NoRights("I cant sign", 73);
-        try
-        {
-            RobotForm.beSigned(NoRights);
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-        try
-        {
-            RobotForm.beSigned(MegaRights);
-            MegaRights.executeForm(RobotForm);
-            MegaRights.executeForm(RobotForm);
-            MegaRights.executeForm(RobotForm);
-            MegaRights.executeForm(RobotForm);
-
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
-    }
 }
