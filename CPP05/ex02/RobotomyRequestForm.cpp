@@ -1,11 +1,11 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(Bureaucrat &target): AForm("RobotomyRequestForm", 72, 45), _target(target), _robotomize(false)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target): AForm("RobotomyRequestForm", 72, 45), _target(target), _robotomize(false)
 {
 	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
 
-Bureaucrat &RobotomyRequestForm::getTarget() const
+const std::string &RobotomyRequestForm::getTarget() const
 {
 	return (_target);
 }

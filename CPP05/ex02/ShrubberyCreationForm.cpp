@@ -1,11 +1,11 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(Bureaucrat &target): AForm("ShrubberyForm", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target): AForm("ShrubberyForm", 145, 137), _target(target)
 {
 	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
-Bureaucrat &ShrubberyCreationForm::getTarget() const
+const std::string &ShrubberyCreationForm::getTarget() const
 {
 	return (_target);
 }
@@ -21,7 +21,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 }
 void ShrubberyCreationForm::action() const
 {
-    std::ofstream shrub_file((_target.getName() + "_shrubbery").c_str());
+    std::ofstream shrub_file((_target + "_shrubbery").c_str());
     if (!shrub_file)
     {
         std::cerr << "Error creating file" << std::endl;

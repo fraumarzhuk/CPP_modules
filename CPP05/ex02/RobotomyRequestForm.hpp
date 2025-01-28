@@ -7,11 +7,11 @@
 class RobotomyRequestForm: public AForm
 {
 private:
-	Bureaucrat &_target;
+	std::string _target;
 	mutable bool _robotomize;
 public:
-	RobotomyRequestForm(Bureaucrat &target);
-	Bureaucrat &getTarget() const;
+	RobotomyRequestForm(const std::string &target);
+	const std::string &getTarget() const;
 	void action() const;
 	~RobotomyRequestForm();
 };

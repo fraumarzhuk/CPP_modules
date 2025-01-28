@@ -1,11 +1,11 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(Bureaucrat &target): AForm("PresidentialPardonForm", 25, 5), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target): AForm("PresidentialPardonForm", 25, 5), _target(target)
 {
 	std::cout << "PresidentialPardonForm Constructor called" << std::endl;
 }
 
-Bureaucrat &PresidentialPardonForm::getTarget() const
+const std::string &PresidentialPardonForm::getTarget() const
 {
 	return (_target);
 }

@@ -7,11 +7,9 @@
 int main() {
 	try {
 		Bureaucrat john("John", 1);
-		Bureaucrat alice("Alice", 2);
-		Bureaucrat bob("Bob", 140);
-		ShrubberyCreationForm shrubbery(john);
-		PresidentialPardonForm pardon(alice);
-		RobotomyRequestForm robotomy(bob);
+		ShrubberyCreationForm shrubbery("home");
+		PresidentialPardonForm pardon("Alice");
+		RobotomyRequestForm robotomy("Bob");
 
 		std::cout << "Executing ShrubberyCreationForm:" << std::endl;
 		john.signForm(shrubbery);

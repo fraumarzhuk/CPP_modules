@@ -8,10 +8,10 @@
 class ShrubberyCreationForm: public AForm
 {
 private:
-	Bureaucrat &_target;
+	std::string _target;
 public:
-	ShrubberyCreationForm(Bureaucrat &target);
-	Bureaucrat &getTarget() const;
+	ShrubberyCreationForm(const std::string &target);
+	const std::string &getTarget() const;
 	void action() const;
 	~ShrubberyCreationForm();
 };
