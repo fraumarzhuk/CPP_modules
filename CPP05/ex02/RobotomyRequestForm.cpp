@@ -23,11 +23,11 @@ void RobotomyRequestForm::action() const
 {
 	std::cout << "** DRILLLL drilll dRiLl **" << std::endl;
 	if (_robotomize)
-		std::cout << _target << " has been successfuly robotomized!" << std::endl;
+		std::cout << GREEN300 <<_target << " has been successfuly robotomized!" << RESET << std::endl;
 	else
 	{
-		std::cout << "robotomy failed" << std::endl;
-		_robotomize = !_robotomize;
+		std::cout << RED200 << "robotomy failed" << RESET << std::endl;
 	}
+	_robotomize = !_robotomize;
 	
 }
