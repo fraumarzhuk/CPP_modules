@@ -4,14 +4,14 @@
 #include "AForm.hpp"
 #include "colors.hpp"
 
-class PresidentialPardon: public AForm
+class PresidentialPardonForm: public AForm
 {
 private:
 	Bureaucrat &_target;
 public:
-	PresidentialPardon(Bureaucrat &target);
+	PresidentialPardonForm(Bureaucrat &target);
 	Bureaucrat &getTarget() const;
-	void execute(const Bureaucrat &executor) const;
-	~PresidentialPardon();
+	void action() const;
+	~PresidentialPardonForm();
 };
 #endif

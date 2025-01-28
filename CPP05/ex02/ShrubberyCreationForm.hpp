@@ -12,7 +12,7 @@ private:
 public:
 	ShrubberyCreationForm(Bureaucrat &target);
 	Bureaucrat &getTarget() const;
-	void execute(const Bureaucrat &executor) const;
+	void action() const;
 	~ShrubberyCreationForm();
 };
 #endif

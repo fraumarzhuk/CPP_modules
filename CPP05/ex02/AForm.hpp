@@ -29,7 +29,8 @@ public:
 
 	/*members*/
 	void beSigned(const Bureaucrat &buro);
-	virtual void execute(const Bureaucrat &executor) const = 0;
+	void execute(const Bureaucrat &executor) const;
+	virtual void action() const = 0;
 
 	/*exceptions*/
 	class GradeTooHighException: public std::exception
@@ -43,10 +44,15 @@ public:
 		public:
 			const char* what() const throw() { return "Grade is too low!"; }
 	};
-		class AFormAlreadySignedException: public std::exception
+	class AFormAlreadySignedException: public std::exception
 	{
 		public:
 			const char* what() const throw() { return "Form has already been signed"; }
+	};
+	class AFormNotSignedException: public std::exception
+	{
+		public:
+			const char* what() const throw() { return "Form is not signed"; }
 	};
 
 };

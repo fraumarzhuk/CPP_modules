@@ -59,3 +59,8 @@ void Bureaucrat::signForm(AForm &form){
 		std::cerr << PINK600 << _name << " couldn't sign " << form.getName() << " because " << PINK300 << e.what() << RESET << std::endl;
 	}
 }
+
+void Bureaucrat::executeForm(AForm const &form)
+{
+	form.execute(*this);
+}

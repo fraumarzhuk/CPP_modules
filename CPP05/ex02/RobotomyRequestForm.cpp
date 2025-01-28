@@ -10,16 +10,16 @@ Bureaucrat &RobotomyRequestForm::getTarget() const
 	return (_target);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other): AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()), _target(other.getTarget())
-{
-	std::cout << " RobotomyRequestForm Copy constructor called" << std::endl;
-}
+// RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other): AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()), _target(other.getTarget())
+// {
+// 	std::cout << " RobotomyRequestForm Copy constructor called" << std::endl;
+// }
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
 	std::cout << " RobotomyRequestForm Destructor called" << std::endl;
 }
-void RobotomyRequestForm::execute(const Bureaucrat &executor) const
+void RobotomyRequestForm::action() const
 {
 	std::cout << "** DRILLLL drilll dRiLl **" << std::endl;
 	if (_robotomize)
