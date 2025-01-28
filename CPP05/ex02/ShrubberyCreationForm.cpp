@@ -12,14 +12,32 @@ Bureaucrat &ShrubberyCreationForm::getTarget() const
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other): AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()), _target(other.getTarget())
 {
-	std::cout << " ShrubberyCreationForm Copy constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm Copy constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << " ShrubberyCreationForm Destructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm Destructor called" << std::endl;
 }
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
-	//Create a file <target>_shrubbery in the working directory, and writes ASCII trees inside it.
+	std::ofstream shrub_file("example.txt");
+    std::ofstream shrub_file((_target.getName() + "_shrubbery").c_str());
+    if (!shrub_file)
+    {
+        std::cerr << "Error creating file" << std::endl;
+        return ;
+    }
+
+    shrub_file << "                  %%%,%%%%%%%\n";
+    shrub_file << "                   ,'%% \\-*%%%%%%%\n";
+    shrub_file << "             ;%%%%%*%   _%%%%\"\n";
+    shrub_file << "              ,%%%       \\(_.*%%%%.\n";
+    shrub_file << "              % *%%, ,%%%%*(    '\n";
+    shrub_file << "            %^     ,*%%% )\\|,%%*%,_\n";
+    shrub_file << "                 *%    \\/ #).-\"*%%*\n";
+    shrub_file << "                     _.) ,/ *%,\n";
+    shrub_file << "             _________/)#(_____________\n";
+
+    shrub_file.close();
 }

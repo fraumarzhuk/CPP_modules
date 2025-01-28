@@ -3,6 +3,7 @@
 #include <iostream>
 #include "AForm.hpp"
 #include "colors.hpp"
+#include <fstream>
 
 class ShrubberyCreationForm: public AForm
 {
