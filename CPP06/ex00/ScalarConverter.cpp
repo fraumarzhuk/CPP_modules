@@ -52,11 +52,11 @@ void ScalarConverter::convert(char *str)
     //     int int_conv = std::atoi(str);
 }
 
-
+//rewrite this bs: infinite loop
 bool ScalarConverter::_is_repeated(std::string str, char c){
 	int pos = 0;
 	int counter = 0;
-	while (pos = str.find(c, pos) != std::string::npos){
+	while ((pos = str.find(c, pos) != std::string::npos)){
 		counter++;
 	}
 	return (counter > 0);
@@ -79,14 +79,17 @@ bool ScalarConverter::_is_a_string(std::string str){
 //function that checks scientific notation
 void ScalarConverter::_check_number_string(std::string str)
 {
+	int pos = 0;
 	if (str.length() > 30)
 		std::cout << "Invalid input" << std::endl;
 	else if (((str[0] == '+') && _is_repeated(str, '+')) || ((str[0] == '-') && _is_repeated(str, '-')))
-		std::cout << "Invalid input" << std::endl;
+		std::cout << "Invalid input" << std::endl; // signs not repeated
 	else if (!isdigit(str[0]) && (str[0] != '-' || str[0] != '+'))
+		std::cout << "Invalid input" << std::endl; //first char is num or sign
+	else if ((pos = str.find(str, '+') != std::string::npos) && pos != 0)
 		std::cout << "Invalid input" << std::endl;
-	else if 
-
+	else if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
+		std::cout << "Invalid input" << std::endl;
 
 }
 
