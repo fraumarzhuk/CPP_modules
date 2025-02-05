@@ -55,8 +55,10 @@ void ScalarConverter::convert(char *str)
 //rewrite this bs: infinite loop
 bool ScalarConverter::_is_repeated(std::string str, char c){
 	int pos = 0;
+	int found = 0;
 	int counter = 0;
-	while ((pos = str.find(c, pos) != std::string::npos)){
+	while ((pos = str.find(c, found) != std::string::npos) && pos != found){
+		found = pos;
 		counter++;
 	}
 	return (counter > 0);
@@ -76,13 +78,16 @@ bool ScalarConverter::_is_a_string(std::string str){
 	return false;
 }
 
+// double sc = 4.44e-400;
+
 //function that checks scientific notation
 void ScalarConverter::_check_number_string(std::string str)
 {
 	int pos = 0;
 	if (str.length() > 30)
 		std::cout << "Invalid input" << std::endl;
-	else if (((str[0] == '+') && _is_repeated(str, '+')) || ((str[0] == '-') && _is_repeated(str, '-')))
+	else if
+	else if (((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-') && !_is_scientific(str))))
 		std::cout << "Invalid input" << std::endl; // signs not repeated
 	else if (!isdigit(str[0]) && (str[0] != '-' || str[0] != '+'))
 		std::cout << "Invalid input" << std::endl; //first char is num or sign
@@ -91,6 +96,33 @@ void ScalarConverter::_check_number_string(std::string str)
 	else if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
 		std::cout << "Invalid input" << std::endl;
 
+}
+
+bool ScalarConverter::_is_sign(char c){
+	return (c == '+' || c == '-');
+}
+
+bool ScalarConverter::_is_scientific(std::string str){
+	return (str.find('e') != std::string::npos && str.find('e') != std::string::npos )
+}
+
+double ScalarConverter::_convert_scientific(std::string str){
+
+	int pos = str.find(str, '.');
+	std::string coef_part = str.substr(0, pos + 1);
+	if (coef_part.length() != 1 && !_is_sign(coef_part[0]))
+		std::cout << "Invalid input" << std::endl;
+	//-< checked first digit
+	pos = str.find(str, 'e');
+	double coeff = std::atof(coef_part.c_str());
+	// -< coeff part calculated
+	std::string exp_part = str.substr(pos + 1, str.length() + 1);
+	if (exp_part.length() > 3 && !_is_sign(exp_part[0]))
+		std::cout << "Invalid input" << std::endl;
+	int exp = std::atoi(exp_part.c_str());
+	// -< exp part calculated
+	double result = pow(coeff, exp);
+	return (result);
 }
 
 //TODO:
