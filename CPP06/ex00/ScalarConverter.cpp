@@ -25,31 +25,20 @@ ScalarConverter::~ScalarConverter()
 {
 	std::cout << " ScalarConverter Destructor called" << std::endl;
 }
+void ScalarConverter::_convert_char(char c){
+
+}
 
 void ScalarConverter::convert(char *str)
 {
     std::string input(str);
-
-	//check for -inff, +inff and nanf.
-	// then check if !contains nums
-		//convert to string
-    // if (input.find('f') != std::string::npos && )
-	//if contains dots -> more than 1 dot -> string, less -> float or double
-	//check if contains digits, one dot and f at the last letter
+		_convert_char(str[0]), exit(1);
 	if (_is_a_string(str))
 		std::cout << input << std::endl;
 	else{
 		_check_number_string(str);
 		std::cout << "To be converted" << std::endl;
 	}
-	// {
-    //     float float_conv = std::strtof(str, NULL);
-
-	// }
-    // else if (input.find('.') != std::string::npos || input.find('e') != std::string::npos)
-    //     double float_conv = std::strtod(str, NULL);
-    // else
-    //     int int_conv = std::atoi(str);
 }
 
 //rewrite this bs: infinite loop
@@ -80,21 +69,29 @@ bool ScalarConverter::_is_a_string(std::string str){
 
 // double sc = 4.44e-400;
 
-//function that checks scientific notation
 void ScalarConverter::_check_number_string(std::string str)
 {
 	int pos = 0;
 	if (str.length() > 30)
 		std::cout << "Invalid input" << std::endl;
-	else if
-	else if (((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-') && !_is_scientific(str))))
-		std::cout << "Invalid input" << std::endl; // signs not repeated
-	else if (!isdigit(str[0]) && (str[0] != '-' || str[0] != '+'))
-		std::cout << "Invalid input" << std::endl; //first char is num or sign
-	else if ((pos = str.find(str, '+') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input" << std::endl;
-	else if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input" << std::endl;
+	if (_is_scientific(str))
+	{
+		_convert_scientific(str);
+		return;
+	}
+	if (((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-') && !_is_scientific(str))))
+		std::cout << "Invalid input" << std::endl, exit(1);// signs not repeated
+	if (!isdigit(str[0]) && (str[0] != '-' || str[0] != '+'))
+		std::cout << "Invalid input" << std::endl, exit(1); //first char is num or sign
+	if ((pos = str.find(str, '+') != std::string::npos) && pos != 0)
+		std::cout << "Invalid input" << std::endl, exit(1); // already cheked and exited on scientific
+	if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
+		std::cout << "Invalid input" << std::endl, exit(1);
+	if ((str.find(str, 'f') != std::string::npos || str.find(str, 'F') != std::string::npos) && str.find(str, '.') != std::string::npos)
+		_convert_float(str);
+	if (str.find(str, '.') != std::string::npos)
+		_convert_double(str);
+
 
 }
 
@@ -103,7 +100,7 @@ bool ScalarConverter::_is_sign(char c){
 }
 
 bool ScalarConverter::_is_scientific(std::string str){
-	return (str.find('e') != std::string::npos && str.find('e') != std::string::npos )
+	return ((str.find('e') != std::string::npos || str.find('E') != std::string::npos) && str.find('.') != std::string::npos);
 }
 
 double ScalarConverter::_convert_scientific(std::string str){
@@ -125,14 +122,9 @@ double ScalarConverter::_convert_scientific(std::string str){
 	return (result);
 }
 
-//TODO:
-//1. Check if there are chars, and if yes, just output it as string
-//2. Add a check just for one char
+//check for 1 char
+//check for string
+//check for scientific
+//check if . and f or F -> float
+//check if only . and num -> double
 
-//nums:
-//1.check for str[0] being a digit or sign
-//2. check for repeated chars
-//3. check for pos of float -- last one
-//4. check for position of e (must be something after)
-
-//1. convert to differnt types

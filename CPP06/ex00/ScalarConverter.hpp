@@ -15,8 +15,9 @@ private:
 	static bool _is_a_string(std::string str);
 	static void _check_number_string(std::string str);
 	static double _convert_scientific(std::string str);
-	static bool _is_scientific(std::string str)
+	static bool _is_scientific(std::string str);
 	static bool _is_sign(char c);
+	static void _convert_char(char c);
 public:
 	~ScalarConverter();
 	static void convert(char *str);
