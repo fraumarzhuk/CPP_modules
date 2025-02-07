@@ -1,8 +1,10 @@
 #include "ScalarConverter.hpp"
+#include <cstdlib> // for atof
+#include <cstring> // for strtof
 
 ScalarConverter::ScalarConverter()
 {
-std::cout << "ScalarConverter Constructor called" << std::endl;
+	std::cout << "ScalarConverter Constructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter &other)
@@ -25,19 +27,36 @@ ScalarConverter::~ScalarConverter()
 {
 	std::cout << " ScalarConverter Destructor called" << std::endl;
 }
-void ScalarConverter::_convert_char(char c){
 
+void ScalarConverter::_convert_char(char c){
+	std::cout << "Char : " << c << std::endl;
+}
+
+void ScalarConverter::_convert_float(std::string str)
+{
+	std::cout << "float : " << static_cast<float>(std::strtof(str.c_str(), NULL)) << std::endl;
+	exit(0);
+}
+
+void ScalarConverter::_convert_double_and_int(std::string str)
+{
+	double result  = std::strtof(str.c_str(), NULL);
+	if (result > INT_MIN && result < INT_MAX)
+		std::cout << "int : " << static_cast<int>(result) << std::endl;
+	else
+		std::cout << "double : " << static_cast<double>(result) << std::endl;
 }
 
 void ScalarConverter::convert(char *str)
 {
-    std::string input(str);
+	std::string input(str);
+	if (input.length() == 1)
 		_convert_char(str[0]), exit(1);
 	if (_is_a_string(str))
 		std::cout << input << std::endl;
 	else{
 		_check_number_string(str);
-		std::cout << "To be converted" << std::endl;
+		// std::cout << "To be converted" << std::endl;
 	}
 }
 
@@ -50,7 +69,7 @@ bool ScalarConverter::_is_repeated(std::string str, char c){
 		found = pos;
 		counter++;
 	}
-	return (counter > 0);
+	return (counter > 1);
 }
 
 bool ScalarConverter::_is_a_string(std::string str){
@@ -80,19 +99,16 @@ void ScalarConverter::_check_number_string(std::string str)
 		return;
 	}
 	if (((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-') && !_is_scientific(str))))
-		std::cout << "Invalid input" << std::endl, exit(1);// signs not repeated
-	if (!isdigit(str[0]) && (str[0] != '-' || str[0] != '+'))
-		std::cout << "Invalid input" << std::endl, exit(1); //first char is num or sign
+		std::cout << "Invalid input1" << std::endl, exit(1);// signs not repeated
+	if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
+		std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
 	if ((pos = str.find(str, '+') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input" << std::endl, exit(1); // already cheked and exited on scientific
+		std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
 	if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input" << std::endl, exit(1);
+		std::cout << "Invalid input4" << std::endl, exit(1);
 	if ((str.find(str, 'f') != std::string::npos || str.find(str, 'F') != std::string::npos) && str.find(str, '.') != std::string::npos)
 		_convert_float(str);
-	if (str.find(str, '.') != std::string::npos)
-		_convert_double(str);
-
-
+	_convert_double_and_int(str);
 }
 
 bool ScalarConverter::_is_sign(char c){
@@ -108,23 +124,17 @@ double ScalarConverter::_convert_scientific(std::string str){
 	int pos = str.find(str, '.');
 	std::string coef_part = str.substr(0, pos + 1);
 	if (coef_part.length() != 1 && !_is_sign(coef_part[0]))
-		std::cout << "Invalid input" << std::endl;
+		std::cout << "Invalid input5" << std::endl;
 	//-< checked first digit
 	pos = str.find(str, 'e');
-	double coeff = std::atof(coef_part.c_str());
+	double coeff = ::atof(coef_part.c_str());
 	// -< coeff part calculated
 	std::string exp_part = str.substr(pos + 1, str.length() + 1);
 	if (exp_part.length() > 3 && !_is_sign(exp_part[0]))
-		std::cout << "Invalid input" << std::endl;
-	int exp = std::atoi(exp_part.c_str());
+		std::cout << "Invalid input6" << std::endl;
+	int exp = ::atof(exp_part.c_str());
 	// -< exp part calculated
-	double result = pow(coeff, exp);
+	double result = static_cast<double>(pow(coeff, exp));
+	std::cout << "Double: " << result << std::endl;
 	return (result);
 }
-
-//check for 1 char
-//check for string
-//check for scientific
-//check if . and f or F -> float
-//check if only . and num -> double
-

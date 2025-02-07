@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cmath>
 #include "colors.hpp"
+#include <climits> 
+#include <string> 
 
 class ScalarConverter
 {
@@ -18,6 +20,8 @@ private:
 	static bool _is_scientific(std::string str);
 	static bool _is_sign(char c);
 	static void _convert_char(char c);
+	static void _convert_float(std::string str);
+	static void _convert_double_and_int(std::string str);
 public:
 	~ScalarConverter();
 	static void convert(char *str);
