@@ -70,6 +70,8 @@ void ScalarConverter::convert(char *str)
 	std::cout.precision(2);
 	int res;
 
+	if (_is_a_string(str))
+		std::cout << "Invalid input!" << std::endl, exit(1);
 	if (input.length() == 1){
 		if (isdigit(str[0]))
 			res = atoi(str);
@@ -77,8 +79,6 @@ void ScalarConverter::convert(char *str)
 			res = str[0];
 		_convert_char(res), exit(1);
 	}
-	if (_is_a_string(str))
-		std::cout << input << std::endl;
 	else{
 		_check_number_string(str);
 	}
@@ -120,7 +120,8 @@ void ScalarConverter::_check_number_string(std::string str)
         _convert_scientific(str);
         return;
     }
-    if ((((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-')) && !_is_scientific(str))))
+    // if ((((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-')) && !_is_scientific(str))))
+	if ((str[0] == '+' && _is_repeated(str, '+')) || (str[0] == '-' && _is_repeated(str, '-')))
         std::cout << "Invalid input1" << std::endl, exit(1);// signs not repeated
     if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
         std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
@@ -158,7 +159,9 @@ double ScalarConverter::_convert_scientific(std::string str){
 	std::string exp_part = str.substr(pos + 1);
 	if (exp_part.length() > 3 && !_is_sign(exp_part[0]))
 		std::cout << "Invalid input6" << std::endl, exit(1);
-	// add check only dogits in the exp part
+	if (_is_repeated(coeff_part, '-') || _is_repeated(coeff_part, '+') || _is_repeated(exp_part, '-') || _is_repeated(exp_part, '+'))
+		std::cout << "Invalid input7" << std::endl, exit(1);
+	// add check only digits in the exp part
 	int exp = atoi(exp_part.c_str());
 	double result = static_cast<double> (coeff * pow(10, exp));
 	std::cout << "Char: Impossible! " << std::endl;

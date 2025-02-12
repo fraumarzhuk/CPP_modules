@@ -2,6 +2,17 @@
 #include "ScalarConverter.hpp"
 #include <stdlib.h>
 
+/*
+	Check if empty input
+	0. == invalid
+	9.e
+	1.2e-1+ or  with -
+	1.2e-1-2
+	e1.2e12
+	1.2e++12f
+
+*/
+
 int main(int argc, char **argv) {
 
 	(void) argc;
