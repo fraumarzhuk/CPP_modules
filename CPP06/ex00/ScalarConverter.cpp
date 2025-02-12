@@ -34,8 +34,8 @@ void ScalarConverter::_convert_char(char c){
 	else
 		std::cout << "Char : " << c << std::endl;
 	std::cout << "Int : " << static_cast<int>(c) << std::endl;
-	std::cout << "Float : " << static_cast<float>(c) << std::endl;
-	std::cout << "Double : " << static_cast<double>(c) << std::endl;
+	std::cout << "Float : " << std::fixed << static_cast<float>(c) << "f" << std::endl;
+	std::cout << "Double : " << std::fixed << static_cast<double>(c) << std::endl;
 }
 
 void ScalarConverter::_convert_float(std::string str)
@@ -43,8 +43,8 @@ void ScalarConverter::_convert_float(std::string str)
 	float res = std::strtof(str.c_str(), NULL);
 	std::cout << "Char : " << static_cast<char>(static_cast<int>(res)) << std::endl;
 	std::cout << "Int : " << static_cast<int>(res) << std::endl;
-	std::cout << "Float : " << static_cast<float>(res) << std::endl;
-	std::cout << "Double : " << static_cast<double>(res) << std::endl;
+	std::cout << "Float : " << std::fixed << static_cast<float>(res) << "f" << std::endl;
+	std::cout << "Double : " << std::fixed << static_cast<double>(res) << std::endl;
 	exit(0);
 }
 
@@ -60,13 +60,14 @@ void ScalarConverter::_convert_double_and_int(std::string str)
 		std::cout << "Char : " << static_cast<char>(result) << std::endl;
 	else
 		std::cout << "Char : Impossible" << std::endl;
-	std::cout << "Double : " << static_cast<double>(result) << std::endl;
-	std::cout << "Float : " << static_cast<float>(result) << std::endl;
+	std::cout << "Double : " << std::fixed << static_cast<double>(result) << std::endl;
+	std::cout << "Float : " << std::fixed << static_cast<float>(result) << "f" << std::endl;
 }
 
 void ScalarConverter::convert(char *str)
 {
 	std::string input(str);
+	std::cout.precision(2);
 	int res;
 
 	if (input.length() == 1){
@@ -108,7 +109,6 @@ bool ScalarConverter::_is_a_string(std::string str){
 	return false;
 }
 
-//double sc = 4.44e-400;
 
 void ScalarConverter::_check_number_string(std::string str)
 {
@@ -163,7 +163,7 @@ double ScalarConverter::_convert_scientific(std::string str){
 	double result = static_cast<double> (coeff * pow(10, exp));
 	std::cout << "Char: Impossible! " << std::endl;
 	std::cout << "Int: Impossible! " << std::endl;
-	std::cout << "Double: " << result << std::endl;
-	std::cout << "Float: " << static_cast<float> (result) << std::endl;
+	std::cout << "Double: " << std::fixed << result << std::endl;
+	std::cout << "Float: " << std::fixed << static_cast<float> (result) << "f" << std::endl;
 	return result;
 }
