@@ -9,3 +9,8 @@ int main(int argc, char **argv) {
 	std::cout << "atof: " << atof(argv[1]) << std::endl;
 	
 }
+
+//std::fixed
+//std;;precision
+
+//str ->invalid input

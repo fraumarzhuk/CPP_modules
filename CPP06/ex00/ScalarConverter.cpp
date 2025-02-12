@@ -29,12 +29,22 @@ ScalarConverter::~ScalarConverter()
 }
 
 void ScalarConverter::_convert_char(char c){
-	std::cout << "Char : " << c << std::endl;
+	if (c <= 0 || (c >= 0 && c <= 31))
+		std::cout << "Char : non displayable" << std::endl;
+	else
+		std::cout << "Char : " << c << std::endl;
+	std::cout << "Int : " << static_cast<int>(c) << std::endl;
+	std::cout << "Float : " << static_cast<float>(c) << std::endl;
+	std::cout << "Double : " << static_cast<double>(c) << std::endl;
 }
 
 void ScalarConverter::_convert_float(std::string str)
 {
-	std::cout << "float : " << static_cast<float>(std::strtof(str.c_str(), NULL)) << std::endl;
+	float res = std::strtof(str.c_str(), NULL);
+	std::cout << "Char : " << static_cast<char>(static_cast<int>(res)) << std::endl;
+	std::cout << "Int : " << static_cast<int>(res) << std::endl;
+	std::cout << "Float : " << static_cast<float>(res) << std::endl;
+	std::cout << "Double : " << static_cast<double>(res) << std::endl;
 	exit(0);
 }
 
@@ -42,32 +52,44 @@ void ScalarConverter::_convert_double_and_int(std::string str)
 {
 	double result  = std::strtof(str.c_str(), NULL);
 	if (result > INT_MIN && result < INT_MAX)
-		std::cout << "int : " << static_cast<int>(result) << std::endl;
+		std::cout << "Int : " << static_cast<int>(result) << std::endl;
 	else
-		std::cout << "double : " << static_cast<double>(result) << std::endl;
+		std::cout << "Int : Impossible!" << std::endl;
+
+	if (result >= 0 && result <= 127)
+		std::cout << "Char : " << static_cast<char>(result) << std::endl;
+	else
+		std::cout << "Char : Impossible" << std::endl;
+	std::cout << "Double : " << static_cast<double>(result) << std::endl;
+	std::cout << "Float : " << static_cast<float>(result) << std::endl;
 }
 
 void ScalarConverter::convert(char *str)
 {
 	std::string input(str);
-	if (input.length() == 1)
-		_convert_char(str[0]), exit(1);
+	int res;
+
+	if (input.length() == 1){
+		if (isdigit(str[0]))
+			res = atoi(str);
+		else
+			res = str[0];
+		_convert_char(res), exit(1);
+	}
 	if (_is_a_string(str))
 		std::cout << input << std::endl;
 	else{
 		_check_number_string(str);
-		// std::cout << "To be converted" << std::endl;
 	}
 }
 
 //rewrite this bs: infinite loop
 bool ScalarConverter::_is_repeated(std::string str, char c){
-	int pos = 0;
-	int found = 0;
+	size_t pos = 0;
 	int counter = 0;
-	while ((pos = str.find(c, found) != std::string::npos) && pos != found){
-		found = pos;
+	while ((pos = str.find(c, pos)) != std::string::npos){
 		counter++;
+		pos++;
 	}
 	return (counter > 1);
 }
@@ -86,29 +108,29 @@ bool ScalarConverter::_is_a_string(std::string str){
 	return false;
 }
 
-// double sc = 4.44e-400;
+//double sc = 4.44e-400;
 
 void ScalarConverter::_check_number_string(std::string str)
 {
-	int pos = 0;
-	if (str.length() > 30)
-		std::cout << "Invalid input" << std::endl;
-	if (_is_scientific(str))
-	{
-		_convert_scientific(str);
-		return;
-	}
-	if (((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-') && !_is_scientific(str))))
-		std::cout << "Invalid input1" << std::endl, exit(1);// signs not repeated
-	if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
-		std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
-	if ((pos = str.find(str, '+') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
-	if ((pos = str.find(str, '-') != std::string::npos) && pos != 0)
-		std::cout << "Invalid input4" << std::endl, exit(1);
-	if ((str.find(str, 'f') != std::string::npos || str.find(str, 'F') != std::string::npos) && str.find(str, '.') != std::string::npos)
-		_convert_float(str);
-	_convert_double_and_int(str);
+    size_t pos = 0;
+    if (str.length() > 30)
+        std::cout << "Invalid input" << std::endl;
+    if (_is_scientific(str))
+    {
+        _convert_scientific(str);
+        return;
+    }
+    if ((((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-')) && !_is_scientific(str))))
+        std::cout << "Invalid input1" << std::endl, exit(1);// signs not repeated
+    if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
+        std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
+    if ((pos = str.find('+')) != std::string::npos && pos != 0)
+        std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
+    if ((pos = str.find('-')) != std::string::npos && pos != 0)
+        std::cout << "Invalid input4, pos : " << pos << std::endl, exit(1);
+    if ((str.find('f') != std::string::npos || str.find('F') != std::string::npos) && str.find('.') != std::string::npos)
+        _convert_float(str);
+    _convert_double_and_int(str);
 }
 
 bool ScalarConverter::_is_sign(char c){
@@ -121,20 +143,27 @@ bool ScalarConverter::_is_scientific(std::string str){
 
 double ScalarConverter::_convert_scientific(std::string str){
 
-	int pos = str.find(str, '.');
-	std::string coef_part = str.substr(0, pos + 1);
-	if (coef_part.length() != 1 && !_is_sign(coef_part[0]))
-		std::cout << "Invalid input5" << std::endl;
-	//-< checked first digit
-	pos = str.find(str, 'e');
-	double coeff = ::atof(coef_part.c_str());
-	// -< coeff part calculated
-	std::string exp_part = str.substr(pos + 1, str.length() + 1);
+	size_t dot_pos = str.find('.');
+	if ((!_is_sign(str[0]) && dot_pos != 1) || (_is_sign(str[0]) && dot_pos != 2))
+		std::cout << "Invalid input5" << std::endl, exit(1);
+	std::string coeff_part = str.substr(0, dot_pos);
+	double coeff = ::atof(coeff_part.c_str());
+
+	size_t pos = str.find('e');
+	if (pos == std::string::npos)
+		pos = str.find('E');
+	if (pos == std::string::npos)
+		std::cout << "Invalid input5" << std::endl, exit(1);
+
+	std::string exp_part = str.substr(pos + 1);
 	if (exp_part.length() > 3 && !_is_sign(exp_part[0]))
-		std::cout << "Invalid input6" << std::endl;
-	int exp = ::atof(exp_part.c_str());
-	// -< exp part calculated
-	double result = static_cast<double>(pow(coeff, exp));
+		std::cout << "Invalid input6" << std::endl, exit(1);
+	// add check only dogits in the exp part
+	int exp = atoi(exp_part.c_str());
+	double result = static_cast<double> (coeff * pow(10, exp));
+	std::cout << "Char: Impossible! " << std::endl;
+	std::cout << "Int: Impossible! " << std::endl;
 	std::cout << "Double: " << result << std::endl;
-	return (result);
+	std::cout << "Float: " << static_cast<float> (result) << std::endl;
+	return result;
 }
