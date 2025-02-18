@@ -18,7 +18,7 @@ ScalarConverter &ScalarConverter::operator = (const ScalarConverter &other)
 	std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		//assign;
+		*this = other;
 	}
 	return (*this);
 }
@@ -148,6 +148,8 @@ double ScalarConverter::_convert_scientific(std::string str){
 	size_t dot_pos = str.find('.');
 	if ((!_is_sign(str[0]) && dot_pos != 1) || (_is_sign(str[0]) && dot_pos != 2))
 		std::cout << "Invalid input5" << std::endl, exit(1);
+	if (!str[dot_pos - 1] || !str[dot_pos + 1])
+		std::cout << "Invalid input5" << std::endl, exit(1);
 	std::string coeff_part = str.substr(0, dot_pos);
 	double coeff = ::atof(coeff_part.c_str());
 
@@ -162,7 +164,11 @@ double ScalarConverter::_convert_scientific(std::string str){
 		std::cout << "Invalid input6" << std::endl, exit(1);
 	if (_is_repeated(coeff_part, '-') || _is_repeated(coeff_part, '+') || _is_repeated(exp_part, '-') || _is_repeated(exp_part, '+'))
 		std::cout << "Invalid input7" << std::endl, exit(1);
-	// add check only digits in the exp part ///
+	for (size_t i = 0; i < exp_part.length(); i++)
+	{
+		if (!isdigit(exp_part[i]))
+			std::cout << "Invalid input8" << std::endl, exit(1);
+	}
 	int exp = atoi(exp_part.c_str());
 	double result = static_cast<double> (coeff * pow(10, exp));
 	std::cout << "Char: Impossible! " << std::endl;
