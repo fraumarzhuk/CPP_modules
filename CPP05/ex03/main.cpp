@@ -9,11 +9,23 @@ int main() {
 	AForm *robotomy = test.makeForm("robotomy request", "buro2");
 	AForm *random = test.makeForm("random form", "buro2");
 
-		//write a test!
-	// Bureaucrat buro2("buro2");
-	// AForm *robo_form = test.makeForm("robotomy request", "buro2");
-	// buro2.signForm(robo_form);
-	// robo_form->execute(buro2);
+	Bureaucrat buro1("buro", 2);
+	try {
+		robotomy->beSigned(buro1);
+		robotomy->execute(buro1);
+	}
+	catch (std::exception &e) {
+		std::cerr<< e.what() << std::endl;
+	}
+
+	Bureaucrat buro2("buro", 150);
+	try {
+		presidential->beSigned(buro2);
+		presidential->execute(buro2);
+	}
+	catch (std::exception &e) {
+		std::cerr<< e.what() << std::endl;
+	}
 	delete shrubby;
 	delete presidential;
 	delete robotomy;

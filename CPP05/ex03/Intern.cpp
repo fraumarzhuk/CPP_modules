@@ -51,7 +51,7 @@ AForm *Intern::makeForm(std::string form_name, std::string target_name)
     {
         if (form_names[i] == form_name)
         {
-            std::cout << BLUE400 <<"Intern creates " << RESET <<target_name << std::endl;
+            std::cout << BLUE400 <<"Intern creates " << RESET << form_name << " form" <<  RESET << std::endl;
             return (this->*form_types[i])(target_name);
         }
     }

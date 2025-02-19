@@ -1,6 +1,6 @@
 #include "AForm.hpp"
 
-AForm::AForm(std::string name, int grade_to_sign, int grade_to_execute): _name(name), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute)
+AForm::AForm(std::string name, int grade_to_sign, int grade_to_execute): _name(name), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute), _is_signed(false)
 {	
 	std::cout << CYAN300 << "Form Constructor called" << RESET << std::endl;
 	if (grade_to_sign < 1 || grade_to_execute < 1)

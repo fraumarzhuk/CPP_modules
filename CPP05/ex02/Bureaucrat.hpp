@@ -13,7 +13,7 @@ private:
 	const std::string _name;
 	int _grade;
 public:
-	Bureaucrat(std::string name="random clerk", int grade=150);
+	Bureaucrat(std::string name="random clerk", int grade=145);
 	~Bureaucrat();
 
 	/*getters*/
