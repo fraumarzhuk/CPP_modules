@@ -1,8 +1,6 @@
 #include "Form.hpp"
 
-Form::Form(std::string name, int grade_to_sign, int grade_to_execute): _name(name), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute)
-{	
-	_is_signed = false;
+Form::Form(std::string name, int grade_to_sign, int grade_to_execute): _name(name), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute), _is_signed(false) {	
 	std::cout << CYAN300 << "Form Constructor called" << RESET << std::endl;
 	if (grade_to_sign < 1 || grade_to_execute < 1)
         throw Form::GradeTooHighException();
@@ -10,48 +8,40 @@ Form::Form(std::string name, int grade_to_sign, int grade_to_execute): _name(nam
         throw Form::GradeTooLowException();
 }
 
-Form::Form(const Form &other): _name(other._name), _grade_to_sign(other._grade_to_sign), _grade_to_execute(other._grade_to_execute), _is_signed(other._is_signed)
-{
+Form::Form(const Form &other): _name(other._name), _grade_to_sign(other._grade_to_sign), _grade_to_execute(other._grade_to_execute), _is_signed(other._is_signed) {
 	std::cout << CYAN300 << " Form Copy constructor called" << RESET << std::endl;
 	*this = other;
 }
 
-Form &Form::operator = (const Form &other)
-{
+Form &Form::operator = (const Form &other) {
 	std::cout << CYAN300 <<  "Form Copy assignment operator called." << RESET << std::endl;
 	if (this != &other)
 			std::cout << PINK300 << "Cannot assign the form sry" <<  RESET << std::endl;
 	return (*this);
 }
 
-Form::~Form()
-{
+Form::~Form() {
 	std::cout << CYAN800 <<" Form Destructor called" << RESET << std::endl;
 }
 
 
-const std::string &Form::getName() const
-{
+const std::string &Form::getName() const {
 	return _name;
 }
 
-int Form::getGradeToSign() const
-{
+int Form::getGradeToSign() const {
 	return _grade_to_sign;
 }
 
-int Form::getGradeToExecute() const
-{
+int Form::getGradeToExecute() const {
 	return _grade_to_execute;
 }
 
-bool Form::getIsSigned() const
-{
+bool Form::getIsSigned() const {
 	return _is_signed;
 }
 
-void Form::beSigned(const Bureaucrat &buro)
-{
+void Form::beSigned(const Bureaucrat &buro) {
 	if (_is_signed)
 		throw Form::FormAlreadySignedException();
 	else if (buro.getGrade() > _grade_to_sign )
