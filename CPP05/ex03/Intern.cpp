@@ -56,5 +56,5 @@ AForm *Intern::makeForm(std::string form_name, std::string target_name)
         }
     }
     std::cerr << RED700 <<"Error: Form not found" << RESET << std::endl;
-    return nullptr;
+    return NULL;
 }
