@@ -1,9 +1,7 @@
-
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
-{
+
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade) {
 	if (grade > 150)
 		throw GradeTooLowException();
 	if (grade < 1)
@@ -12,23 +10,19 @@ Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 	std::cout << PINK600 << "Bureaucrat Constructor called" << RESET << std::endl;
 }
 
-Bureaucrat::~Bureaucrat()
-{
+Bureaucrat::~Bureaucrat() {
 	std::cout << PINK600 << "Bureaucrat Destructor called" << RESET << std::endl;
 }
 
-const std::string &Bureaucrat::getName() const
-{
+const std::string &Bureaucrat::getName() const {
 	return (_name);
 }
 
-int Bureaucrat::getGrade() const
-{
+int Bureaucrat::getGrade() const {
 	return _grade;
 }
 
-void Bureaucrat::incrementGrade()
-{
+void Bureaucrat::incrementGrade() {
 	if ((_grade - 1) < 1)
 		throw GradeTooHighException();
 	else
@@ -36,8 +30,7 @@ void Bureaucrat::incrementGrade()
 	std::cout << LIME200 << _name << "Grade incremented to: " << _grade << RESET << std::endl;
 }
 
-void Bureaucrat::decrementGrade()
-{
+void Bureaucrat::decrementGrade() {
 	if ((_grade + 1) > 150)
 		throw GradeTooLowException();
 	else
@@ -45,8 +38,7 @@ void Bureaucrat::decrementGrade()
 	std::cout << PINK300 << _name << "Grade decremented to: " << _grade << RESET << std::endl;
 }
 
-std::ostream &operator<<(std::ostream& out, const Bureaucrat& bureaucrat)
-{
+std::ostream &operator<<(std::ostream& out, const Bureaucrat& bureaucrat) {
 	out << bureaucrat.getName() << ", bureaucrat grade is " << bureaucrat.getGrade() << std::endl;
 	return (out);
 }
