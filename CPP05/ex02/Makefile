@@ -1,14 +1,14 @@
 NAME = ./forms
 CXX = c++ -std=c++98
-CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CXXFLAGS = -Wall -Werror -Wextra -g
 
-SRC = $(wildcard *.cpp)
+SRC = AForm.cpp Bureaucrat.cpp main.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

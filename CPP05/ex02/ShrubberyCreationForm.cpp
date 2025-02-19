@@ -39,4 +39,5 @@ void ShrubberyCreationForm::action() const
     shrub_file << "             _________/)#(_____________\n";
 
     shrub_file.close();
+	std::cout << LIME300 << "Form succesfully created" << RESET << std:: endl;
 }

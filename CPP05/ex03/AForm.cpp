@@ -55,6 +55,7 @@ void AForm::beSigned(const Bureaucrat &buro)
 		throw AForm::AFormAlreadySignedException();
 	else if (buro.getGrade() > _grade_to_sign )
 		throw AForm::GradeTooLowException();
+	std::cout << LIME300 << "Form succesfully signed" << RESET << std:: endl;
 	_is_signed = true;
 
 }
