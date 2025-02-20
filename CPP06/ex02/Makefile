@@ -2,13 +2,13 @@ NAME = ./casts
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
-SRC = $(wildcard *.cpp)
+SRC = Aclass.cpp Bclass.cpp Cclass.cpp Base.cpp main.cpp 
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
