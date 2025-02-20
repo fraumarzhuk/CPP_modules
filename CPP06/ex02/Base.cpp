@@ -2,6 +2,7 @@
 #include "Aclass.hpp"
 #include "Bclass.hpp"
 #include "Cclass.hpp"
+#include <ctime>
 
 Base::~Base() {
 	std::cout << "Base Destructor called" << std::endl;
@@ -34,12 +35,22 @@ void identify(Base *p)
 void identify(Base &p)
 {
 	std::string type = "unknown";
-    if (dynamic_cast<Aclass*>(&p))
-        type = "A";
-    else if (dynamic_cast<Bclass*>(&p))
-        type = "B";
-    else if (dynamic_cast<Cclass*>(&p))
-		type = "C";
-        
-	std::cout << "It is " << type << " class" << std::endl;
+	try {
+		Aclass a = dynamic_cast<Aclass&>(p);
+		type = "A";
+	} catch (std::bad_cast) {
+		try {
+			Bclass a = dynamic_cast<Bclass&>(p);
+			type = "B";
+		} catch (std::bad_cast) {
+			try {
+				Cclass a = dynamic_cast<Cclass&>(p);
+				type = "C";
+			} catch (std::bad_cast) {
+				type = "error casting this";
+			}
+		}
+	}
+	
+	std::cout << "Result: " << type << " class" << std::endl;
 }

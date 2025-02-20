@@ -2,6 +2,7 @@
 #define SERIALIZER_HPP
 #include <iostream>
 #include "colors.hpp"
+#include <stdint.h> 
 
 struct Data {
 	unsigned long value;
