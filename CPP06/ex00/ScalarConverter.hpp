@@ -15,6 +15,7 @@ private:
 
 	static bool _is_repeated(std::string str, char c);
 	static bool _is_a_string(std::string str);
+	static void _convert_infs(std::string str);
 	static void _check_number_string(std::string str);
 	static double _convert_scientific(std::string str);
 	static bool _is_scientific(std::string str);
