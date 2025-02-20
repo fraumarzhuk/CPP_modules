@@ -89,6 +89,8 @@ bool ScalarConverter::_is_repeated(std::string str, char c){
 	size_t pos = 0;
 	int counter = 0;
 	while ((pos = str.find(c, pos)) != std::string::npos){
+		if ((str[pos] == '+' || str[pos] == '-') && (pos != 0 && str[pos - 1] != 'e' && str[pos -1] != 'E'))
+			std::cout << "Invalid input1" << std::endl, exit(1);
 		counter++;
 		pos++;
 	}
@@ -120,15 +122,17 @@ void ScalarConverter::_check_number_string(std::string str)
         _convert_scientific(str);
         return;
     }
-    // if ((((str[0] == '+') && _is_repeated(str, '+')) || (((str[0] == '-') && _is_repeated(str, '-')) && !_is_scientific(str))))
 	if ((str[0] == '+' && _is_repeated(str, '+')) || (str[0] == '-' && _is_repeated(str, '-')))
-        std::cout << "Invalid input1" << std::endl, exit(1);// signs not repeated
+	{
+		_convert_double_and_int(str);
+        return ;
+	}
     if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
         std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
     if ((pos = str.find('+')) != std::string::npos && pos != 0)
         std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
-    if ((pos = str.find('-')) != std::string::npos && pos != 0)
-        std::cout << "Invalid input4, pos : " << pos << std::endl, exit(1);
+	else if (((pos = str.find('-')) != std::string::npos && pos != 0 && str[pos - 1] != 'e' && str[pos - 1] != 'E'))
+		std::cout << "Invalid input4, pos : " << pos << std::endl, exit(1);
     if ((str.find('f') != std::string::npos || str.find('F') != std::string::npos) && str.find('.') != std::string::npos)
         _convert_float(str);
     _convert_double_and_int(str);
@@ -142,6 +146,7 @@ bool ScalarConverter::_is_scientific(std::string str){
 	return ((str.find('e') != std::string::npos || str.find('E') != std::string::npos) && str.find('.') != std::string::npos);
 }
 
+double clip = 2e-1;
 double ScalarConverter::_convert_scientific(std::string str){
 
 	//input like 2e-1 doesnt work. change

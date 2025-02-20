@@ -5,7 +5,9 @@
 
 int main(int argc, char **argv) {
 
-	(void) argc;
+	if (argc < 2)
+		std::cerr << "INPUT BITTE "<< std::endl, exit(1);
+
 	ScalarConverter::convert(argv[1]);
 	std::cout << "atof: " << atof(argv[1]) << std::endl;
 	
