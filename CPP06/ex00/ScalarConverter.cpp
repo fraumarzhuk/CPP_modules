@@ -2,33 +2,25 @@
 #include <cstdlib> // for atof
 #include <cstring> // for strtof
 
-ScalarConverter::ScalarConverter()
-{
+ScalarConverter::ScalarConverter() {
 	std::cout << "ScalarConverter Constructor called" << std::endl;
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter &other)
-{
+ScalarConverter::ScalarConverter(const ScalarConverter &other) {
 	std::cout << " ScalarConverter Copy constructor called" << std::endl;
 	*this = other;
 }
 
-ScalarConverter &ScalarConverter::operator = (const ScalarConverter &other)
-{
+ScalarConverter &ScalarConverter::operator = (const ScalarConverter &other) {
 	std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
-	if (this != &other)
-	{
-		*this = other;
-	}
 	return (*this);
 }
 
-ScalarConverter::~ScalarConverter()
-{
+ScalarConverter::~ScalarConverter() {
 	std::cout << " ScalarConverter Destructor called" << std::endl;
 }
 
-void ScalarConverter::_convert_char(char c){
+void ScalarConverter::_convert_char(char c) {
 	if (c <= 0 || (c >= 0 && c <= 31))
 		std::cout << "Char : non displayable" << std::endl;
 	else
@@ -38,8 +30,7 @@ void ScalarConverter::_convert_char(char c){
 	std::cout << "Double : " << std::fixed << static_cast<double>(c) << std::endl;
 }
 
-void ScalarConverter::_convert_float(std::string str)
-{
+void ScalarConverter::_convert_float(std::string str) {
 	float res = std::strtof(str.c_str(), NULL);
 	std::cout << "Char : " << static_cast<char>(static_cast<int>(res)) << std::endl;
 	std::cout << "Int : " << static_cast<int>(res) << std::endl;
@@ -48,8 +39,7 @@ void ScalarConverter::_convert_float(std::string str)
 	exit(0);
 }
 
-void ScalarConverter::_convert_double_and_int(std::string str)
-{
+void ScalarConverter::_convert_double_and_int(std::string str) {
 	double result  = std::strtof(str.c_str(), NULL);
 	if (result > INT_MIN && result < INT_MAX)
 		std::cout << "Int : " << static_cast<int>(result) << std::endl;
@@ -84,7 +74,6 @@ void ScalarConverter::convert(char *str)
 	}
 }
 
-//rewrite this bs: infinite loop
 bool ScalarConverter::_is_repeated(std::string str, char c){
 	size_t pos = 0;
 	int counter = 0;
@@ -114,28 +103,28 @@ bool ScalarConverter::_is_a_string(std::string str){
 
 void ScalarConverter::_check_number_string(std::string str)
 {
-    size_t pos = 0;
-    if (str.length() > 30)
-        std::cout << "Invalid input" << std::endl;
-    if (_is_scientific(str))
-    {
-        _convert_scientific(str);
-        return;
-    }
+	size_t pos = 0;
+	if (str.length() > 30)
+		std::cout << "Invalid input" << std::endl;
+	if (_is_scientific(str))
+	{
+		_convert_scientific(str);
+		return;
+	}
 	if ((str[0] == '+' && _is_repeated(str, '+')) || (str[0] == '-' && _is_repeated(str, '-')))
 	{
 		_convert_double_and_int(str);
-        return ;
+		return ;
 	}
-    if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
-        std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
-    if ((pos = str.find('+')) != std::string::npos && pos != 0)
-        std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
+	if (!isdigit(str[0]) && (str[0] != '-' && str[0] != '+'))
+		std::cout << "Invalid input2" << std::endl, exit(1); //first char is num or sign
+	if ((pos = str.find('+')) != std::string::npos && pos != 0)
+		std::cout << "Invalid input3" << std::endl, exit(1); // already cheked and exited on scientific
 	else if (((pos = str.find('-')) != std::string::npos && pos != 0 && str[pos - 1] != 'e' && str[pos - 1] != 'E'))
 		std::cout << "Invalid input4, pos : " << pos << std::endl, exit(1);
-    if ((str.find('f') != std::string::npos || str.find('F') != std::string::npos) && str.find('.') != std::string::npos)
-        _convert_float(str);
-    _convert_double_and_int(str);
+	if ((str.find('f') != std::string::npos || str.find('F') != std::string::npos) && str.find('.') != std::string::npos)
+		_convert_float(str);
+	_convert_double_and_int(str);
 }
 
 bool ScalarConverter::_is_sign(char c){
@@ -146,10 +135,9 @@ bool ScalarConverter::_is_scientific(std::string str){
 	return ((str.find('e') != std::string::npos || str.find('E') != std::string::npos) && str.find('.') != std::string::npos);
 }
 
-double clip = 2e-1;
+
 double ScalarConverter::_convert_scientific(std::string str){
 
-	//input like 2e-1 doesnt work. change
 	size_t dot_pos = str.find('.');
 	if ((!_is_sign(str[0]) && dot_pos != 1) || (_is_sign(str[0]) && dot_pos != 2))
 		std::cout << "Invalid input5" << std::endl, exit(1);
