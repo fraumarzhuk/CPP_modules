@@ -2,6 +2,9 @@
 #define BASE_HPP
 #include <iostream>
 #include "colors.hpp"
+#include <ctime>
+#include <cstdlib>
+#include <unistd.h>
 
 class Base {
 public:

@@ -1,6 +1,6 @@
 NAME = ./casts
 CXX = c++ -std=c++98
-CXXFLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+CXXFLAGS = -Wall -Werror -Wextra -g
 
 SRC = Serializer.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)

@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <cstring>
 #include <limits>
+#include <string.h> 
+#include <float.h> 
 
 ScalarConverter::ScalarConverter() {
 	std::cout << "ScalarConverter Constructor called" << std::endl;
@@ -53,7 +55,11 @@ void ScalarConverter::_convert_double_and_int(std::string str) {
 	else
 		std::cout << "Char : Impossible" << std::endl;
 	std::cout << "Double : " << std::fixed << static_cast<double>(result) << std::endl;
-	std::cout << "Float : " << std::fixed << static_cast<float>(result) << "f" << std::endl;
+	if (result < FLT_MAX)
+		std::cout << "Float : " << std::fixed << static_cast<float>(result) << "f" << std::endl;
+	else
+		std::cout << "Float : Impossible!" << std::endl;
+
 }
 
 void ScalarConverter::convert(char *str)
@@ -61,7 +67,8 @@ void ScalarConverter::convert(char *str)
 	std::string input(str);
 	std::cout.precision(2);
 	int res;
-
+	if (std::string(str).length() == 1 && !isdigit(str[0]))
+		_convert_char(str[0]), exit(0);
 	if (_is_a_string(str))
 		std::cout << "Invalid input!" << std::endl, exit(1);
 	if (input.length() == 1){
@@ -163,15 +170,13 @@ double ScalarConverter::_convert_scientific(std::string str){
 		std::cout << "Invalid input5" << std::endl, exit(1);
 	if (!str[dot_pos - 1] || !str[dot_pos + 1])
 		std::cout << "Invalid input5" << std::endl, exit(1);
-	std::string coeff_part = str.substr(0, dot_pos);
-	double coeff = ::atof(coeff_part.c_str());
-
 	size_t pos = str.find('e');
 	if (pos == std::string::npos)
 		pos = str.find('E');
 	if (pos == std::string::npos)
 		std::cout << "Invalid input5" << std::endl, exit(1);
-
+	std::string coeff_part = str.substr(0, pos);
+	float coeff = ::atof(coeff_part.c_str());
 	std::string exp_part = str.substr(pos + 1);
 	if (exp_part.length() > 3 && !_is_sign(exp_part[0]))
 		std::cout << "Invalid input6" << std::endl, exit(1);
@@ -182,7 +187,8 @@ double ScalarConverter::_convert_scientific(std::string str){
 		if (!isdigit(exp_part[i]))
 			std::cout << "Invalid input8" << std::endl, exit(1);
 	}
-	int exp = atoi(exp_part.c_str());
+	double exp = atof(exp_part.c_str());
+	std::cout << "Coeff: " << coeff << " Exp part: " << exp_part << std::endl;
 	double result = static_cast<double> (coeff * pow(10, exp));
 	std::cout << "Char: Impossible! " << std::endl;
 	std::cout << "Int: Impossible! " << std::endl;
@@ -190,3 +196,12 @@ double ScalarConverter::_convert_scientific(std::string str){
 	std::cout << "Float: " << std::fixed << static_cast<float> (result) << "f" << std::endl;
 	return result;
 }
+
+/* 
+c2r8s4% ./casts -245e-3
+Int : 0
+Char : Impossible
+Double : -0.25
+Float : -0.25f
+atof: -0.24
+ */
