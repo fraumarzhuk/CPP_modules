@@ -1,19 +1,15 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
-#include "colors.hpp"
 
-template<class A>
+template <typename I, typename F>
 
-class Array{
-public:
-	Array();
-	Array(unsigned int n);
-	Array(const A &other);
-	Array &operator= (const A &other);
-	~Array();
-	size();
-
-};
+void iter(const I *adr, size_t len, F function) {
+	if (!function || len == 0 || adr == NULL)
+		return ;
+	for (size_t i = 0; i < len; ++i) {
+		function(adr[i]);
+	}
+}
 
 #endif

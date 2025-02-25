@@ -1,37 +1,27 @@
 #include <iostream>
 #include <stdlib.h>
-#include "whatever.hpp"
+#include "iter.hpp"
+#include <cstdio>
+#include "colors.hpp"
+
+
+void print_my_auto(std::string name) {
+	std::cout << "My fav car is " << name << std::endl;
+}
+
+void print_my_num(int num) {
+	std::cout << "My fav num is " << num << std::endl;
+}
 
 
 int main( void ) {
-	int a = 27467364734334;
-	int b = 3394879348793847;
-	::swap( a, b );
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-	std::string c = "chaine1";
-	std::string d = "chaine2";
-	::swap(c, d);
-	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	std::cout << BG_BLUE300 LIME600 << "Array of strings:" << RESET << std::endl;
+	std::string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+	::iter(cars, 4, print_my_auto);
 
-	char x = '0';
-	char y = '1';
-	::swap( x, y );
-	std::cout << "x = " << x << ", y = " << y << std::endl;
-	std::cout << "min( x, y ) = " << ::min( x, y ) << std::endl;
-	std::cout << "max( x, y ) = " << ::max( x, y ) << std::endl;
-	{
-	const char *x = "2";
-	const char *y = "3";
-	::swap( x, y );
-	std::cout << "x = " << x << ", y = " << y << std::endl;
-	std::cout << "min( x, y ) = " << ::min( x, y ) << std::endl;
-	std::cout << "max( x, y ) = " << ::max( x, y ) << std::endl;
-	}
-
+	std::cout << BG_BLUE300  LIME600 << "Array of ints:" << RESET << std::endl;
+	int numbers[5] = {1, 2, 3, 4, 5};
+	::iter(numbers, 5, print_my_num);
 
 	return 0;
 	}
