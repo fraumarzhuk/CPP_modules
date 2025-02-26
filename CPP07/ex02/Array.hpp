@@ -8,7 +8,7 @@ class Array
 {
 	private:
 		unsigned int _len;
-		// Array<T> _arr;
+		T *_arr;
 	public:
 	Array();
     Array(unsigned int len);
@@ -24,9 +24,9 @@ class Array
 template <typename T>
 T& Array<T>::operator[](int index)
 {
-	if (!this[index])
+	if (!_arr[index])
 		throw std::exception();
-    return this[index];
+    return _arr[index];
 }
 
 // template <typename T>
@@ -48,21 +48,23 @@ template <typename T>
 Array<T>::Array(): _len(0)
 {
 	std::cout << "Array Constructor called" << std::endl;
-	new T[_len];
+	_arr = new T[_len];
 }
 
 template <typename T>
 Array<T>::Array(unsigned int len): _len(len) {
 	std::cout << "Array Constructor called" << std::endl;
-	new T[len];
+	_arr = new T[len];
 }
 
 template <typename T>
 Array<T>::Array(const Array<T> &other) {
 	std::cout << " Array Copy constructor called" << std::endl;
-	Array<T> arr = new T[other._len];
-	for (int i = 0; i < other._len; i++) {
-		arr[_len] = other[_len];
+	delete _arr;
+	_arr = NULL;
+	_arr = new T[other._len];
+	for (unsigned int i = 0; i < other._len; i++) {
+		_arr[_len] = other._arr[_len];
 	}
 }
 
@@ -72,7 +74,10 @@ Array<T> &Array<T>::operator = (const Array<T> &other)
 	std::cout << "Array Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		*this = other;
+		for (unsigned int i = 0; i < other._len; i++) {
+			_arr[_len] = other._arr[_len];
+		}
+		_len = other._len;
 	}
 	return (*this);
 }
