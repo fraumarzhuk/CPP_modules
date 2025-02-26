@@ -28,7 +28,7 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
-    //SCOPE
+    // SCOPE
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
@@ -64,5 +64,8 @@ int main(int, char**)
         numbers[i] = rand();
     }
     delete [] mirror;//
+
+	Array<int> empty(0);
+	std::cout << "Memory address of an empty array: " << &empty << std::endl;
     return 0;
 }

@@ -1,6 +1,6 @@
 NAME = ./array
 CXX = c++ -std=c++98
-CXXFLAGS = -Wall -Werror -Wextra -g
+CXXFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 
 SRC = main.cpp 
 OBJ = $(SRC:.cpp=.o)
