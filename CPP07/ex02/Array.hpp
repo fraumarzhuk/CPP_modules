@@ -46,16 +46,9 @@ Array<T>::Array(unsigned int len): _len(len) {
 }
 
 template <typename T>
-Array<T>::Array(const Array<T> &other): _len(other._len), _arr(NULL) {
+Array<T>::Array(const Array<T> &other) :_len(other._len), _arr(NULL) {
 	std::cout << " Array Copy constructor called" << std::endl;
-	if (_len > 0) {
-		if (_arr !=NULL)
-			delete[] _arr;
-		_arr = new T[_len];
-		for (unsigned int i = 0; i < _len; i++) {
-			_arr[i] = other._arr[i];
-		}
-	}
+	*this = other;
 }
 template <typename T>
 Array<T> &Array<T>::operator = (const Array<T> &other)
@@ -70,7 +63,6 @@ Array<T> &Array<T>::operator = (const Array<T> &other)
 		for (unsigned int i = 0; i < other._len; i++) {
 			_arr[i] = other._arr[i];
 		}
-		delete []other._arr;
 	}
 	return (*this);
 }
