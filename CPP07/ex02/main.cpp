@@ -54,7 +54,7 @@ int main(int, char**)
     }
     delete [] mirror;//
 
-	Array<int> empty(0);
+    Array<int> empty;
 	std::cout << "Memory address of an empty array: " << &empty << std::endl;
     return 0;
 }

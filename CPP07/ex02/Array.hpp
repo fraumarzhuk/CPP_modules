@@ -26,7 +26,7 @@ T& Array<T>::operator[](unsigned int index)
 {
 	if (index >= _len )
 		throw std::exception();
-    return _arr[index];
+	return _arr[index];
 }
 
 template <typename T>
