@@ -31,8 +31,8 @@ T& Array<T>::operator[](unsigned int index)
 
 template <typename T>
 Array<T>::Array(): _len(0)
-{	_arr = NULL;
-	std::cout << "Array Constructor called" << std::endl;
+{	_arr = new T[_len];
+	std::cout << "empty Array Constructor called" << std::endl;
 
 }
 

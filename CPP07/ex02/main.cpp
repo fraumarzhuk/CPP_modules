@@ -52,7 +52,7 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
 
     Array<int> empty;
 	std::cout << "Memory address of an empty array: " << &empty << std::endl;
