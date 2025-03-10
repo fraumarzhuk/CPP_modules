@@ -3,7 +3,8 @@
 
 
 
-int main() {
+int main()
+{
 	const size_t N = 5;
 	int a[N] = { 4, 32, -5, 42, 5 };
 	std::vector<int> myarr(&a[0], &a[N]);
