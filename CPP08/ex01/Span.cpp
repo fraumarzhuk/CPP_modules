@@ -1,10 +1,10 @@
 #include "Span.hpp"
 
 Span::Span(unsigned int N): _N(N) {
-	if (N == 0) {
-		std::cerr << RED500 << "Incorrect parameters" << RESET << std::endl;
-		return ;
-	}
+	// if (N == 0) {
+	// 	std::cerr << RED500 << "Incorrect parameters" << RESET << std::endl;
+	// 	return ;
+	// }
 	std::cout << "Span Constructor called" << std::endl;
 }
 
@@ -25,4 +25,8 @@ Span &Span::operator = (const Span &other) {
 
 Span::~Span() {
 	std::cout << " Span Destructor called" << std::endl;
+}
+
+void Span::addNumber() {
+
 }

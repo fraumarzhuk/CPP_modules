@@ -9,7 +9,7 @@
 class Span
 {
 private:
-	unsigned int _N;
+	//unsigned int _N;
 	std::vector<int> _vector;
 public:
 	Span(unsigned int N=0);
@@ -18,12 +18,15 @@ public:
 	~Span();
 	class NoNumStored: public std::exception {
 		public:
-		const char* what() const throw() { return "Grade is too high!"; }
-	}
-	class NoNumStored: public std::exception {
+		const char* what() const throw() { return "Only one or 0 numbers stored in span."; }
+	};
+	class SpanIsFull: public std::exception {
 		public:
-		const char* what() const throw() { return "Grade is too high!"; }
-	}
+		const char* what() const throw() { return "Span is full. Can't store any more numbers."; }
+	};
+	void addNumber();
+	void shortestSpan();
+	void longestSpan();
 };
 
 #endif
