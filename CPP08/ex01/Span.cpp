@@ -61,3 +61,9 @@ void Span::fillSpan(int min_num, int max_num) {
 		_vector.push_back(min_num + std::rand() % max_num);
 	}
 }
+
+void Span::printSpan() {
+	for (size_t i =0; i < _vector.size(); i++) {
+		std::cout << _vector[i] + " " << std:: endl;
+	}
+}

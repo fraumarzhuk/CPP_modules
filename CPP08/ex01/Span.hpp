@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "colors.hpp"
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <algorithm>
 
 
@@ -32,6 +32,7 @@ public:
 	void fillSpan(int min_num, int max_num);
 	int shortestSpan();
 	int longestSpan();
+	void printSpan();
 };
 
 #endif
