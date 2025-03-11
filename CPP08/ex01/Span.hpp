@@ -29,6 +29,7 @@ public:
 		const char* what() const throw() { return "Vector can't hold that many numbers on this system"; }
 	};
 	void addNumber(int num);
+	void fillSpan(int min_num, int max_num);
 	int shortestSpan();
 	int longestSpan();
 };

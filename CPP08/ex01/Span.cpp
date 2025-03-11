@@ -51,3 +51,13 @@ int Span::longestSpan() {
 	std::vector<int>::iterator max = std::max_element(_vector.begin(), _vector.end());
 	return (*max - *min); 
 }
+
+void Span::fillSpan(int min_num, int max_num) {
+	if (min_num > max_num) {
+		std::cerr << RED500 << "Incorrect parameters" << RESET << std::endl;
+	}
+	std::srand(std::time(0));
+	for (size_t i =0; i < _vector.size(); i++) {
+		_vector.push_back(min_num + std::rand() % max_num);
+	}
+}

@@ -13,4 +13,7 @@ sp.addNumber(11);
 std::cout << sp.shortestSpan() << std::endl;
 std::cout << sp.longestSpan() << std::endl;
 return 0;
+
+Span medium = Span(20);
+
 }
