@@ -1,4 +1,6 @@
 #include "Span.hpp"
+#include <climits>
+#include <ctime>
 
 Span::Span(unsigned int N) {
 	if (N > _vector.max_size())
@@ -52,18 +54,21 @@ int Span::longestSpan() {
 	return (*max - *min); 
 }
 
+
 void Span::fillSpan(int min_num, int max_num) {
 	if (min_num > max_num) {
-		std::cerr << RED500 << "Incorrect parameters" << RESET << std::endl;
+		std::cerr << "Incorrect parameters" << std::endl;
+		return;
 	}
 	std::srand(std::time(0));
-	for (size_t i =0; i < _vector.size(); i++) {
-		_vector.push_back(min_num + std::rand() % max_num);
+	while (_vector.size() < _vector.capacity()) {
+		_vector.push_back(min_num + std::rand() % (max_num - min_num + 1));
 	}
 }
 
-void Span::printSpan() {
-	for (size_t i =0; i < _vector.size(); i++) {
-		std::cout << _vector[i] + " " << std:: endl;
+void Span::printSpan() const {
+	for (size_t i = 0; i < _vector.size(); i++) {
+		std::cout << _vector[i] << " ";
 	}
+	std::cout << std::endl;
 }

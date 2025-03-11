@@ -32,7 +32,7 @@ public:
 	void fillSpan(int min_num, int max_num);
 	int shortestSpan();
 	int longestSpan();
-	void printSpan();
+	void printSpan() const;
 };
 
 #endif
