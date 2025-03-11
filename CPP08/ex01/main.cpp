@@ -12,11 +12,12 @@ sp.addNumber(11);
 std::cout << sp.shortestSpan() << std::endl;
 std::cout << sp.longestSpan() << std::endl;
 
-Span medium = Span(20);
-medium.fillSpan(-1, 50);
+Span medium = Span(10000);
+medium.fillSpan(-520, 520);
 
-std::cout << "shortest span: " + sp.shortestSpan() << std::endl;
-std::cout << "longest span: " + sp.longestSpan() << std::endl;
+medium.printSpan();
+std::cout << "shortest span: " << medium.shortestSpan() << std::endl;
+std::cout << "longest span: " << medium.longestSpan() << std::endl;
 
 return 0;
 
