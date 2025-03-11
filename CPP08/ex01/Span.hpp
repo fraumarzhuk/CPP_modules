@@ -4,12 +4,12 @@
 #include <vector>
 #include "colors.hpp"
 #include <bits/stdc++.h>
+#include <algorithm>
 
 
 class Span
 {
 private:
-	//unsigned int _N;
 	std::vector<int> _vector;
 public:
 	Span(unsigned int N=0);
@@ -24,9 +24,13 @@ public:
 		public:
 		const char* what() const throw() { return "Span is full. Can't store any more numbers."; }
 	};
-	void addNumber();
-	void shortestSpan();
-	void longestSpan();
+	class VectorTooBig: public std::exception {
+		public:
+		const char* what() const throw() { return "Vector can't hold that many numbers on this system"; }
+	};
+	void addNumber(int num);
+	int shortestSpan();
+	int longestSpan();
 };
 
 #endif
