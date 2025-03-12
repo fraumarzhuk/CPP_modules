@@ -14,11 +14,23 @@ std::cout << sp.longestSpan() << std::endl;
 
 Span medium = Span(100);
 medium.fillSpan(-520, 520);
-
+Span copy = medium;
 medium.printSpan();
+
 std::cout << BG_LIME300 PINK500 << "Normal Span: " << RESET << std::endl;
 std::cout << "shortest span: " << medium.shortestSpan() << std::endl;
 std::cout << "longest span: " << medium.longestSpan() << std::endl;
+
+std::cout << BG_LIME300 PINK500 << "Assigned copy of normal Span: " << RESET << std::endl;
+std::cout << "shortest span: " << medium.shortestSpan() << std::endl;
+std::cout << "longest span: " << medium.longestSpan() << std::endl;
+
+Span copy2(copy);
+
+std::cout << BG_LIME300 PINK500 << "copy of normal Span created with copy constructor: " << RESET << std::endl;
+std::cout << "shortest span: " << medium.shortestSpan() << std::endl;
+std::cout << "longest span: " << medium.longestSpan() << std::endl;
+
 
 Span empty = Span(0);
 try {
