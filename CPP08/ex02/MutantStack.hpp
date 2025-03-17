@@ -2,7 +2,7 @@
 #define MUTANTSTACK_HPP
 #include <iostream>
 #include "colors.hpp"
-
+#include <stack>
 template <typename T>
 class MutantStack: public std::stack<T>
 {
