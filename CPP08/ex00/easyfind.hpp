@@ -7,18 +7,14 @@
 
 template <typename T>
 int easyfind(T hextech, int victor) {
-
 	typename T::iterator first = hextech.begin();
 	typename T::iterator last = hextech.end();
-	int pos = 0;
-	while (first != last){
-		if (*first == victor)
-			return (pos);
-		first++;
-		pos++;
+	typename T::iterator pos =  std::find(first, last, victor);
+	if (pos == last){
+		std::cout << RED500 << "No occurrence found" << RESET << std::endl;
+		return (-1);
 	}
-	std::cout << RED500 << "No occurrence found" << RESET << std::endl;
-	return (-1);
+	return (pos - first);
 }
 
 #endif
