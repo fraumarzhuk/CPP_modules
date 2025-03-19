@@ -15,7 +15,7 @@ private:
 public:
 	~FileChecker();
 	FileChecker(std::string input);
-	bool open_check();
+	void open_check();
 	void error_exit(std::string error);
 };
 #endif
