@@ -2,7 +2,7 @@ NAME = ./btc
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 
-SRC = main.cpp BitcoinExchange.cpp
+SRC = main.cpp BitcoinExchange.cpp FileChecker.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
