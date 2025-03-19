@@ -1,11 +1,6 @@
 #include "FileChecker.hpp"
 
-#define DATA "date,exchange_rate"
-#define INPUT "date | value"
-
-FileChecker::FileChecker(std::string input): _database("data.csv"), _input(input) {
-	//std::cout << "FileChecker Constructor called" << std::endl;
-	open_check();
+FileChecker::FileChecker() {
 }
 
 FileChecker::FileChecker(const FileChecker &other) {
@@ -24,20 +19,28 @@ FileChecker::~FileChecker() {
 	//std::cout << " FileChecker Destructor called" << std::endl;
 }
 
-void FileChecker::open_check() {
-	std::ifstream input(_input.c_str());
-	std::ifstream data(_database.c_str());
+void FileChecker::open_check(std::string filename) {
+	std::string database = DATABASE;
+	std::ifstream input(filename.c_str());
+	std::ifstream data(database.c_str());
 	if (!input || !data)
-		error_exit("Error opening/reading a file named: " + (input ? _database : _input));
+		error_exit("Error opening/reading a file named: " + (input ? database : filename));
 	input.seekg(0, std::ios::end);
 	data.seekg(0, std::ios::end);
 	if (!input.tellg() || !data.tellg())
 		error_exit("Empty file or database.");
 	}
 	
-	void FileChecker::error_exit(std::string error) {
-		std::cerr << RED500 << error << std::endl;
-		exit(1);
-	}
-	
+void FileChecker::error_exit(std::string error) {
+	std::cerr << RED500 << error << std::endl;
+	exit(1);
+}
+
+void FileChecker::file_check(std::string file) {
+	open_check(file);
+
+}
+// void FileChecker::contents_parse(std::string type) {
+
+// }
 //first line fort database and for input check, then pass to parsing function

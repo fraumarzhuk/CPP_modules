@@ -2,6 +2,7 @@
 #define BITCOINEXCHANGE_HPP
 #include <iostream>
 #include "colors.hpp"
+#include "FileChecker.hpp"
 
 class BitcoinExchange
 {

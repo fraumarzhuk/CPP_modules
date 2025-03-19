@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include "FileChecker.hpp"
 #include <map>
 #include "colors.hpp"
 #include <iostream>
@@ -24,5 +23,5 @@ int main(int argc, char **argv) {
 		std::cerr << RED500 <<"Incorrect amount of parameters" << RESET << std::endl;
 		return (1);
 	}
-	FileChecker file_check(argv[1]);
+	FileChecker::file_check(argv[1]);
 }

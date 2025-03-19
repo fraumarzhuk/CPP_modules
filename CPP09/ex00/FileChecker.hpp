@@ -5,17 +5,25 @@
 #include <fstream>
 #include <stdlib.h>
 
-class FileChecker
-{
+#define DATA "date,exchange_rate"
+#define INPUT "date | value"
+#define DATABASE "data.csv"
+
+class FileChecker {
 private:
-	std::string _database;
-	std::string _input; 
+
+	/*OCF*/
 	FileChecker(const FileChecker &other);
 	FileChecker &operator= (const FileChecker &other);
-public:
 	~FileChecker();
-	FileChecker(std::string input);
-	void open_check();
-	void error_exit(std::string error);
+	FileChecker();
+
+	/*members*/
+	static void error_exit(std::string error);
+	static void open_check(std::string filename);
+public:
+	static void file_check(std::string file);
+	// void contents_parse(std::string type);
 };
+
 #endif
