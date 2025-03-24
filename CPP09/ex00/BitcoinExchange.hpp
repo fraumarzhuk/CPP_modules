@@ -7,6 +7,8 @@
 
 #define DATA_T 44
 #define INPUT_T 124
+#define BITCOIN_START_YEAR 2009
+#define CURRENT_YEAR 2025
 class BitcoinExchange
 {
 private:
