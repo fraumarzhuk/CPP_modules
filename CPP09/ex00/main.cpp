@@ -19,9 +19,8 @@
 //4. print function with multiplication
 
 int main(int argc, char **argv) {
-	if (argc != 2){
-		std::cerr << RED500 <<"Incorrect amount of parameters" << RESET << std::endl;
-		return (1);
-	}
+	if (argc != 2)
+		FileChecker::error_exit("Incorrect amount of parameters");
 	FileChecker::file_check(argv[1]);
+	BitcoinExchange exchanger;
 }

@@ -29,7 +29,7 @@ void FileChecker::open_check(std::string filename) {
 	data.seekg(0, std::ios::end);
 	if (!input.tellg() || !data.tellg())
 		error_exit("Empty file or database.");
-	}
+}
 	
 void FileChecker::error_exit(std::string error) {
 	std::cerr << RED500 << error << std::endl;
@@ -39,6 +39,21 @@ void FileChecker::error_exit(std::string error) {
 void FileChecker::file_check(std::string file) {
 	open_check(file);
 
+}
+bool FileChecker::is_correct_format(std::string line, char delimeter) {
+	if (delimeter == DATA_T && line.compare(DATA))
+		error_exit("Incorrect format of file. Correct format should be " + static_cast<std::string>(DATA));
+	else if (delimeter == INPUT_T && line.compare(INPUT))
+		error_exit("Incorrect format of data file  Correct format should be " + static_cast<std::string>(INPUT));
+	return (true);	
+}
+
+//attention this function only checks separated parts before and after delimeter
+bool FileChecker::is_file_char(char c, std::string filename) {
+	if (isdigit(c) || c == '-' || c == '.' || c == ',')
+		return true;
+	error_exit("Incorrect format of the " + filename + " file. Found char: " + c);
+	return false;
 }
 // void FileChecker::contents_parse(std::string type) {
 
