@@ -25,7 +25,7 @@ public:
 	static bool is_correct_format(std::string line, char delimeter);
 	static void error_exit(std::string error);
 	static void file_check(std::string file);
-	static void check_date(std::string line, char delimeter);
+	static std::string get_date(std::string line);
 	// void contents_parse(std::string type);
 };
 

@@ -56,7 +56,7 @@ bool FileChecker::is_file_char(char c, std::string filename) {
 	return false;
 }
 
-void FileChecker::check_date(std::string line, char delimeter) {
+std::string FileChecker::get_date(std::string line) {
 	std::string error = NULL;
 	if (line[4] != '-' && line[7] != '-')
 		error = "date should be in YYYY-MM-DD format.";
@@ -72,8 +72,9 @@ void FileChecker::check_date(std::string line, char delimeter) {
 		error = "invalid year";
 	if (!(date[2] >= 1 && date[2] <= 31))
 		error = "invalid date";
-	if (error != NULL)
+	if (!error.empty())
 		error_exit("Incorrect date format: " + error);
+	
 	
 	
 }
