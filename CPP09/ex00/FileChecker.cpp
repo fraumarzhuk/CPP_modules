@@ -56,25 +56,26 @@ bool FileChecker::is_file_char(char c, std::string filename) {
 	return false;
 }
 
-std::string FileChecker::get_date(std::string line) {
+Date FileChecker::get_date(std::string line, Date &date) {
 	std::string error = "";
 	if (line[4] != '-' && line[7] != '-')
 		error = "date should be in YYYY-MM-DD format.";
 
-	int date[3];
-	date[0] = std::atoi(line.substr(0, 4).c_str());
-	date[1] = std::atoi(line.substr(5, 7).c_str());
-	date[2] = std::atoi(line.substr(8, 9).c_str());
-	//std::cout << "date: " << date[0] << "-" << date[1] << "-"  << date[2] << std::endl;
-	if (date[0] > CURRENT_YEAR || date[0] < BITCOIN_START_YEAR)
+	//Date date;
+	date.year = std::atoi(line.substr(0, 4).c_str());
+	date.month = std::atoi(line.substr(5, 7).c_str());
+	date.day = std::atoi(line.substr(8, 9).c_str());
+	//std::cout << "date: " << date[0] << "-" << date[1] << "-"  << date.day << std::endl;
+	if (date.year > CURRENT_YEAR || date.year < BITCOIN_START_YEAR)
 		error = "invalid year";
-	if (!(date[1] >= 1 && date[1] <= 12))
+	if (!(date.month >= 1 && date.month <= 12))
 		error = "invalid year";
-	if (!(date[2] >= 1 && date[2] <= 31))
+	if (!(date.day >= 1 && date.day <= 31))
 		error = "invalid date";
 	if (!error.empty())
 		error_exit("Incorrect date format: " + error);
-	return line;
+
+	return date;
 }
 
 float FileChecker::get_value(std::string line_val, std::string filename) {

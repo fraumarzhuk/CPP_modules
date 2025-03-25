@@ -5,12 +5,13 @@
 #include <fstream>
 #include <stdlib.h>
 #include <float.h>
+#include "BitcoinExchange.hpp"
 
 #define DATA "date,exchange_rate"
 #define INPUT "date | value"
 #define DATABASE "data.csv"
 
-#include "BitcoinExchange.hpp"
+
 class FileChecker {
 private:
 	/*OCF*/
@@ -26,7 +27,7 @@ public:
 	static bool is_correct_format(std::string line, char delimeter);
 	static void error_exit(std::string error);
 	static void file_check(std::string file);
-	static std::string get_date(std::string line);
+	static struct Date get_date(std::string line, Date &date);
 	static float get_value(std::string line_val, std::string filename);
 	// void contents_parse(std::string type);
 };
