@@ -12,8 +12,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
 
 BitcoinExchange &BitcoinExchange::operator = (const BitcoinExchange &other) {
 	//std::cout << "BitcoinExchange Copy assignment operator called" << std::endl;
-	if (this != &other)
-	{
+	if (this != &other) {
 		*this = other;
 	}
 	return (*this);
@@ -44,3 +43,8 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 			_input.insert(std::pair<std::string, float>(FileChecker::get_date(parsed[0]), FileChecker::get_value(parsed[1], filename)));
 	}
 }
+
+//TODO:
+// should dates be kept in strings ot maybe save them in a struct??
+//create a print function that will output things nicely
+//create an algorithm function that will find the closest date
