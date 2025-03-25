@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <float.h>
 #include <string> 
+#include <limits.h>
 #include "BitcoinExchange.hpp"
 
 #define DATA "date,exchange_rate"

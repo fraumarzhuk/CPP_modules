@@ -27,10 +27,8 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	std::string line;
 	std::getline(file, line);
 	std::string parsed[2];
-	//std::cout << "line: "<< first_line << std::endl;
 
-	FileChecker::is_correct_format(line, type); // chek first line
-
+	FileChecker::is_correct_format(line, type);
 	while (std::getline(file, line)) {
 		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
@@ -39,11 +37,21 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		Date date;
 		FileChecker::get_date(parsed[0], date);
 		float value = FileChecker::get_value(parsed[1], filename);
-		//std::cout << "date: "<< date.year << date.month << date.day << std::endl;
 		if (type == DATA_T)
 			_database.insert(std::pair<Date, float>(date, value));
 		else if (type == INPUT_T)
 			_input.insert(std::pair<Date, float>(date, value));
+	}
+}
+
+const float BitcoinExchange::get_exchange_rate(Date date) {
+	std::multimap<Date, float>::iterator begin = _database.begin();
+	std::multimap<Date, float>::iterator end = _database.begin();
+
+	int dif = INT_MAX;
+	while (begin != end) {
+		time_t date_tstamp = mktime(&date);
+		if (begin->first.year == date.year)
 	}
 }
 

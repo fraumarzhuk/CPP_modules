@@ -31,6 +31,7 @@ private:
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator= (const BitcoinExchange &other);
 	void parse_file(std::string filename, int type);
+	const float get_exchange_rate(Date date);
 
 public:
 	BitcoinExchange();
