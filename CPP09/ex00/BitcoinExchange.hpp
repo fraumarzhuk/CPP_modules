@@ -14,6 +14,11 @@ struct Date {
 	int year;
 	int month;
 	int day;
+	bool operator<(const Date& other) const {
+	if (year != other.year) return year < other.year;
+	if (month != other.month) return month < other.month;
+	return day < other.day;
+    }
 };
 
 class BitcoinExchange
