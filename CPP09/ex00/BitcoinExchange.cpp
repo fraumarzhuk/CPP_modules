@@ -35,16 +35,12 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	while (std::getline(file, line)) {
 		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
-		parsed[1] = line.substr(pos, line.length());
-
-		//TODO:
-		//write function to check float or int value get_value()
-		if (type == DATA_T) {
-			_database.insert(std::pair<std::string, float>(FileChecker::get_date(parsed[0]), 32.4f));
-		}
-		else if (type == INPUT_T) {
-			_input.insert(FileChecker::get_date(line))
-		}
-		i++
+		parsed[1] = line.substr(pos + 1, line.length());
+		// std::cout << "line 1: "<< parsed[0] << std::endl;
+		// std::cout << "line 1: "<< parsed[1] << std::endl;
+		if (type == DATA_T)
+			_database.insert(std::pair<std::string, float>(FileChecker::get_date(parsed[0]), FileChecker::get_value(parsed[1], filename)));
+		else if (type == INPUT_T)
+			_input.insert(std::pair<std::string, float>(FileChecker::get_date(parsed[0]), FileChecker::get_value(parsed[1], filename)));
 	}
 }
