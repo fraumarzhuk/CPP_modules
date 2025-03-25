@@ -34,26 +34,26 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		parsed[0] = line.substr(0, pos);
 		parsed[1] = line.substr(pos + 1, line.length());
 
-		Date date;
+		struct tm date;
 		FileChecker::get_date(parsed[0], date);
 		float value = FileChecker::get_value(parsed[1], filename);
 		if (type == DATA_T)
-			_database.insert(std::pair<Date, float>(date, value));
+			_database.insert(std::pair<struct tm, float>(date, value));
 		else if (type == INPUT_T)
-			_input.insert(std::pair<Date, float>(date, value));
+			_input.insert(std::pair<struct tm, float>(date, value));
 	}
 }
 
-const float BitcoinExchange::get_exchange_rate(Date date) {
-	std::multimap<Date, float>::iterator begin = _database.begin();
-	std::multimap<Date, float>::iterator end = _database.begin();
+// const float BitcoinExchange::get_exchange_rate(struct tm date) {
+// 	std::multimap<struct tm, float>::iterator begin = _database.begin();
+// 	std::multimap<struct tm, float>::iterator end = _database.begin();
 
-	int dif = INT_MAX;
-	while (begin != end) {
-		time_t date_tstamp = mktime(&date);
-		if (begin->first.year == date.year)
-	}
-}
+// 	int dif = INT_MAX;
+// 	while (begin != end) {
+// 		time_t date_tstamp = mktime(&date);
+// 		if (begin->first.tm_year == date.tm_year)
+// 	}
+// }
 
 //TODO:
 //create a print function that will output things nicely

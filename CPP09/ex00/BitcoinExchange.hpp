@@ -10,32 +10,37 @@
 #define BITCOIN_START_YEAR 2009
 #define CURRENT_YEAR 2025
 
-struct Date {
-	int year;
-	int month;
-	int day;
-	bool operator<(const Date& other) const {
-	if (year != other.year) return year < other.year;
-	if (month != other.month) return month < other.month;
-	return day < other.day;
-    }
-};
+// struct Date {
+// 	int year;
+// 	int month;
+// 	int day;
+// 	bool operator<(const Date& other) const {
+// 	if (year != other.year) return year < other.year;
+// 	if (month != other.month) return month < other.month;
+// 	return day < other.day;
+//     }
+// };
 
 class BitcoinExchange
 {
 private:
-	std::multimap<Date, float> _database;
-	std::multimap<Date, float> _input;
+	std::multimap<struct tm, float> _database;
+	std::multimap<struct tm, float> _input;
 
 	/*OCF*/
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator= (const BitcoinExchange &other);
 	void parse_file(std::string filename, int type);
-	const float get_exchange_rate(Date date);
+	// const float get_exchange_rate(struct tm date);
 
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
 };
 
+bool operator<(const struct tm& other) const {
+	if (tm_year != other.year) return year < other.year;
+	if (month != other.month) return month < other.month;
+	return day < other.day;
+    }
 #endif
