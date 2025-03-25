@@ -5,6 +5,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <float.h>
+#include <string> 
 #include "BitcoinExchange.hpp"
 
 #define DATA "date,exchange_rate"

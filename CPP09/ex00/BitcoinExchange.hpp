@@ -24,8 +24,8 @@ struct Date {
 class BitcoinExchange
 {
 private:
-	std::multimap<struct Date, float> _database;
-	std::multimap<struct Date, float> _input;
+	std::multimap<Date, float> _database;
+	std::multimap<Date, float> _input;
 
 	/*OCF*/
 	BitcoinExchange(const BitcoinExchange &other);

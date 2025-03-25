@@ -39,7 +39,7 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		Date date;
 		FileChecker::get_date(parsed[0], date);
 		float value = FileChecker::get_value(parsed[1], filename);
-		std::cout << "date: "<< date.year << date.month << date.day << std::endl;
+		//std::cout << "date: "<< date.year << date.month << date.day << std::endl;
 		if (type == DATA_T)
 			_database.insert(std::pair<Date, float>(date, value));
 		else if (type == INPUT_T)
@@ -48,6 +48,5 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 }
 
 //TODO:
-// should dates be kept in strings ot maybe save them in a struct??
 //create a print function that will output things nicely
 //create an algorithm function that will find the closest date
