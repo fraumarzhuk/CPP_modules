@@ -70,12 +70,10 @@ float BitcoinExchange::get_exchange_rate(struct tm date) {
 	time_t date_tstamp = mktime(&date);
 	while (begin != end) {
 		struct tm temp_tm = begin->first;
-		//std::cout << "Begin->second: " <<begin->second << std::endl;
 		time_t temp = mktime(&temp_tm);
-		if (date_tstamp - temp < dif) {
-			dif = temp - date_tstamp;
+		if (abs(date_tstamp - temp) < dif) {
+			dif = abs(date_tstamp - temp);
 			rate = begin->second;
-			//std::cout << "Begin->second: " <<begin->second << std::endl;
 		}
 		begin++;
 	}
