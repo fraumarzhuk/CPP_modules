@@ -42,7 +42,7 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 			_database.insert(std::pair<struct tm, float>(date, value));
 		else if (type == INPUT_T)
 			_input.insert(std::pair<struct tm, float>(date, value));
-			
+
 		if (!FileChecker::_correctline && type == DATA_T)
 			exit(1);
 		else {
@@ -71,7 +71,7 @@ float BitcoinExchange::get_exchange_rate(struct tm date) {
 }
 
 void BitcoinExchange::print_result(struct tm date, std::string date_line, float val) {
-	std::cout << date_line << " => " << val << " = " <<  get_exchange_rate(date) <<  std::endl;
+	std::cout << date_line << " => " << val << " = " <<  get_exchange_rate(date) * val <<  std::endl;
 }
 
 //TODO:

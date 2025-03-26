@@ -1,5 +1,7 @@
 #include "FileChecker.hpp"
 
+bool FileChecker::_correctline = true;
+
 FileChecker::FileChecker() {
 }
 
