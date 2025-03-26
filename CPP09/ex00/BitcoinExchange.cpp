@@ -1,8 +1,9 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() {
+BitcoinExchange::BitcoinExchange(std::string filename) {
 	//std::cout << "BitcoinExchange Constructor called" << std::endl;
 	parse_file(DATABASE, DATA_T);
+	parse_file(filename, INPUT_T);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
@@ -27,10 +28,11 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	std::string line;
 	std::getline(file, line);
 	std::string parsed[2];
+	//std::cout << "line: " << line << std::endl;
 
 	FileChecker::_correctline = true; // maybe create a getter for it
 	FileChecker::is_correct_format(line, type);
-	while (std::getline(file, line)) {
+	while (std::getline(file, line) && FileChecker::_correctline) {
 		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
 		parsed[1] = line.substr(pos + 1, line.length());
@@ -45,10 +47,12 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 
 		if (!FileChecker::_correctline && type == DATA_T)
 			exit(1);
-		else {
+		if (type == INPUT_T && FileChecker::_correctline) {
 			print_result(date, parsed[0], value);
 		}
+		FileChecker::_correctline = true;
 	}
+	file.close(); //?
 }
 
 float BitcoinExchange::get_exchange_rate(struct tm date) {
@@ -74,6 +78,6 @@ void BitcoinExchange::print_result(struct tm date, std::string date_line, float 
 	std::cout << date_line << " => " << val << " = " <<  get_exchange_rate(date) * val <<  std::endl;
 }
 
-//TODO:
-//create a print function that will output things nicely
-//create an algorithm function that will find the closest date
+// void BitcoinExchange::print_exchange(std::string filename) {
+// 	parse_file(filename, INPUT_T);
+// }

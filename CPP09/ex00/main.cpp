@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 	if (argc != 2)
 		FileChecker::error_exit("Incorrect amount of parameters");
 	FileChecker::file_check(argv[1]);
-	BitcoinExchange exchanger;
+	BitcoinExchange exchanger(argv[1]);
 	// std::cout << "dif between 2011-02-09  and 2011-01-09: " <<  "2011-02-09" - "2011-01-09" << std::endl;
 	// std::cout << "dif between 2011-01-08  and 2011-01-07: " <<  "2011-01-08" - "2011-01-07" << std::endl;
 }

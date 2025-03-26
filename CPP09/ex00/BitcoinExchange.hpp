@@ -32,10 +32,8 @@ private:
 	
 public:
 	void print_result(struct tm date, std::string date_line, float val);
-	BitcoinExchange();
+	BitcoinExchange(std::string filename);
 	~BitcoinExchange();
 };
 
 #endif
-
-//change error exit to just print.....

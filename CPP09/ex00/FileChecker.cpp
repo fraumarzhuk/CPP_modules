@@ -34,7 +34,7 @@ void FileChecker::open_check(std::string filename) {
 }
 	
 void FileChecker::error_exit(std::string error) {
-	std::cerr << RED500 << error << std::endl;
+	std::cerr << RED500 << error << RESET << std::endl;
 	_correctline = false;
 	//exit(1);
 }
@@ -44,6 +44,9 @@ void FileChecker::file_check(std::string file) {
 
 }
 bool FileChecker::is_correct_format(std::string line, char delimeter) {
+	// std::cout << "delimeter: " << delimeter << std::endl;
+	// std::cout << "line: " << line << std::endl;
+
 	if (delimeter == DATA_T && line.compare(DATA))
 		error_exit("Incorrect format of file. Correct format should be " + static_cast<std::string>(DATA));
 	else if (delimeter == INPUT_T && line.compare(INPUT))
@@ -61,8 +64,10 @@ bool FileChecker::is_file_char(char c, std::string filename) {
 
 struct tm FileChecker::get_date(std::string line, struct tm &date) {
 	std::string error = "";
+	if (line[line.length() - 1] == ' ')
+		line = line.substr(0, line.length() - 1);
 	if ((line[4] != '-' && line[7] != '-') || line.length() != 10)
-		error = "date should be in YYYY-MM-DD format: " + line;
+	error = "date should be in YYYY-MM-DD format: " + line;
 
 	date.tm_year = std::atoi(line.substr(0, 4).c_str());
 	date.tm_mon = std::atoi(line.substr(5, 7).c_str());
