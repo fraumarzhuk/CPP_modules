@@ -61,15 +61,14 @@ float BitcoinExchange::get_exchange_rate(struct tm date) {
 	std::multimap<struct tm, float>::iterator end = _database.end();
 
 	float rate = 0;
-	int dif = INT_MAX;
 	time_t date_tstamp = mktime(&date);
 	while (begin != end) {
 		struct tm temp_tm = begin->first;
 		time_t temp = mktime(&temp_tm);
-		if (abs(date_tstamp - temp) < dif) {
-			dif = abs(date_tstamp - temp);
+		if (temp <= date_tstamp) {
 			rate = begin->second;
-		}
+		} else
+			break;
 		begin++;
 	}
 	return (rate);
