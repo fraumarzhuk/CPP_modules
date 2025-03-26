@@ -39,8 +39,12 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		parsed[1] = line.substr(pos + 1, line.length());
 
 		struct tm date;
+		date.tm_hour = 0;
+		date.tm_min = 0;
+		date.tm_sec = 0;
 		FileChecker::get_date(parsed[0], date);
 		float value = FileChecker::get_value(parsed[1], filename);
+		// std::cout << "Value : " << value << std::endl;
 		if (type == DATA_T)
 			_database.insert(std::pair<struct tm, float>(date, value));
 		else if (type == INPUT_T)
@@ -59,17 +63,19 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 
 float BitcoinExchange::get_exchange_rate(struct tm date) {
 	std::multimap<struct tm, float>::iterator begin = _database.begin();
-	std::multimap<struct tm, float>::iterator end = _database.begin();
+	std::multimap<struct tm, float>::iterator end = _database.end();
 
 	float rate = 0;
 	int dif = INT_MAX;
 	time_t date_tstamp = mktime(&date);
 	while (begin != end) {
 		struct tm temp_tm = begin->first;
+		//std::cout << "Begin->second: " <<begin->second << std::endl;
 		time_t temp = mktime(&temp_tm);
 		if (date_tstamp - temp < dif) {
 			dif = temp - date_tstamp;
 			rate = begin->second;
+			//std::cout << "Begin->second: " <<begin->second << std::endl;
 		}
 		begin++;
 	}
@@ -77,9 +83,8 @@ float BitcoinExchange::get_exchange_rate(struct tm date) {
 }
 
 void BitcoinExchange::print_result(struct tm date, std::string date_line, float val) {
-	std::cout << date_line << " => " << val << " = " <<  get_exchange_rate(date) * val <<  std::endl;
+	// std::cout << "Exchange rate: " << get_exchange_rate(date) << std::endl;
+	// std::cout << "Value: " << val << std::endl;
+	float res = get_exchange_rate(date) * val;
+	std::cout << date_line << " => " << val << " = " << res <<  std::endl;
 }
-
-// void BitcoinExchange::print_exchange(std::string filename) {
-// 	parse_file(filename, INPUT_T);
-// }

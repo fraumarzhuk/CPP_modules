@@ -38,7 +38,6 @@ void FileChecker::error_exit(std::string error) {
 	std::cerr << PINK300 << "LINE " << _line_num << ": "<< RESET;
 	std::cerr << RED500 << error << RESET << std::endl;
 	_correctline = false;
-	//exit(1);
 }
 
 void FileChecker::file_check(std::string file) {
@@ -46,9 +45,6 @@ void FileChecker::file_check(std::string file) {
 
 }
 bool FileChecker::is_correct_format(std::string line, char delimeter) {
-	// std::cout << "delimeter: " << delimeter << std::endl;
-	// std::cout << "line: " << line << std::endl;
-
 	if (delimeter == DATA_T && line.compare(DATA))
 		error_exit("Incorrect format of file. Correct format should be " + static_cast<std::string>(DATA));
 	else if (delimeter == INPUT_T && line.compare(INPUT))
@@ -90,12 +86,15 @@ struct tm FileChecker::get_date(std::string line, struct tm &date) {
 float FileChecker::get_value(std::string line_val, std::string filename) {
 	if (line_val[0] == ' ')
 		line_val = line_val.substr(1, line_val.length() -1);
+	// std::cout << "val from file: " << line_val << std::endl;
 	for (size_t i = 0; i < line_val.length(); i++) {
 		if (is_file_char(line_val[i], filename))
 			continue;
 	}
 	float val = atof(line_val.c_str());
-	if (val >= INT_MAX || val < 0)
+	// std::cout << "val from parsing: " << val << std::endl;
+ 	if (val >= INT_MAX || val < 0)
 		error_exit("Bad value " + line_val + " is provided in " + filename);
+	// std::cout << line_val <<" Value : " << val << std::endl;
 	return (val);
 }
