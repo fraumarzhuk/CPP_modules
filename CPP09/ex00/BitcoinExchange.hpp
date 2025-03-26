@@ -19,18 +19,23 @@ inline bool operator<(const struct tm& fst, const struct tm& other) {
 
 class BitcoinExchange {
 private:
+	/*members*/
 	std::multimap<struct tm, float> _database;
 	std::multimap<struct tm, float> _input;
 
+	void parse_file(std::string filename, int type);
+	float get_exchange_rate(struct tm date);
+	
 	/*OCF*/
 	BitcoinExchange(const BitcoinExchange &other);
 	BitcoinExchange &operator= (const BitcoinExchange &other);
-	void parse_file(std::string filename, int type);
-	float get_exchange_rate(struct tm date);
-
+	
 public:
+	void print_result(struct tm date, std::string date_line, float val);
 	BitcoinExchange();
 	~BitcoinExchange();
 };
 
 #endif
+
+//change error exit to just print.....

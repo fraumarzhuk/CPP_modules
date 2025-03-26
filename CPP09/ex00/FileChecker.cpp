@@ -33,7 +33,8 @@ void FileChecker::open_check(std::string filename) {
 	
 void FileChecker::error_exit(std::string error) {
 	std::cerr << RED500 << error << std::endl;
-	exit(1);
+	_correctline = false;
+	//exit(1);
 }
 
 void FileChecker::file_check(std::string file) {
