@@ -28,7 +28,6 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	std::string line;
 	std::getline(file, line);
 	std::string parsed[2];
-	//std::cout << "line: " << line << std::endl;
 
 	FileChecker::_correctline = true; // maybe create a getter for it
 	FileChecker::_line_num = 1;
@@ -39,12 +38,8 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		parsed[1] = line.substr(pos + 1, line.length());
 
 		struct tm date;
-		date.tm_hour = 0;
-		date.tm_min = 0;
-		date.tm_sec = 0;
 		FileChecker::get_date(parsed[0], date);
 		float value = FileChecker::get_value(parsed[1], filename);
-		// std::cout << "Value : " << value << std::endl;
 		if (type == DATA_T)
 			_database.insert(std::pair<struct tm, float>(date, value));
 		else if (type == INPUT_T)
@@ -81,8 +76,6 @@ float BitcoinExchange::get_exchange_rate(struct tm date) {
 }
 
 void BitcoinExchange::print_result(struct tm date, std::string date_line, float val) {
-	// std::cout << "Exchange rate: " << get_exchange_rate(date) << std::endl;
-	// std::cout << "Value: " << val << std::endl;
 	float res = get_exchange_rate(date) * val;
 	std::cout << date_line << " => " << val << " = " << res <<  std::endl;
 }

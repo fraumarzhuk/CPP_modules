@@ -52,7 +52,6 @@ bool FileChecker::is_correct_format(std::string line, char delimeter) {
 	return (true);	
 }
 
-//attention this function only checks separated parts before and after delimeter
 bool FileChecker::is_file_char(char c, std::string filename) {
 	if (isdigit(c) || c == '-' || c == '.' )
 		return true;
@@ -86,15 +85,12 @@ struct tm FileChecker::get_date(std::string line, struct tm &date) {
 float FileChecker::get_value(std::string line_val, std::string filename) {
 	if (line_val[0] == ' ')
 		line_val = line_val.substr(1, line_val.length() -1);
-	// std::cout << "val from file: " << line_val << std::endl;
 	for (size_t i = 0; i < line_val.length(); i++) {
 		if (is_file_char(line_val[i], filename))
 			continue;
 	}
 	float val = atof(line_val.c_str());
-	// std::cout << "val from parsing: " << val << std::endl;
  	if (val >= INT_MAX || val < 0)
 		error_exit("Bad value " + line_val + " is provided in " + filename);
-	// std::cout << line_val <<" Value : " << val << std::endl;
 	return (val);
 }
