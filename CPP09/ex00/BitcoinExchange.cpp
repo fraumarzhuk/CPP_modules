@@ -44,16 +44,24 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	}
 }
 
-// const float BitcoinExchange::get_exchange_rate(struct tm date) {
-// 	std::multimap<struct tm, float>::iterator begin = _database.begin();
-// 	std::multimap<struct tm, float>::iterator end = _database.begin();
+float BitcoinExchange::get_exchange_rate(struct tm date) {
+	std::multimap<struct tm, float>::iterator begin = _database.begin();
+	std::multimap<struct tm, float>::iterator end = _database.begin();
 
-// 	int dif = INT_MAX;
-// 	while (begin != end) {
-// 		time_t date_tstamp = mktime(&date);
-// 		if (begin->first.tm_year == date.tm_year)
-// 	}
-// }
+	float rate = 0;
+	int dif = INT_MAX;
+	time_t date_tstamp = mktime(&date);
+	while (begin != end) {
+		struct tm temp_tm = begin->first;
+		time_t temp = mktime(&temp_tm);
+		if (temp - date_tstamp < dif) {
+			dif = temp - date_tstamp;
+			rate = begin->second;
+		}
+		begin++;
+	}
+	return (rate);
+}
 
 //TODO:
 //create a print function that will output things nicely
