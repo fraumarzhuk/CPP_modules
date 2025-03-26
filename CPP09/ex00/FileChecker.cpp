@@ -1,6 +1,7 @@
 #include "FileChecker.hpp"
 
 bool FileChecker::_correctline = true;
+int FileChecker::_line_num = 1;
 
 FileChecker::FileChecker() {
 }
@@ -34,6 +35,7 @@ void FileChecker::open_check(std::string filename) {
 }
 	
 void FileChecker::error_exit(std::string error) {
+	std::cerr << PINK300 << "LINE " << _line_num << ": "<< RESET;
 	std::cerr << RED500 << error << RESET << std::endl;
 	_correctline = false;
 	//exit(1);
@@ -86,12 +88,14 @@ struct tm FileChecker::get_date(std::string line, struct tm &date) {
 }
 
 float FileChecker::get_value(std::string line_val, std::string filename) {
+	if (line_val[0] == ' ')
+		line_val = line_val.substr(1, line_val.length() -1);
 	for (size_t i = 0; i < line_val.length(); i++) {
 		if (is_file_char(line_val[i], filename))
 			continue;
 	}
 	float val = atof(line_val.c_str());
-	if (val >= FLT_MAX || val < 0)
-		error_exit("Incorrect value is provided in " + filename);
+	if (val >= INT_MAX || val < 0)
+		error_exit("Bad value " + line_val + " is provided in " + filename);
 	return (val);
 }

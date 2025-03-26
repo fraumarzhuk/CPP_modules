@@ -27,6 +27,7 @@ private:
 	static bool is_file_char(char c, std::string filename);
 public:
 	static bool _correctline;
+	static int _line_num;
 	static bool is_correct_format(std::string line, char delimeter);
 	static void error_exit(std::string error);
 	static void file_check(std::string file);
