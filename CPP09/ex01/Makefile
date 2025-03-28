@@ -2,7 +2,7 @@ NAME = ./mutantstack
 CXX = c++ -std=c++98
 CXXFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 
-SRC = main.cpp
+SRC = main.cpp RPN.cpp RPN.hpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
