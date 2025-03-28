@@ -83,14 +83,14 @@ struct tm FileChecker::get_date(std::string line, struct tm &date) {
 }
 
 float FileChecker::get_value(std::string line_val, std::string filename) {
-	if (line_val[0] == ' ')
+	if (line_val[0] == ' ' && filename != DATABASE)
 		line_val = line_val.substr(1, line_val.length() -1);
 	for (size_t i = 0; i < line_val.length(); i++) {
 		if (is_file_char(line_val[i], filename))
 			continue;
 	}
 	float val = atof(line_val.c_str());
- 	if (val >= INT_MAX || val < 0 || line_val.empty())
+ 	if (val >= INT_MAX || val < 0 || line_val.empty() || !isdigit(line_val[0]))
 		error_exit("Bad value " + line_val + " is provided in " + filename);
 	return (val);
 }
