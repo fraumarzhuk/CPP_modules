@@ -33,6 +33,7 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	FileChecker::_line_num = 1;
 	FileChecker::is_correct_format(line, type);
 	while (std::getline(file, line) && FileChecker::_correctline) {
+		FileChecker::_line_num++;
 		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
 		parsed[1] = line.substr(pos + 1, line.length());
@@ -51,7 +52,6 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 			print_result(date, parsed[0], value);
 		}
 		FileChecker::_correctline = true;
-		FileChecker::_line_num++;
 	}
 	file.close(); //?
 }

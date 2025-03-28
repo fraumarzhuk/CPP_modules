@@ -90,7 +90,7 @@ float FileChecker::get_value(std::string line_val, std::string filename) {
 			continue;
 	}
 	float val = atof(line_val.c_str());
- 	if (val >= INT_MAX || val < 0)
+ 	if (val >= INT_MAX || val < 0 || line_val.empty())
 		error_exit("Bad value " + line_val + " is provided in " + filename);
 	return (val);
 }
