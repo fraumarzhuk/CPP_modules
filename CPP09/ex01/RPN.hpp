@@ -12,8 +12,8 @@
 #define DIVIDE '/'
 class RPN {
 private:
-	std::string _input;
-	std::stack<int> operands;
+	//std::string _input;
+	std::stack<double> operands;
 	RPN();
 	~RPN();
 
