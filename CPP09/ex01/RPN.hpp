@@ -3,6 +3,8 @@
 #include <iostream>
 #include "colors.hpp"
 #include <stack>
+#include <cstring>
+#include <string.h>
 
 #define PLUS '+'
 #define MINUS '-'
@@ -17,10 +19,12 @@ private:
 
 	RPN(const RPN &other);
 	RPN &operator= (const RPN &other);
-	static void error(std::string msg);
+	static bool is_operator(char c);
 public:
 	/*members*/
-	static unsigned long long evaluate();
+	static double process_expr(std::string input);
+	static void error(std::string msg);
+	static bool is_correct_input(std::string input);
 };
 
 #endif
