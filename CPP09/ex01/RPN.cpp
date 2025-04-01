@@ -32,7 +32,9 @@ float RPN::process_expr(std::string input) {
 	std::string::iterator it;
 	std::stack<float> _stack;
 
+	std::cout << "STRING: " << input << std::endl;
 	for (it = input.begin(); it != input.end(); it++) {
+		// std::cout << "operator: " << *it << std::endl;
 		if (is_operator(*it)) {
 			a = _stack.top();
 			_stack.pop();
@@ -58,13 +60,19 @@ bool RPN::is_correct_input(std::string input) {
 		if (!isdigit(input[i]) && !is_operator(input[i]) && !isspace(input[i])) {
 			std::cout << "char " << input[i] << " .";
 			RPN::error("incorrect char provided");
+			return false;
+		}
+		if ((i % 2 != 0) && !isspace(input[i])) {
+			std::cout << "char " << input[i] << " .";
+			RPN::error("values should be separated by spaces.");
+			return false; 
 		}
 	}
-	//check that it starts with operands
 	return true;
 }
 
 float RPN::do_operation(char op, int a, int b) {
+	std::cout << "operator: " << op << std::endl;
 	switch (op) {
 		case PLUS:
 			return b + a;
@@ -74,8 +82,10 @@ float RPN::do_operation(char op, int a, int b) {
 			return b * a;
 		case DIVIDE:
 			return b / a;
+		default:
+			RPN::error("invalid operator");
 	}
-	return 0.0;
+	return 0;
 }
 
 
