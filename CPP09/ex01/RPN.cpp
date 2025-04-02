@@ -28,12 +28,16 @@ bool RPN::is_operand(char c) {
 }
 
 float RPN::process_expr(std::string input) {
-	int a, b;
+	float a, b;
 	std::string::iterator it;
 	std::stack<float> _stack;
 
 	for (it = input.begin(); it != input.end(); it++) {
 		if (is_operator(*it)) {
+			if (_stack.size() < 2) {
+				RPN::error("Invalid expression: not enough operands for operation");
+				return 0;
+			}
 			a = _stack.top();
 			_stack.pop();
 			b = _stack.top();
@@ -41,7 +45,7 @@ float RPN::process_expr(std::string input) {
 			_stack.push(do_operation(*it, a, b));
 		}
 		else if (is_operand(*it))
- 			_stack.push(static_cast<int>(*it - '0'));
+ 			_stack.push(static_cast<float>(*it - '0'));
 	}
 	return _stack.top();
 }
@@ -51,6 +55,7 @@ void RPN::error(std::string msg) {
 }
 
 bool RPN::is_correct_input(std::string input) {
+
 	if (input.empty())
 		return false;
 	for (size_t i = 0; i < (input.length() - 1); i++) {
@@ -64,12 +69,11 @@ bool RPN::is_correct_input(std::string input) {
 			RPN::error("values should be separated by spaces.");
 			return false; 
 		}
-	}
-	//check that there is normal regular notation (9 + 9 or smth) ?
+	 }
 	return true;
 }
 
-float RPN::do_operation(char op, int a, int b) {
+float RPN::do_operation(char op, float a, float b) {
 	switch (op) {
 		case PLUS:{
 			return b + a;

@@ -21,7 +21,7 @@ private:
 	RPN &operator= (const RPN &other);
 	static bool is_operator(char c);
 	static bool is_operand(char c);
-	static float do_operation(char op, int a, int b);
+	static float do_operation(char op, float a, float b);
 public:
 	/*members*/
 	static float process_expr(std::string input);

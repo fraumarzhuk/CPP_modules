@@ -11,7 +11,7 @@ int main() {
 		std::getline(std::cin, input);
 		if (!RPN::is_correct_input(input))
 			continue ;
-		double res = RPN::process_expr(input);
+		float res = RPN::process_expr(input);
 		std::cout << CYAN500 << "> Result: " << BLUE500 << res <<  RESET << std::endl;
 	}
 	return 0;
