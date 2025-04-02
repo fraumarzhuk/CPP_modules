@@ -32,19 +32,16 @@ float RPN::process_expr(std::string input) {
 	std::string::iterator it;
 	std::stack<float> _stack;
 
-	std::cout << "STRING: " << input << std::endl;
 	for (it = input.begin(); it != input.end(); it++) {
-		// std::cout << "operator: " << *it << std::endl;
 		if (is_operator(*it)) {
 			a = _stack.top();
 			_stack.pop();
 			b = _stack.top();
 			_stack.pop();
-			_stack.push(do_operation(a, b, *it));
+			_stack.push(do_operation(*it, a, b));
 		}
-		else {
-			_stack.push(*it - '0');
-		}
+		else if (is_operand(*it))
+ 			_stack.push(static_cast<int>(*it - '0'));
 	}
 	return _stack.top();
 }
@@ -56,7 +53,7 @@ void RPN::error(std::string msg) {
 bool RPN::is_correct_input(std::string input) {
 	if (input.empty())
 		return false;
-	for (size_t i = 0; i < input.length() - 1; i++) {
+	for (size_t i = 0; i < (input.length() - 1); i++) {
 		if (!isdigit(input[i]) && !is_operator(input[i]) && !isspace(input[i])) {
 			std::cout << "char " << input[i] << " .";
 			RPN::error("incorrect char provided");
@@ -68,14 +65,15 @@ bool RPN::is_correct_input(std::string input) {
 			return false; 
 		}
 	}
+	//check that there is normal regular notation (9 + 9 or smth) ?
 	return true;
 }
 
 float RPN::do_operation(char op, int a, int b) {
-	std::cout << "operator: " << op << std::endl;
 	switch (op) {
-		case PLUS:
+		case PLUS:{
 			return b + a;
+		}
 		case MINUS:
 			return b - a;
 		case MULT:
