@@ -3,20 +3,20 @@
 #include <iostream>
 #include "colors.hpp"
 
-// template <typename T>
+template <typename T>
 
 class PmergeMe {
 private:
-	static std::vector<std::pair<int, int>> _vect_cont;
-	static std::deque<int> _deq_cont;
+	static std::vector<std::pair<int, int> > _vect_cont;
+	static std::deque<std::pair<int, int> > _deq_cont;
 
-	void _pair_sort(std::vector<int> main_arg);
-
+	
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
 	PmergeMe &operator= (const PmergeMe &other);
 	~PmergeMe();
 public:
+	static std::vector<T> _pair_sort(std::vector<T> main_arg);
 	//static T sort_sequence();
 };
 
