@@ -7,7 +7,7 @@ template <typename T>
 
 class PmergeMe {
 private:
-	static std::vector<std::pair<int, int> > _vect_cont;
+	//static std::vector<std::pair<T, T> > _vect_cont;
 	static std::deque<std::pair<int, int> > _deq_cont;
 
 	
