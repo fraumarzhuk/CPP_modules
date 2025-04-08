@@ -2,7 +2,9 @@
 #define PMERGEME_HPP
 #include <iostream>
 #include "colors.hpp"
-
+#include <vector>
+#include <deque>
+#include <stdlib.h>
 template <typename T>
 
 class PmergeMe {
