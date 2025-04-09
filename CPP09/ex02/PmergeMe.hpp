@@ -24,6 +24,7 @@ public:
 	static std::vector<std::pair<int, int> > _pair_up(std::vector<int> main_arg); //move to private after testing
 	static void _place_into_cont();
 	static void insertion_sort(std::vector<int> &up);
+	static void binary_search();
 	//static T sort_sequence();
 };
 

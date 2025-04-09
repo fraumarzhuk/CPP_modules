@@ -128,3 +128,8 @@ void PmergeMe::insertion_sort(std::vector<int> &up) {
         up[j + 1] = key;
     }
 }
+
+
+//combine into the main chain(up) 1st element of down, place it at [0] + up
+//insert downline[0] to up using jacobsthal(?) and binary insertion(!)
+//question: when exactly do we insert the remaining number?
