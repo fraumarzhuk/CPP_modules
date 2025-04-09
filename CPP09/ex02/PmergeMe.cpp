@@ -1,5 +1,9 @@
 #include "PmergeMe.hpp"
 
+std::vector<int> PmergeMe::_rest_line;
+std::vector<int> PmergeMe::_down_line;
+std::vector<int> PmergeMe::_up_line;
+
 PmergeMe::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
 }
@@ -72,18 +76,19 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 // if (cur.first > cur.second)
 // std::swap(cur.first, cur.second);
 
+//to think: maybe its not neede to separate them into pairs, just separate to two containers from the beginning
+
 std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) {
 	typename std::vector<int>::iterator a_it_b = main_arg.begin();
 	typename std::vector<int>::iterator a_it_e = main_arg.end();
-	std::vector<int> _up_line;
-	std::vector<int> _down_line;
-	std::vector<int> _rest_line;
 
 	//separate to pairs
 	std::vector<std::pair<int, int> > _vect_cont;
 	while (a_it_b < a_it_e) {
 		if ((a_it_b + 1) != a_it_e) {
 			std::pair<int, int> cur = std::make_pair(*a_it_b, *(a_it_b + 1));
+			if (cur.first > cur.second)
+				std::swap(cur.second, cur.first);
 			_vect_cont.push_back(cur);
 		} else 
 			_rest_line.push_back(*a_it_b);
@@ -93,5 +98,8 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	if (!_rest_line.empty())
 		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
 	return (_vect_cont);
+
+	//place into two vectors
+	
 }
 

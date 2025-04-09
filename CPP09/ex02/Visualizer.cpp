@@ -38,3 +38,6 @@ void Visualizer::print_pairs(std::vector<std::pair<int, int> > main_arg) {
 	std::cout << std::endl;
 
 }
+
+//print unsorted schema
+//print schema after sorting
