@@ -1,11 +1,32 @@
-// #include "PmergeMe.hpp"
-#include <iostream>
-#include "colors.hpp"
-#include <vector>
-#include <deque>
-#include <stdlib.h>
+#include "Visualizer.hpp"
 
-void print_pairs(std::vector<std::pair<int, int> > main_arg) {
+Visualizer::Visualizer()
+{
+std::cout << "Visualizer Constructor called" << std::endl;
+}
+
+Visualizer::Visualizer(const Visualizer &other)
+{
+	std::cout << " Visualizer Copy constructor called" << std::endl;
+	*this = other;
+}
+
+Visualizer &Visualizer::operator = (const Visualizer &other)
+{
+	std::cout << "Visualizer Copy assignment operator called" << std::endl;
+	if (this != &other)
+	{
+		//assign;
+	}
+	return (*this);
+}
+
+Visualizer::~Visualizer()
+{
+	std::cout << " Visualizer Destructor called" << std::endl;
+}
+
+void Visualizer::print_pairs(std::vector<std::pair<int, int> > main_arg) {
 	typename std::vector<std::pair<int, int> >::iterator a_it_b = main_arg.begin();
 	typename std::vector<std::pair<int, int> >::iterator a_it_e = main_arg.end();
 	

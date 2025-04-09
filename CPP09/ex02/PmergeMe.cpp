@@ -16,10 +16,9 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 	return (*this);
 }
 
-
-PmergeMe::~PmergeMe() {
-	//std::cout << " PmergeMe Destructor called" << std::endl;
-}
+// PmergeMe::~PmergeMe() {
+// 	//std::cout << " PmergeMe Destructor called" << std::endl;
+// }
 
 //step 1 get them into pairs
 
@@ -84,7 +83,7 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 			_vect_cont.push_back(std::make_pair(*a_it_b, NULL));
 		a_it_b += 2;
 	}
-	print_pairs(_vect_cont);
+	//Visualizer::print_pairs(_vect_cont);
 	// if (cur.first > cur.second)
 	// std::swap(cur.first, cur.second);
 	return (_vect_cont);
