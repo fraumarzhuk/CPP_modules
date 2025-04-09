@@ -72,15 +72,25 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) {
 	typename std::vector<int>::iterator a_it_b = main_arg.begin();
 	typename std::vector<int>::iterator a_it_e = main_arg.end();
-	
+	std::vector<int> _up_line;
+	std::vector<int> _down_line;
+	std::vector<int> _rest_line;
+
 	//separate to pairs
 	std::vector<std::pair<int, int> > _vect_cont;
+	if (main_arg.size() % 2 != 0) {
+		_rest_line.push_back(*(a_it_e - 1));
+		main_arg.pop_back();
+		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	}
+
 	while (a_it_b < a_it_e) {
 		if ((a_it_b + 1) != a_it_e) {
 			std::pair<int, int> cur = std::make_pair(*a_it_b, *(a_it_b + 1));
 			_vect_cont.push_back(cur);
-		} else
-			_vect_cont.push_back(std::make_pair(*a_it_b, NULL));
+		}
+		// } else
+		// 	_vect_cont.push_back(std::make_pair(*a_it_b, NULL));
 		a_it_b += 2;
 	}
 	Visualizer::print_pairs(_vect_cont);
