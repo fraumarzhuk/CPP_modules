@@ -98,16 +98,16 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	if (!_rest_line.empty())
 		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
 	_place_into_cont();
+	insertion_sort(_up_line);
+	Visualizer::print_schema(_down_line, _up_line);
 	return (_vect_cont);
 
-	//place into two vectors
 }
 void PmergeMe::_place_into_cont() {
 	typename std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
 	typename std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
 
 	while (a_it_b < a_it_e) {
-		// std::cout << a_it_b->first << " ";
 		_down_line.push_back(a_it_b->first);
 		_up_line.push_back(a_it_b->second);
 		a_it_b++;
@@ -115,3 +115,16 @@ void PmergeMe::_place_into_cont() {
 	Visualizer::print_schema(_down_line, _up_line);
 }
 
+void PmergeMe::insertion_sort(std::vector<int> &up) {
+    int n = up.size();
+    for (int i = 1; i < n; i++) {
+        int key = up[i];
+        int j = i - 1;
+
+        while (j >= 0 && up[j] > key) {
+            up[j + 1] = up[j];
+            j = j - 1;
+        }
+        up[j + 1] = key;
+    }
+}
