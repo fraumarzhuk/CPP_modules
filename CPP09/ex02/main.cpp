@@ -1,4 +1,4 @@
-#include "PmergeMe.cpp"
+#include "PmergeMe.hpp"
 #include <iostream>
 #include <vector>
 #include "colors.hpp"

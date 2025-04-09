@@ -32,7 +32,7 @@ void Visualizer::print_pairs(std::vector<std::pair<int, int> > main_arg) {
 	
 	//separate to pairs
 	while (a_it_b < a_it_e) {
-		std::cout << "[" << (*a_it_b).first << "," << (*a_it_b).second << "], ";
+		std::cout << "[" << (*a_it_b).first << "," << (*a_it_b).second << "] ";
 		a_it_b++;
 	}
 	std::cout << std::endl;

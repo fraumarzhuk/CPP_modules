@@ -5,7 +5,7 @@
 #include <vector>
 #include <deque>
 #include <stdlib.h>
-//#include "Visualizer.hpp"
+#include "Visualizer.hpp"
 
 class PmergeMe {
 private:
