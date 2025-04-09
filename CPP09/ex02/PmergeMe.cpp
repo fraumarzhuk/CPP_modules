@@ -3,6 +3,7 @@
 std::vector<int> PmergeMe::_rest_line;
 std::vector<int> PmergeMe::_down_line;
 std::vector<int> PmergeMe::_up_line;
+std::vector<std::pair<int, int> > PmergeMe::_vect_cont;
 
 PmergeMe::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
@@ -83,7 +84,6 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	typename std::vector<int>::iterator a_it_e = main_arg.end();
 
 	//separate to pairs
-	std::vector<std::pair<int, int> > _vect_cont;
 	while (a_it_b < a_it_e) {
 		if ((a_it_b + 1) != a_it_e) {
 			std::pair<int, int> cur = std::make_pair(*a_it_b, *(a_it_b + 1));
@@ -97,9 +97,21 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	Visualizer::print_pairs(_vect_cont);
 	if (!_rest_line.empty())
 		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	_place_into_cont();
 	return (_vect_cont);
 
 	//place into two vectors
-	
+}
+void PmergeMe::_place_into_cont() {
+	typename std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
+	typename std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
+
+	while (a_it_b < a_it_e) {
+		// std::cout << a_it_b->first << " ";
+		_down_line.push_back(a_it_b->first);
+		_up_line.push_back(a_it_b->second);
+		a_it_b++;
+	}
+	Visualizer::print_schema(_down_line, _up_line);
 }
 

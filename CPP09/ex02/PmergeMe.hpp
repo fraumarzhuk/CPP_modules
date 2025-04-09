@@ -9,7 +9,7 @@
 
 class PmergeMe {
 private:
-	//static std::vector<std::pair<int, int> > _vect_cont;
+	static std::vector<std::pair<int, int> > _vect_cont;
 	static std::deque<std::pair<int, int> > _deq_cont;
 	static std::vector<int> _up_line;
 	static std::vector<int> _down_line;
@@ -22,6 +22,7 @@ private:
 	~PmergeMe();
 public:
 	static std::vector<std::pair<int, int> > _pair_up(std::vector<int> main_arg); //move to private after testing
+	static void _place_into_cont();
 	//static T sort_sequence();
 };
 

@@ -39,5 +39,20 @@ void Visualizer::print_pairs(std::vector<std::pair<int, int> > main_arg) {
 
 }
 
-//print unsorted schema
-//print schema after sorting
+void Visualizer::print_schema(std::vector<int> down, std::vector<int> up) {
+	typename std::vector<int>::iterator a_it_b = up.begin();
+	typename std::vector<int>::iterator a_it_e = up.end();
+	
+	//separate to pairs
+	while (a_it_b < a_it_e) {
+		std::cout << *a_it_b << "—";
+		a_it_b++;
+	}
+	std::cout << std::endl;
+	a_it_b = down.begin();
+	a_it_e = down.end();
+	while (a_it_b < a_it_e) {
+		std::cout <<  *a_it_b << "—";
+		a_it_b++;
+	}
+}
