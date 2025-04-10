@@ -14,10 +14,10 @@ std::vector<int> get_argument(int argc, char **argv) {
 	std::vector<int> res;
 	for (int i = 1; i < argc; i++) {
 		int j = atoi(argv[i]);
-		if (j >= 0)
+		if (j >= 0 && std::find(res.begin(), res.end(), j) == res.end())
 			res.push_back(j);
 		else
-			error_exit("negative numbers are not allowed!");
+			error_exit("negative numbers or duplicates are not allowed!");
 	}
 	return res;
 }

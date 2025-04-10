@@ -5,6 +5,8 @@ std::vector<int> PmergeMe::_down_line;
 std::vector<int> PmergeMe::_up_line;
 std::vector<std::pair<int, int> > PmergeMe::_vect_cont;
 
+static int bs_counter = 0;
+
 PmergeMe::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
 }
@@ -46,6 +48,7 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	add_up_line();
 	Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
+	std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
 	return (_vect_cont);
 
 }
@@ -107,6 +110,7 @@ void PmergeMe::binary_search() {
 	}
 	_down_line.erase(_down_line.begin());
 	Visualizer::print_schema(_down_line, _up_line);
+	bs_counter++;
 	binary_search();
 }
 	
