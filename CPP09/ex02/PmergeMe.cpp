@@ -37,8 +37,9 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 		a_it_b += 2;
 	}
 	Visualizer::print_pairs(_vect_cont);
-	if (!_rest_line.empty())
+	if (!_rest_line.empty()) {
 		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	}
 	_place_into_cont();
 	insertion_sort(_up_line);
 	Visualizer::print_schema(_down_line, _up_line);
@@ -57,6 +58,7 @@ void PmergeMe::_place_into_cont() {
 		_up_line.push_back(a_it_b->second);
 		a_it_b++;
 	}
+	_down_line.push_back(_rest_line[0]);
 	Visualizer::print_schema(_down_line, _up_line);
 }
 
@@ -78,7 +80,7 @@ void PmergeMe::add_up_line() {
 	_up_line.insert(_up_line.begin(), *_down_line.begin());
 	_down_line.erase(_down_line.begin());
 	//append the last num of the downline here?
-	//_down_line.push_back(*_rest_line.begin());
+	//_down_line.push_back(*_rest_line.end());
 }
 
 void PmergeMe::binary_search() {
@@ -108,7 +110,12 @@ bool PmergeMe::is_correct_index(int target_num, int mid) {
 		_up_line.insert(_up_line.begin() + mid, target_num);
 		return true;
 	}
-	if (_up_line[mid - 1] > target_num && target_num < _up_line[mid]) {
+	if (mid == 0) {
+		std::cout << "cur num and pos: " << target_num << "" << mid << std::endl;
+		_up_line.insert(_up_line.begin(), target_num);
+		return true;
+	}
+	if ((_up_line[mid - 1] > target_num) && target_num < _up_line[mid]) {
 		_up_line.insert(_up_line.begin() + (mid - 1), target_num);
 		return true;
 	}
