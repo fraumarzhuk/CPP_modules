@@ -21,64 +21,6 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 	return (*this);
 }
 
-// PmergeMe::~PmergeMe() {
-// 	//std::cout << " PmergeMe Destructor called" << std::endl;
-// }
-
-//step 1 get them into pairs
-
-// void PmergeMe::_pair_sort(std::vector<int> main_arg) {
-// 	std::vector<int>::iterator a_it_b = main_arg.begin();
-// 	std::vector<int>::iterator a_it_e = main_arg.end();
-
-// 	while (a_it_b < a_it_e) {
-// 		if ((a_it_b + 1) != a_it_e) {
-// 			std::pair<int, int> cur = std::make_pair(*a_it_b, *(a_it_b + 1));
-// 			if (cur.first > cur.second)
-// 				std::swap(cur.first, cur.second);
-// 			_vect_cont.push_back(cur);
-// 		}
-// 		a_it_b += 2;
-// 	}
-// 	//make pairs
-// 	//separate
-// 	//make pair
-// 	//separate
-// template <typename T>
-// std::vector<std::pair<T, T> > PmergeMe<T>::_vect_cont;
-
-// template <typename T>
-// std::vector<T> PmergeMe<T>::_pair_sort(std::vector<T> main_arg) {
-// 	typename std::vector<T>::iterator a_it_b = main_arg.begin();
-// 	typename std::vector<T>::iterator a_it_e = main_arg.end();
-
-// 	if (main_arg.size() <= 2)
-// 		return main_arg;
-// 	std::vector<std::pair<T, T> > _vect_cont;
-// 	while (a_it_b < a_it_e) {
-// 		if ((a_it_b + 1) != a_it_e) {
-// 			std::pair<T, T> cur = std::make_pair(*a_it_b, *(a_it_b + 1));
-// 			if (cur.first > cur.second)
-// 				std::swap(cur.first, cur.second);
-// 			_vect_cont.push_back(cur);
-// 		} else
-// 			_vect_cont.push_back(std::make_pair(*a_it_b, T()));
-// 		a_it_b += 2;
-// 	}
-// 	std::vector<T> test;
-// 	for (typename std::vector<std::pair<T, T> >::iterator it = _vect_cont.begin(); it != _vect_cont.end(); ++it) {
-// 		test.push_back(it->first);
-// 		if (it->second != T())
-// 			test.push_back(it->second);
-// 	}
-// 	return _pair_sort(test);
-// }
-
-// if (cur.first > cur.second)
-// std::swap(cur.first, cur.second);
-
-//to think: maybe its not neede to separate them into pairs, just separate to two containers from the beginning
-
 std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) {
 	typename std::vector<int>::iterator a_it_b = main_arg.begin();
 	typename std::vector<int>::iterator a_it_e = main_arg.end();
@@ -100,6 +42,9 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	_place_into_cont();
 	insertion_sort(_up_line);
 	Visualizer::print_schema(_down_line, _up_line);
+	add_up_line();
+	Visualizer::print_schema(_down_line, _up_line);
+	binary_search();
 	return (_vect_cont);
 
 }
@@ -129,7 +74,52 @@ void PmergeMe::insertion_sort(std::vector<int> &up) {
     }
 }
 
+void PmergeMe::add_up_line() {
+	_up_line.insert(_up_line.begin(), *_down_line.begin());
+	_down_line.erase(_down_line.begin());
+	//append the last num of the downline here?
+	//_down_line.push_back(*_rest_line.begin());
+}
+
+void PmergeMe::binary_search() {
+	if (_down_line.empty())
+		return ;
+	int ins_num = *_down_line.begin();
+	int high = _up_line.size() - 1;
+	int low = 0;
+	while (low <= high) {
+		int mid = floor((high + low) / 2);
+		if (is_correct_index(ins_num, mid)) {
+			_down_line.erase(_down_line.begin());
+			break; 
+		}
+		else if (_up_line[mid] < ins_num)
+			low = mid + 1;
+		else 
+			high = mid - 1;
+	}
+	std::cout << "Binary search: " << std::endl;
+	Visualizer::print_schema(_down_line, _up_line);
+	binary_search();
+}
+
+bool PmergeMe::is_correct_index(int target_num, int mid) {
+	if (_up_line[mid] == target_num) {
+		_up_line.insert(_up_line.begin() + mid, target_num);
+		return true;
+	}
+	if (_up_line[mid - 1] > target_num && target_num < _up_line[mid]) {
+		_up_line.insert(_up_line.begin() + (mid - 1), target_num);
+		return true;
+	}
+	return (false);
+}
 
 //combine into the main chain(up) 1st element of down, place it at [0] + up
 //insert downline[0] to up using jacobsthal(?) and binary insertion(!)
 //question: when exactly do we insert the remaining number?
+
+//TODO:
+//1. handle " arg"
+//2. handle duplicates??? are they allowed
+//3.handle max int
