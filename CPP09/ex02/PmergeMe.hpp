@@ -6,6 +6,7 @@
 #include <deque>
 #include <stdlib.h>
 #include <cmath>
+#include <algorithm>
 #include "Visualizer.hpp"
 
 class PmergeMe {

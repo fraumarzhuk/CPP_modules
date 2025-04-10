@@ -63,64 +63,65 @@ void PmergeMe::_place_into_cont() {
 }
 
 void PmergeMe::insertion_sort(std::vector<int> &up) {
-    int n = up.size();
-    for (int i = 1; i < n; i++) {
-        int key = up[i];
-        int j = i - 1;
+	int n = up.size();
+	for (int i = 1; i < n; i++) {
+		int key = up[i];
+		int j = i - 1;
 
-        while (j >= 0 && up[j] > key) {
-            up[j + 1] = up[j];
-            j = j - 1;
-        }
-        up[j + 1] = key;
-    }
+		while (j >= 0 && up[j] > key) {
+			up[j + 1] = up[j];
+			j = j - 1;
+		}
+		up[j + 1] = key;
+	}
 }
 
 void PmergeMe::add_up_line() {
 	_up_line.insert(_up_line.begin(), *_down_line.begin());
 	_down_line.erase(_down_line.begin());
-	//append the last num of the downline here?
-	//_down_line.push_back(*_rest_line.end());
 }
 
 void PmergeMe::binary_search() {
 	if (_down_line.empty())
-		return ;
+		return;
 	int ins_num = *_down_line.begin();
 	int high = _up_line.size() - 1;
 	int low = 0;
+	
 	while (low <= high) {
-		int mid = floor((high + low) / 2);
-		if (is_correct_index(ins_num, mid)) {
-			_down_line.erase(_down_line.begin());
-			break; 
-		}
-		else if (_up_line[mid] < ins_num)
-			low = mid + 1;
+	int mid = floor((high + low) / 2);
+	if (mid < 1) {
+		if (_up_line[0] > ins_num)
+			_up_line.insert(_up_line.begin(), ins_num);
 		else 
-			high = mid - 1;
+			_up_line.insert(_up_line.begin() + 1, ins_num);
+		break;
 	}
-	std::cout << "Binary search: " << std::endl;
+	if (is_correct_index(ins_num, mid))
+		break;
+	else if (_up_line[mid] < ins_num)
+		low = mid + 1;
+	else
+		high = mid - 1;
+	
+	}
+	_down_line.erase(_down_line.begin());
 	Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
 }
-
+	
 bool PmergeMe::is_correct_index(int target_num, int mid) {
 	if (_up_line[mid] == target_num) {
 		_up_line.insert(_up_line.begin() + mid, target_num);
 		return true;
 	}
-	if (mid == 0) {
-		std::cout << "cur num and pos: " << target_num << "" << mid << std::endl;
-		_up_line.insert(_up_line.begin(), target_num);
+	if (_up_line[mid - 1] < target_num && target_num < _up_line[mid]) {
+		_up_line.insert(_up_line.begin() + mid, target_num);
 		return true;
 	}
-	if ((_up_line[mid - 1] > target_num) && target_num < _up_line[mid]) {
-		_up_line.insert(_up_line.begin() + (mid - 1), target_num);
-		return true;
-	}
-	return (false);
+	return false;
 }
+
 
 //combine into the main chain(up) 1st element of down, place it at [0] + up
 //insert downline[0] to up using jacobsthal(?) and binary insertion(!)
