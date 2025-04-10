@@ -82,6 +82,7 @@ void PmergeMe::add_up_line() {
 }
 
 void PmergeMe::binary_search() {
+	insertion_sort(_up_line);
 	if (_down_line.empty())
 		return;
 	int ins_num = *_down_line.begin();
@@ -103,7 +104,6 @@ void PmergeMe::binary_search() {
 		low = mid + 1;
 	else
 		high = mid - 1;
-	
 	}
 	_down_line.erase(_down_line.begin());
 	Visualizer::print_schema(_down_line, _up_line);
