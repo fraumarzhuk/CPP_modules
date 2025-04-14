@@ -86,8 +86,7 @@ void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
 	for (int i = 1; i < n; i++) {
 		std::pair<int, int> key = pair_line[i];
 		int j = i - 1;
-
-		while (j <= 0 && pair_line[j].second < key.second) {
+		while (j >= 0 && pair_line[j].second > key.second) {
 			pair_line[j + 1] = pair_line[j];
 			j = j - 1;
 		}
