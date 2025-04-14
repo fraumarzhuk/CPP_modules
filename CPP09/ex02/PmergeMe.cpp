@@ -133,8 +133,5 @@ bool PmergeMe::is_correct_index(int target_num, int mid) {
 //question: when exactly do we insert the remaining number?
 
 //TODO:
-//1. handle " arg"
-//2. handle duplicates??? are they allowed
-//3.handle max int
 //4. add time
 //5. do deque
