@@ -61,7 +61,8 @@ void PmergeMe::_place_into_cont() {
 		_up_line.push_back(a_it_b->second);
 		a_it_b++;
 	}
-	_down_line.push_back(_rest_line[0]);
+	if (!_rest_line.empty())
+		_down_line.push_back(_rest_line[0]);
 	Visualizer::print_schema(_down_line, _up_line);
 }
 
@@ -135,3 +136,5 @@ bool PmergeMe::is_correct_index(int target_num, int mid) {
 //1. handle " arg"
 //2. handle duplicates??? are they allowed
 //3.handle max int
+//4. add time
+//5. do deque
