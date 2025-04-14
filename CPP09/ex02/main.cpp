@@ -27,7 +27,7 @@ std::vector<int> get_argument(int argc, char **argv) {
 
 int main (int argc, char **argv) {
 	std::vector<int> expr = get_argument(argc, argv);
-	std::vector<std::pair<int, int> > res = PmergeMe::_pair_up(expr);
+	std::vector<int> res = PmergeMe::_pair_up(expr);
 	// Visualizer::print_pairs(res);
 	// std::cout << "Sorted result: ";
 	// for (std::vector<int>::iterator it = res.begin(); it != res.end(); ++it) {

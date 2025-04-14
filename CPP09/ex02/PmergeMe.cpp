@@ -23,7 +23,7 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 	return (*this);
 }
 
-std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) {
+std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	typename std::vector<int>::iterator a_it_b = main_arg.begin();
 	typename std::vector<int>::iterator a_it_e = main_arg.end();
 
@@ -49,7 +49,7 @@ std::vector<std::pair<int, int> > PmergeMe::_pair_up(std::vector<int> main_arg) 
 	Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
 	std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
-	return (_vect_cont);
+	return (_up_line);
 
 }
 void PmergeMe::_place_into_cont() {
@@ -86,7 +86,7 @@ void PmergeMe::add_up_line() {
 }
 
 void PmergeMe::binary_search() {
-	insertion_sort(_up_line);
+	//insertion_sort(_up_line);
 	if (_down_line.empty())
 		return;
 	int ins_num = *_down_line.begin();
