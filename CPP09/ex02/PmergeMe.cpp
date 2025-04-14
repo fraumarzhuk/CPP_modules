@@ -41,19 +41,19 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	Visualizer::print_pairs(_vect_cont);
 	insertion_sort(_vect_cont);
 	Visualizer::print_pairs(_vect_cont);
-	// if (!_rest_line.empty()) {
-	// 	std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
-	// }
-	// _place_into_cont();
-	// insertion_sort(_up_line);
-	// Visualizer::print_schema(_down_line, _up_line);
-	// add_up_line();
-	// Visualizer::print_schema(_down_line, _up_line);
-	// binary_search();
-	// std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
+	if (!_rest_line.empty()) {
+		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	}
+	_place_into_cont();
+	Visualizer::print_schema(_down_line, _up_line);
+	add_up_line();
+	Visualizer::print_schema(_down_line, _up_line);
+	binary_search();
+	std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
 	return (_up_line);
 
 }
+
 void PmergeMe::_place_into_cont() {
 	typename std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
 	typename std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
@@ -68,19 +68,6 @@ void PmergeMe::_place_into_cont() {
 	Visualizer::print_schema(_down_line, _up_line);
 }
 
-// void PmergeMe::insertion_sort(std::vector<int> &up) {
-// 	int n = up.size();
-// 	for (int i = 1; i < n; i++) {
-// 		int key = up[i];
-// 		int j = i - 1;
-
-// 		while (j >= 0 && up[j] > key) {
-// 			up[j + 1] = up[j];
-// 			j = j - 1;
-// 		}
-// 		up[j + 1] = key;
-// 	}
-// }
 void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
 	int n = pair_line.size();
 	for (int i = 1; i < n; i++) {
@@ -94,13 +81,12 @@ void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
 	}
 }
 
-// void PmergeMe::add_pair_line_line() {
-// 	_up_line.insert(_up_line.begin(), *_down_line.begin());
-// 	_down_line.erase(_down_line.begin());
-// }
+void PmergeMe::add_up_line() {
+	_up_line.insert(_up_line.begin(), *_down_line.begin());
+	_down_line.erase(_down_line.begin());
+}
 
 void PmergeMe::binary_search() {
-	//insertion_sort(_up_line);
 	if (_down_line.empty())
 		return;
 	int ins_num = *_down_line.begin();
