@@ -39,16 +39,18 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 		a_it_b += 2;
 	}
 	Visualizer::print_pairs(_vect_cont);
-	if (!_rest_line.empty()) {
-		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
-	}
-	_place_into_cont();
-	insertion_sort(_up_line);
-	Visualizer::print_schema(_down_line, _up_line);
-	add_up_line();
-	Visualizer::print_schema(_down_line, _up_line);
-	binary_search();
-	std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
+	insertion_sort(_vect_cont);
+	Visualizer::print_pairs(_vect_cont);
+	// if (!_rest_line.empty()) {
+	// 	std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	// }
+	// _place_into_cont();
+	// insertion_sort(_up_line);
+	// Visualizer::print_schema(_down_line, _up_line);
+	// add_up_line();
+	// Visualizer::print_schema(_down_line, _up_line);
+	// binary_search();
+	// std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
 	return (_up_line);
 
 }
@@ -66,24 +68,37 @@ void PmergeMe::_place_into_cont() {
 	Visualizer::print_schema(_down_line, _up_line);
 }
 
-void PmergeMe::insertion_sort(std::vector<int> &up) {
-	int n = up.size();
+// void PmergeMe::insertion_sort(std::vector<int> &up) {
+// 	int n = up.size();
+// 	for (int i = 1; i < n; i++) {
+// 		int key = up[i];
+// 		int j = i - 1;
+
+// 		while (j >= 0 && up[j] > key) {
+// 			up[j + 1] = up[j];
+// 			j = j - 1;
+// 		}
+// 		up[j + 1] = key;
+// 	}
+// }
+void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
+	int n = pair_line.size();
 	for (int i = 1; i < n; i++) {
-		int key = up[i];
+		std::pair<int, int> key = pair_line[i];
 		int j = i - 1;
 
-		while (j >= 0 && up[j] > key) {
-			up[j + 1] = up[j];
+		while (j <= 0 && pair_line[j].second < key.second) {
+			pair_line[j + 1] = pair_line[j];
 			j = j - 1;
 		}
-		up[j + 1] = key;
+		pair_line[j + 1] = key;
 	}
 }
 
-void PmergeMe::add_up_line() {
-	_up_line.insert(_up_line.begin(), *_down_line.begin());
-	_down_line.erase(_down_line.begin());
-}
+// void PmergeMe::add_pair_line_line() {
+// 	_up_line.insert(_up_line.begin(), *_down_line.begin());
+// 	_down_line.erase(_down_line.begin());
+// }
 
 void PmergeMe::binary_search() {
 	//insertion_sort(_up_line);

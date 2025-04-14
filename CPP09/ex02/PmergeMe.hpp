@@ -25,8 +25,8 @@ private:
 public:
 	static std::vector<int> _pair_up(std::vector<int> main_arg); //move to private after testing
 	static void _place_into_cont();
-	static void insertion_sort(std::vector<int> &up);
-	static void add_up_line();
+	static void insertion_sort(std::vector<std::pair<int, int> > &pair_line);
+	//static void add_up_line();
 	static void binary_search();
 	static bool is_correct_index(int target_num, int mid);
 	//static T sort_sequence();
