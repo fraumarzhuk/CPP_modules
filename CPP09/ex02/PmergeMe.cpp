@@ -1,18 +1,18 @@
 #include "PmergeMe.hpp"
 
 int _num_el;
-// time_t _start_time;
-// time_t _end_time;
 std::vector<int> PmergeMe::_rest_line;
 std::vector<int> PmergeMe::_down_line;
 std::vector<int> PmergeMe::_up_line;
 std::vector<std::pair<int, int> > PmergeMe::_vect_cont;
 
-static int bs_counter = 0;
-
 
 PmergeMe::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
+}
+
+PmergeMe::~PmergeMe() {
+	//std::cout << "PmergeMe Destructor called" << std::endl;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other) {
@@ -31,10 +31,10 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	vec_it a_it_b = main_arg.begin();
 	vec_it a_it_e = main_arg.end();
 
-	struct tm start_tm;
-    struct tm end_tm;
-
-	time_t start_time = mktime(&start_tm);
+	// timespec ts_beg, ts_end; //microseconds
+	// clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_beg);
+	struct timeval begin, end;
+    gettimeofday(&begin, 0);
 	//separate to pairs
 	while (a_it_b < a_it_e) {
 		if ((a_it_b + 1) != a_it_e) {
@@ -57,13 +57,17 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	add_up_line();
 	//Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
-	time_t end_time = mktime(&end_tm);
-	time_t dif = difftime(end_time, start_time);
+	// clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_end);
+	gettimeofday(&end, 0);
+    // long seconds = end.tv_sec - begin.tv_sec;
+    // long microseconds = end.tv_usec - begin.tv_usec;
+    // double elapsed = seconds + microseconds*1e-6;
 	std::cout << CYAN300 << "Before: " << RESET;
 	Visualizer::print_sequence(main_arg);
 	std::cout << LIME300 << "After: "<< RESET;
 	Visualizer::print_sequence(_up_line);
-	std::cout << "time to process a range of 5 elements with std::vector : " << PURPLE400  << dif << RESET <<" us" << std::endl;
+	double dif = (end.tv_sec * 1000 * 1000 + end.tv_usec) - (begin.tv_sec * 1000 * 1000 + begin.tv_usec);
+	std::cout << "time to process a range of " << _num_el << " elements with std::vector : " << PURPLE400  << dif << RESET <<" us" << std::endl;
 	
 	return (_up_line);
 
@@ -126,7 +130,6 @@ void PmergeMe::binary_search() {
 	}
 	_down_line.erase(_down_line.begin());
 	//Visualizer::print_schema(_down_line, _up_line);
-	bs_counter++;
 	binary_search();
 }
 	

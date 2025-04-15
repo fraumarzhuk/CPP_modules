@@ -9,6 +9,8 @@
 #include <ctime>
 #include <algorithm>
 #include "Visualizer.hpp"
+#include "time.h"
+#include <sys/time.h>
 
 typedef std::vector<int>::iterator vec_it;
 
@@ -19,10 +21,7 @@ private:
 	static std::vector<int> _up_line;
 	static std::vector<int> _down_line;
 	static std::vector<int> _rest_line; //change to remaining num int?
-	// static time_t *_start_time;
-	// static time_t *_end_time;
 
-	
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
 	PmergeMe &operator= (const PmergeMe &other);
