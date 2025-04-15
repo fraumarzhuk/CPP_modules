@@ -1,30 +1,39 @@
 #include "PmergeMe.hpp"
 
 int _num_el;
-std::vector<int> PmergeMe::_rest_line;
-std::vector<int> PmergeMe::_down_line;
-std::vector<int> PmergeMe::_up_line;
-std::vector<std::pair<int, int> > PmergeMe::_vect_cont;
+template <typename T, template<typename> class Container>
+Container<T> PmergeMe<T, Container>::_rest_line;
+template <typename T, template<typename> class Container>
+Container<T> PmergeMe<T, Container>::_down_line;
+template <typename T, template<typename> class Container>
+Container<T> PmergeMe<T, Container>::_up_line;
+template <typename T, template<typename> class Container>
+Container<std::pair<int, int>> PmergeMe<T, Container>::_vect_cont; //change this to T if doesnt work
 
 
-PmergeMe::PmergeMe() {
+template <typename T, template<typename> class Container>
+PmergeMe<T, Container>::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
 }
 
-PmergeMe::~PmergeMe() {
+template <typename T, template<typename> class Container>
+PmergeMe<T, Container>::~PmergeMe() {
 	//std::cout << "PmergeMe Destructor called" << std::endl;
 }
 
-PmergeMe::PmergeMe(const PmergeMe &other) {
+template <typename T, template<typename> class Container>
+PmergeMe<T, Container>::PmergeMe(const PmergeMe &other) {
 	//std::cout << " PmergeMe Copy constructor called" << std::endl;
 }
 
-PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
+template <typename T, template<typename> class Container>
+PmergeMe<T, Container> &PmergeMe<T, Container>::operator=(const PmergeMe &other) {
 	//std::cout << "PmergeMe Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
-std::vector<int> PmergeMe::sort_vector(std::vector<int> main_arg) {
+template <typename T, template<typename> class Container>
+void PmergeMe<T, Container>::sort_vector(Container<int> main_arg){
 	vec_it a_it_b = main_arg.begin();
 	vec_it a_it_e = main_arg.end();
 
@@ -41,16 +50,9 @@ std::vector<int> PmergeMe::sort_vector(std::vector<int> main_arg) {
 			_rest_line.push_back(*a_it_b);
 		a_it_b += 2;
 	}
-	//Visualizer::print_pairs(_vect_cont);
 	insertion_sort(_vect_cont);
-	//Visualizer::print_pairs(_vect_cont);
-	// if (!_rest_line.empty()) {
-	// 	std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
-	// }
 	_place_into_cont();
-	//Visualizer::print_schema(_down_line, _up_line);
 	add_up_line();
-	//Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
 	gettimeofday(&end, 0);
 	std::cout << CYAN300 << "Before: " << RESET;
@@ -60,11 +62,12 @@ std::vector<int> PmergeMe::sort_vector(std::vector<int> main_arg) {
 	double dif = (end.tv_sec * 1000 * 1000 + end.tv_usec) - (begin.tv_sec * 1000 * 1000 + begin.tv_usec);
 	std::cout << "time to process a range of " << _num_el << " elements with std::vector : " << PURPLE400  << dif << RESET <<" us" << std::endl;
 	
-	return (_up_line);
-
+	// return (_up_line);
 }
 
-void PmergeMe::_place_into_cont() {
+template <typename T, template<typename> class Container>
+void PmergeMe<T, Container>::_place_into_cont()
+{
 	std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
 	std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
 
@@ -75,10 +78,10 @@ void PmergeMe::_place_into_cont() {
 	}
 	if (!_rest_line.empty())
 		_down_line.push_back(_rest_line[0]);
-	//Visualizer::print_schema(_down_line, _up_line);
 }
 
-void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
+template <typename T, template<typename> class Container>
+void PmergeMe<T, Container>::insertion_sort(Container<std::pair<T, T>> &pair_line) {
 	int n = pair_line.size();
 	for (int i = 1; i < n; i++) {
 		std::pair<int, int> key = pair_line[i];
@@ -91,12 +94,14 @@ void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
 	}
 }
 
-void PmergeMe::add_up_line() {
+template <typename T, template<typename> class Container>
+void PmergeMe<T, Container>::add_up_line() {
 	_up_line.insert(_up_line.begin(), *_down_line.begin());
 	_down_line.erase(_down_line.begin());
 }
 
-void PmergeMe::binary_search() {
+template <typename T, template<typename> class Container>
+void PmergeMe<T, Container>::binary_search() {
 	if (_down_line.empty())
 		return;
 	int ins_num = *_down_line.begin();
@@ -123,8 +128,9 @@ void PmergeMe::binary_search() {
 	//Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
 }
-	
-bool PmergeMe::is_correct_index(int target_num, int mid) {
+
+template <typename T, template<typename> class Container>
+bool PmergeMe<T, Container>::is_correct_index(int target_num, int mid) {
 	if (_up_line[mid] == target_num) {
 		_up_line.insert(_up_line.begin() + mid, target_num);
 		return true;
