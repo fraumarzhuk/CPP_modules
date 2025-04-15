@@ -17,17 +17,14 @@ PmergeMe::~PmergeMe() {
 
 PmergeMe::PmergeMe(const PmergeMe &other) {
 	//std::cout << " PmergeMe Copy constructor called" << std::endl;
-	*this = other;
 }
 
 PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 	//std::cout << "PmergeMe Copy assignment operator called" << std::endl;
-	if (this != &other)
-		*this = other;
 	return (*this);
 }
 
-std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
+std::vector<int> PmergeMe::sort_vector(std::vector<int> main_arg) {
 	vec_it a_it_b = main_arg.begin();
 	vec_it a_it_e = main_arg.end();
 

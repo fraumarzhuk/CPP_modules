@@ -20,14 +20,18 @@ private:
 	static std::deque<std::pair<int, int> > _deq_cont;
 	static std::vector<int> _up_line;
 	static std::vector<int> _down_line;
-	static std::vector<int> _rest_line; //change to remaining num int?
+	static std::vector<int> _rest_line;
+
+	static std::deque<int> _d_up_line;
+	static std::deque<int> _d_down_line;
+	static std::deque<int> _d_rest_line;
 
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
 	PmergeMe &operator= (const PmergeMe &other);
 	~PmergeMe();
 public:
-	static std::vector<int> _pair_up(std::vector<int> main_arg); //move to private after testing
+	static std::vector<int> sort_vector(std::vector<int> main_arg); //move to private after testing
 	static void _place_into_cont();
 	static void insertion_sort(std::vector<std::pair<int, int> > &pair_line);
 	static void add_up_line();
