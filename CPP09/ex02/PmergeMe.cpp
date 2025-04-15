@@ -31,8 +31,6 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	vec_it a_it_b = main_arg.begin();
 	vec_it a_it_e = main_arg.end();
 
-	// timespec ts_beg, ts_end; //microseconds
-	// clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_beg);
 	struct timeval begin, end;
     gettimeofday(&begin, 0);
 	//separate to pairs
@@ -57,11 +55,7 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 	add_up_line();
 	//Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
-	// clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts_end);
 	gettimeofday(&end, 0);
-    // long seconds = end.tv_sec - begin.tv_sec;
-    // long microseconds = end.tv_usec - begin.tv_usec;
-    // double elapsed = seconds + microseconds*1e-6;
 	std::cout << CYAN300 << "Before: " << RESET;
 	Visualizer::print_sequence(main_arg);
 	std::cout << LIME300 << "After: "<< RESET;
