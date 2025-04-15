@@ -1,11 +1,15 @@
 #include "PmergeMe.hpp"
 
+int _num_el;
+// time_t _start_time;
+// time_t _end_time;
 std::vector<int> PmergeMe::_rest_line;
 std::vector<int> PmergeMe::_down_line;
 std::vector<int> PmergeMe::_up_line;
 std::vector<std::pair<int, int> > PmergeMe::_vect_cont;
 
 static int bs_counter = 0;
+
 
 PmergeMe::PmergeMe() {
 	//std::cout << "PmergeMe Constructor called" << std::endl;
@@ -24,9 +28,13 @@ PmergeMe &PmergeMe::operator = (const PmergeMe &other) {
 }
 
 std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
-	typename std::vector<int>::iterator a_it_b = main_arg.begin();
-	typename std::vector<int>::iterator a_it_e = main_arg.end();
+	vec_it a_it_b = main_arg.begin();
+	vec_it a_it_e = main_arg.end();
 
+	struct tm start_tm;
+    struct tm end_tm;
+
+	time_t start_time = mktime(&start_tm);
 	//separate to pairs
 	while (a_it_b < a_it_e) {
 		if ((a_it_b + 1) != a_it_e) {
@@ -38,25 +46,32 @@ std::vector<int> PmergeMe::_pair_up(std::vector<int> main_arg) {
 			_rest_line.push_back(*a_it_b);
 		a_it_b += 2;
 	}
-	Visualizer::print_pairs(_vect_cont);
+	//Visualizer::print_pairs(_vect_cont);
 	insertion_sort(_vect_cont);
-	Visualizer::print_pairs(_vect_cont);
-	if (!_rest_line.empty()) {
-		std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
-	}
+	//Visualizer::print_pairs(_vect_cont);
+	// if (!_rest_line.empty()) {
+	// 	std::cout << "remaining number: " << *(_rest_line.end() - 1) << std::endl;
+	// }
 	_place_into_cont();
-	Visualizer::print_schema(_down_line, _up_line);
+	//Visualizer::print_schema(_down_line, _up_line);
 	add_up_line();
-	Visualizer::print_schema(_down_line, _up_line);
+	//Visualizer::print_schema(_down_line, _up_line);
 	binary_search();
-	std::cout << "binary search + insertion sort counts: " << bs_counter << std::endl;
+	time_t end_time = mktime(&end_tm);
+	time_t dif = difftime(end_time, start_time);
+	std::cout << CYAN300 << "Before: " << RESET;
+	Visualizer::print_sequence(main_arg);
+	std::cout << LIME300 << "After: "<< RESET;
+	Visualizer::print_sequence(_up_line);
+	std::cout << "time to process a range of 5 elements with std::vector : " << PURPLE400  << dif << RESET <<" us" << std::endl;
+	
 	return (_up_line);
 
 }
 
 void PmergeMe::_place_into_cont() {
-	typename std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
-	typename std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
+	std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
+	std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
 
 	while (a_it_b < a_it_e) {
 		_down_line.push_back(a_it_b->first);
@@ -65,7 +80,7 @@ void PmergeMe::_place_into_cont() {
 	}
 	if (!_rest_line.empty())
 		_down_line.push_back(_rest_line[0]);
-	Visualizer::print_schema(_down_line, _up_line);
+	//Visualizer::print_schema(_down_line, _up_line);
 }
 
 void PmergeMe::insertion_sort(std::vector<std::pair<int, int> > &pair_line) {
@@ -110,7 +125,7 @@ void PmergeMe::binary_search() {
 		high = mid - 1;
 	}
 	_down_line.erase(_down_line.begin());
-	Visualizer::print_schema(_down_line, _up_line);
+	//Visualizer::print_schema(_down_line, _up_line);
 	bs_counter++;
 	binary_search();
 }

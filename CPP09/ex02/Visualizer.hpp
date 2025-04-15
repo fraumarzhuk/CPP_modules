@@ -14,5 +14,6 @@ private:
 public:
 	static void print_pairs(std::vector<std::pair<int, int> > main_arg);
 	static void print_schema(std::vector<int> down, std::vector<int> up);
+	static void print_sequence(std::vector<int> line);
 };
 #endif

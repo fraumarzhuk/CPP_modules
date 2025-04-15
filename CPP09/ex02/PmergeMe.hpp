@@ -6,8 +6,11 @@
 #include <deque>
 #include <stdlib.h>
 #include <cmath>
+#include <ctime>
 #include <algorithm>
 #include "Visualizer.hpp"
+
+typedef std::vector<int>::iterator vec_it;
 
 class PmergeMe {
 private:
@@ -16,6 +19,8 @@ private:
 	static std::vector<int> _up_line;
 	static std::vector<int> _down_line;
 	static std::vector<int> _rest_line; //change to remaining num int?
+	// static time_t *_start_time;
+	// static time_t *_end_time;
 
 	
 	PmergeMe();

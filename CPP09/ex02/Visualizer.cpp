@@ -39,8 +39,8 @@ void Visualizer::print_pairs(std::vector<std::pair<int, int> > main_arg) {
 }
 
 void Visualizer::print_schema(std::vector<int> down, std::vector<int> up) {
-	typename std::vector<int>::iterator a_it_b = up.begin();
-	typename std::vector<int>::iterator a_it_e = up.end();
+	std::vector<int>::iterator a_it_b = up.begin();
+	std::vector<int>::iterator a_it_e = up.end();
 	
 	std::cout << std::endl;
 	while (a_it_b < a_it_e) {
@@ -53,6 +53,12 @@ void Visualizer::print_schema(std::vector<int> down, std::vector<int> up) {
 	while (a_it_b < a_it_e) {
 		std::cout <<  *a_it_b << "—";
 		a_it_b++;
+	}
+	std::cout << std::endl;
+}
+void Visualizer::print_sequence(std::vector<int> line) {
+	for (std::vector<int>::iterator it = line.begin(); it != line.end(); ++it) {
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 }
