@@ -26,7 +26,8 @@ std::vector<int> get_argument(int argc, char **argv) {
 }
 
 int main (int argc, char **argv) {
-	std::vector<int> expr = get_argument(argc, argv);
-	PmergeMe<std::vector<int>>::sort_vector(expr);
-	std::cout << std::endl;
+	std::vector<int> expr_vec = get_argument(argc, argv);
+	PmergeMe<std::vector>::sort_vector(expr_vec);
+	// std::deque<int> expr_deq(expr_vec.begin(), expr_vec.end());
+	// PmergeMe<std::deque>::sort_vector(expr_deq);
 }
