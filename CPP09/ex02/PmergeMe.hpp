@@ -9,6 +9,7 @@
 #include <sys/time.h>
 #include <algorithm>
 #include <cmath>
+#include <typeinfo>
 #include "Visualizer.hpp"
 
 template <template <typename, typename> class Container>
@@ -18,6 +19,8 @@ private:
 	static Container<int, std::allocator<int> > _up_line;
 	static Container<int, std::allocator<int> > _down_line;
 	static Container<int, std::allocator<int> > _rest_line;
+	// static struct timeval begin;
+	// static struct timeval end;
 
 	PmergeMe();
 	PmergeMe(const PmergeMe &other);
@@ -31,7 +34,13 @@ public:
 	static void add_up_line();
 	static void binary_search();
 	static bool is_correct_index(int target_num, int mid);
+	//static bool container_type(const Container<int, std::allocator<int> > &container);
+	static void print_results(Container<int, std::allocator<int> > main_arg, struct timeval begin, struct timeval end);
 };
+
+
+// static struct timeval begin;
+// static struct timeval end;
 
 template <template <typename, typename> class Container>
 Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > PmergeMe<Container>::_vect_cont;
@@ -45,6 +54,11 @@ Container<int, std::allocator<int> > PmergeMe<Container>::_down_line;
 template <template <typename, typename> class Container>
 Container<int, std::allocator<int> > PmergeMe<Container>::_up_line;
 
+
+// template <template <typename, typename> class Container>
+// bool PmergeMe<Container>::container_type(const Container<int, std::allocator<int> > &container) {
+// 	return typeid(container) == typeid(std::vector<int>);
+// }
 
 template <template <typename, typename> class Container>
 void PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_arg) {
@@ -69,20 +83,33 @@ void PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_
 	add_up_line();
 	binary_search();
 	gettimeofday(&end, 0);
+	print_results(main_arg, begin, end);
+}
+
+template <template <typename, typename> class Container>
+// void PmergeMe<Container>::print_results(Container<int, std::allocator<int> > main_arg, struct timeval begin, struct timeval end) {
+// 	std::cout << CYAN300 << "Before: " << RESET;
+// 	Visualizer<Container<int, std::allocator<int> > >::print_sequence(main_arg);
+// 	std::cout << LIME300 << "After: " << RESET;
+// 	Visualizer<Container>::print_sequence(_up_line);
+// 	double dif = (end.tv_sec * 1000 * 1000 + end.tv_usec) - (begin.tv_sec * 1000 * 1000 + begin.tv_usec);
+// 	std::cout << "time to process a range of " << main_arg.size() << " elements: " << PURPLE400 << dif << RESET << " us" << std::endl;
+// }
+
+void PmergeMe<Container>::print_results(Container<int, std::allocator<int> > main_arg, struct timeval begin, struct timeval end) {
 	std::cout << CYAN300 << "Before: " << RESET;
-	Visualizer::print_sequence(main_arg);
+	Visualizer<Container<int, std::allocator<int> > >::print_sequence(main_arg); // Provide template arguments
 	std::cout << LIME300 << "After: " << RESET;
-	Visualizer::print_sequence(_up_line);
+	Visualizer<Container<int, std::allocator<int> > >::print_sequence(_up_line); // Provide template arguments
 	double dif = (end.tv_sec * 1000 * 1000 + end.tv_usec) - (begin.tv_sec * 1000 * 1000 + begin.tv_usec);
 	std::cout << "time to process a range of " << main_arg.size() << " elements: " << PURPLE400 << dif << RESET << " us" << std::endl;
 }
 
-
 template <template <typename, typename> class Container>
 void PmergeMe<Container>::_place_into_cont()
 {
-	std::vector<std::pair<int, int> >::iterator a_it_b = _vect_cont.begin();
-	std::vector<std::pair<int, int> >::iterator a_it_e = _vect_cont.end();
+	typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator a_it_b = _vect_cont.begin();
+	typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator a_it_e = _vect_cont.end();
 
 	while (a_it_b < a_it_e) {
 		_down_line.push_back(a_it_b->first);
