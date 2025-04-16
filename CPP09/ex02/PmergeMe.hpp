@@ -16,7 +16,7 @@
 template <template <typename, typename> class Container>
 class PmergeMe {
 private:
-	static Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > _vect_cont; // Adaptable container
+	static Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > _vect_cont;
 	static Container<int, std::allocator<int> > _up_line;
 	static Container<int, std::allocator<int> > _down_line;
 	static Container<int, std::allocator<int> > _rest_line;
@@ -27,7 +27,7 @@ private:
 	~PmergeMe();
 
 public:
-	static void sort_vector(Container<int, std::allocator<int> > main_arg); // Accepts adaptable container
+	static void sort_vector(Container<int, std::allocator<int> > main_arg);
 	static void _place_into_cont();
 	static void insertion_sort(Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > &pair_line);
 	static void add_up_line();

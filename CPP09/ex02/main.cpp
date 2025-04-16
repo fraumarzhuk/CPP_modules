@@ -31,3 +31,8 @@ int main (int argc, char **argv) {
 	std::deque<int> expr_deq(expr_vec.begin(), expr_vec.end());
 	PmergeMe<std::deque>::sort_vector(expr_deq);
 }
+
+//TODO:
+//1. add jacobsthal
+//2. make sure us seconds are correct
+//3. one more check for error handling
