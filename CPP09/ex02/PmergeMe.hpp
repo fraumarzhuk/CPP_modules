@@ -12,6 +12,7 @@
 #include <typeinfo>
 #include "Visualizer.hpp"
 
+
 template <template <typename, typename> class Container>
 class PmergeMe {
 private:
@@ -68,9 +69,8 @@ void PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_
 			if (cur.first > cur.second)
 				std::swap(cur.first, cur.second);
 			_vect_cont.push_back(cur);
-		} else {
+		} else
 			_rest_line.push_back(*a_it_b);
-		}
 		a_it_b += 2;
 	}
 	insertion_sort(_vect_cont);
@@ -88,8 +88,9 @@ void PmergeMe<Container>::print_results(Container<int, std::allocator<int> > mai
 	std::cout << LIME300 << "After: " << RESET;
 	Visualizer<Container>::print_sequence(_up_line);
 	double dif = (end.tv_sec * 1000 * 1000 + end.tv_usec) - (begin.tv_sec * 1000 * 1000 + begin.tv_usec);
-	std::cout << "time to process a range of " << main_arg.size() << " elements with " << (container_type(main_arg) == true ? "std::vector" : "std::deque") << ": " << PURPLE400 << dif << RESET << " us" << std::endl;
+	std::cout << "time to process a range of " << main_arg.size() << " elements with " << GREEN300 << (container_type(main_arg) == true ? "std::vector" : "std::deque") << RESET << ": " << PURPLE400 << dif << RESET << " us" << std::endl;
 }
+
 template <template <typename, typename> class Container>
 void PmergeMe<Container>::_place_into_cont()
 {
