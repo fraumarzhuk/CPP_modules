@@ -12,6 +12,7 @@ private:
 	Visualizer(const Visualizer &other);
 	Visualizer &operator= (const Visualizer &other);
 	~Visualizer();
+	typedef typename Container<int, std::allocator<int> >::iterator cont_it;
 public:
 	static void print_pairs(Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > main_arg);
 	static void print_schema(Container<int, std::allocator<int> >  down, Container<int, std::allocator<int> > up);
@@ -26,8 +27,8 @@ Visualizer<Container>::~Visualizer() {
 
 template <template <typename, typename> class Container>
 void Visualizer<Container>::print_pairs(Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > main_arg) {
-	typename Container<int, std::allocator<int> >::iterator a_it_b = main_arg.begin();
-	typename Container<int, std::allocator<int> >::iterator a_it_e = main_arg.end();
+	cont_it a_it_b = main_arg.begin();
+	cont_it a_it_e = main_arg.end();
 	
 	while (a_it_b < a_it_e) {
 		std::cout << "[" << (*a_it_b).first << "," << (*a_it_b).second << "] ";
@@ -39,8 +40,8 @@ void Visualizer<Container>::print_pairs(Container<std::pair<int, int>, std::allo
 
 template <template <typename, typename> class Container>
 void Visualizer<Container>::print_schema(Container<int, std::allocator<int> >  down, Container<int, std::allocator<int> > up) {
-	typename Container<int, std::allocator<int> >::iterator a_it_b = up.begin();
-	typename Container<int, std::allocator<int> >::iterator a_it_e = up.end();
+	cont_it a_it_b = up.begin();
+	cont_it a_it_e = up.end();
 	
 	std::cout << std::endl;
 	while (a_it_b < a_it_e) {
@@ -59,7 +60,7 @@ void Visualizer<Container>::print_schema(Container<int, std::allocator<int> >  d
 
 template <template <typename, typename> class Container>
 void Visualizer<Container>::print_sequence(Container<int, std::allocator<int> >  line) {
-	for (typename Container<int, std::allocator<int> >::iterator it = line.begin(); it != line.end(); ++it) {
+	for (cont_it it = line.begin(); it != line.end(); ++it) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;

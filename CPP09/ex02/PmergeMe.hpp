@@ -14,8 +14,11 @@
 
 
 template <template <typename, typename> class Container>
+
 class PmergeMe {
 private:
+	typedef typename Container<int, std::allocator<int> >::iterator cont_it;
+	typedef typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator cont_pair_it;
 	static Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > _vect_cont;
 	static Container<int, std::allocator<int> > _up_line;
 	static Container<int, std::allocator<int> > _down_line;
@@ -58,8 +61,8 @@ bool PmergeMe<Container>::container_type(const Container<int, std::allocator<int
 
 template <template <typename, typename> class Container>
 void PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_arg) {
-	typename Container<int, std::allocator<int> >::iterator a_it_b = main_arg.begin();
-	typename Container<int, std::allocator<int> >::iterator a_it_e = main_arg.end();
+	cont_it a_it_b = main_arg.begin();
+	cont_it a_it_e = main_arg.end();
 
 	struct timeval begin, end;
 	gettimeofday(&begin, 0);
@@ -94,9 +97,8 @@ void PmergeMe<Container>::print_results(Container<int, std::allocator<int> > mai
 template <template <typename, typename> class Container>
 void PmergeMe<Container>::_place_into_cont()
 {
-	typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator a_it_b = _vect_cont.begin();
-	typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator a_it_e = _vect_cont.end();
-
+	cont_pair_it a_it_b = _vect_cont.begin();
+	cont_pair_it a_it_e = _vect_cont.end();
 	while (a_it_b < a_it_e) {
 		_down_line.push_back(a_it_b->first);
 		_up_line.push_back(a_it_b->second);
