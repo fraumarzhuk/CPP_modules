@@ -74,11 +74,13 @@ Visualizer<Container>::Visualizer() {
 template <template <typename, typename> class Container>
 Visualizer<Container>::Visualizer(const Visualizer &other) {
 	//std::cout << " Visualizer Copy constructor called" << std::endl;
+	this = other;
 }
 
 template <template <typename, typename> class Container>
 Visualizer<Container> &Visualizer<Container>::operator = (const Visualizer<Container> &other) {
 	//std::cout << "Visualizer Copy assignment operator called" << std::endl;
+	this = other;
 	return (*this);
 }
 

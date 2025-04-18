@@ -21,6 +21,7 @@ private:
 	typedef typename Container<std::pair<int, int>, std::allocator<std::pair<int, int> > >::iterator cont_pair_it;
 	static Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > _vect_cont;
 	static Container<int, std::allocator<int> > _up_line;
+	static Container<int, std::allocator<int> > jacobsthal;
 	static Container<int, std::allocator<int> > _down_line;
 	static Container<int, std::allocator<int> > _rest_line;
 
@@ -30,6 +31,7 @@ private:
 	~PmergeMe();
 
 public:
+	static void generate_jacobsthal();
 	static void sort_vector(Container<int, std::allocator<int> > main_arg);
 	static void _place_into_cont();
 	static void insertion_sort(Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > &pair_line);
@@ -53,6 +55,21 @@ Container<int, std::allocator<int> > PmergeMe<Container>::_down_line;
 template <template <typename, typename> class Container>
 Container<int, std::allocator<int> > PmergeMe<Container>::_up_line;
 
+template <template <typename, typename> class Container>
+Container<int, std::allocator<int> > PmergeMe<Container>::jacobsthal;
+
+template <template <typename, typename> class Container>
+void PmergeMe<Container>::generate_jacobsthal() {
+	jacobsthal.clear();
+	jacobsthal.push_back(0);
+	jacobsthal.push_back(1);
+
+	int max_size = static_cast<int>(_up_line.size()) - 1; // Cast to signed integer
+	while (jacobsthal.back() < max_size) {
+		int next = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
+		jacobsthal.push_back(next);
+	}
+}
 
 template <template <typename, typename> class Container>
 bool PmergeMe<Container>::container_type(const Container<int, std::allocator<int> > &container) {
@@ -79,6 +96,7 @@ void PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_
 	insertion_sort(_vect_cont);
 	_place_into_cont();
 	add_up_line();
+	generate_jacobsthal();
 	binary_search();
 	gettimeofday(&end, 0);
 	print_results(main_arg, begin, end);
@@ -136,21 +154,25 @@ void PmergeMe<Container>::binary_search() {
 	int high = _up_line.size() - 1;
 	int low = 0;
 	
-	while (low <= high) {
-	int mid = floor((high + low) / 2);
-	if (mid < 1) {
-		if (_up_line[0] > ins_num)
-			_up_line.insert(_up_line.begin(), ins_num);
-		else 
-			_up_line.insert(_up_line.begin() + 1, ins_num);
-		break;
-	}
-	if (is_correct_index(ins_num, mid))
-		break;
-	else if (_up_line[mid] < ins_num)
-		low = mid + 1;
-	else
-		high = mid - 1;
+	for (cont_it it = jacobsthal.begin(); it != jacobsthal.end(); ++it) {
+		int step = *it;
+		int mid = std::min(low + step, high);
+		if (mid < 1) {
+			if (_up_line[0] > ins_num)
+				_up_line.insert(_up_line.begin(), ins_num);
+			else
+				_up_line.insert(_up_line.begin() + 1, ins_num);
+			break;
+		}
+		if (is_correct_index(ins_num, mid))
+			break;
+		else if (_up_line[mid] < ins_num)
+			low = mid + 1;
+		else
+			high = mid - 1;
+
+		if (low > high)
+			break;
 	}
 	_down_line.erase(_down_line.begin());
 	binary_search();
@@ -182,11 +204,13 @@ PmergeMe<Container>::~PmergeMe() {
 template <template <typename, typename> class Container>
 PmergeMe<Container>::PmergeMe(const PmergeMe &other) {
 	//std::cout << " PmergeMe Copy constructor called" << std::endl;
+	(void)other;
 }
 
 template <template <typename, typename> class Container>
 PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe &other) {
 	//std::cout << "PmergeMe Copy assignment operator called" << std::endl;
+	*this = &other;
 	return (*this);
 }
 
