@@ -29,11 +29,16 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	std::getline(file, line);
 	std::string parsed[2];
 
-	FileChecker::_correctline = true; // maybe create a getter for it
+
+	// FileChecker::_correctline = true;
 	FileChecker::_line_num = 1;
 	FileChecker::is_correct_format(line, type);
-	while (std::getline(file, line) && FileChecker::_correctline) {
+	while (std::getline(file, line)) {
 		FileChecker::_line_num++;
+		if (line.empty()){
+			FileChecker::error_exit("empty line");
+			continue ;
+		}
 		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
 		parsed[1] = line.substr(pos + 1, line.length());
@@ -53,7 +58,7 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 		}
 		FileChecker::_correctline = true;
 	}
-	file.close(); //?
+	file.close();
 }
 
 float BitcoinExchange::get_exchange_rate(struct tm date) {
