@@ -64,7 +64,7 @@ void PmergeMe<Container>::generate_jacobsthal() {
 	jacobsthal.push_back(0);
 	jacobsthal.push_back(1);
 
-	int max_size = static_cast<int>(_up_line.size()) - 1; // Cast to signed integer
+	int max_size = static_cast<int>(_up_line.size()) - 1;
 	while (jacobsthal.back() < max_size) {
 		int next = jacobsthal[jacobsthal.size() - 1] + 2 * jacobsthal[jacobsthal.size() - 2];
 		jacobsthal.push_back(next);
@@ -152,28 +152,31 @@ void PmergeMe<Container>::binary_search() {
 	if (_down_line.empty())
 		return;
 	int ins_num = *_down_line.begin();
-	int high = _up_line.size() - 1;
 	int low = 0;
-	
-	for (cont_it it = jacobsthal.begin(); it != jacobsthal.end(); ++it) {
-		int step = *it;
-		int mid = std::min(low + step, high);
-		if (mid < 1) {
-			if (_up_line[0] > ins_num)
-				_up_line.insert(_up_line.begin(), ins_num);
-			else
-				_up_line.insert(_up_line.begin() + 1, ins_num);
-			break;
-		}
-		if (is_correct_index(ins_num, mid))
-			break;
-		else if (_up_line[mid] < ins_num)
-			low = mid + 1;
-		else
-			high = mid - 1;
+	int high = _up_line.size() - 1;
 
-		if (low > high)
-			break;
+	while (low <= high) {
+		for (cont_it it = jacobsthal.begin(); it != jacobsthal.end(); ++it) {
+			int step = *it;
+			int mid = std::min(low + step, high);
+			if (mid < 0 || mid >= static_cast<int>(_up_line.size()))
+				continue;
+
+			if (is_correct_index(ins_num, mid)) {
+				_down_line.erase(_down_line.begin());
+				binary_search();
+				return;
+			} else if (_up_line[mid] < ins_num) {
+				low = mid + 1;
+			} else {
+				high = mid - 1;
+			}
+		}
+	}
+	if (low >= static_cast<int>(_up_line.size())) {
+		_up_line.push_back(ins_num);
+	} else {
+		_up_line.insert(_up_line.begin() + low, ins_num);
 	}
 	_down_line.erase(_down_line.begin());
 	binary_search();
@@ -181,9 +184,12 @@ void PmergeMe<Container>::binary_search() {
 
 template <template <typename, typename> class Container>
 bool PmergeMe<Container>::is_correct_index(int target_num, int mid) {
-	if (_up_line[mid] == target_num) {
-		_up_line.insert(_up_line.begin() + mid, target_num);
-		return true;
+	if (mid == 0) {
+		if (_up_line[mid] > target_num) {
+			_up_line.insert(_up_line.begin(), target_num);
+			return true;
+		}
+		return false;
 	}
 	if (_up_line[mid - 1] < target_num && target_num < _up_line[mid]) {
 		_up_line.insert(_up_line.begin() + mid, target_num);
