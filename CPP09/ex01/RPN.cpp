@@ -31,9 +31,11 @@ float RPN::process_expr(std::string input) {
 	float a, b;
 	std::string::iterator it;
 	std::stack<float> _stack;
+	bool found;
 
 	for (it = input.begin(); it != input.end(); it++) {
 		if (is_operator(*it)) {
+			found = true;
 			if (_stack.size() < 2) {
 				RPN::error("Invalid expression: not enough operands for operation");
 				return 0;
@@ -47,6 +49,8 @@ float RPN::process_expr(std::string input) {
 		else if (is_operand(*it))
  			_stack.push(static_cast<float>(*it - '0'));
 	}
+	if (!found)
+		RPN::error("Invalid expression: no operators found");
 	return _stack.top();
 }
 

@@ -13,7 +13,6 @@
 
 class RPN {
 private:
-	//static std::stack<float> _stack;
 	RPN();
 	~RPN();
 
