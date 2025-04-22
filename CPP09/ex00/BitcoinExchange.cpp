@@ -35,11 +35,11 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	FileChecker::is_correct_format(line, type);
 	while (std::getline(file, line)) {
 		FileChecker::_line_num++;
-		if (line.empty()){
+		size_t pos;
+		if (line.empty() || (pos = line.find(type)) == std::string::npos){
 			FileChecker::error_exit("empty line");
 			continue ;
 		}
-		int pos = line.find(type);
 		parsed[0] = line.substr(0, pos);
 		parsed[1] = line.substr(pos + 1, line.length());
 
