@@ -4,11 +4,6 @@
 #include "colors.hpp"
 #include "limits.h"
 
-//TODO:
-//change printed time
-//no scientific notation with 50 000 nums bitte
-
-
 void error_exit(std::string msg) {
 	std::cout << RED500 << msg << std::endl;
 	exit (1);
@@ -47,20 +42,14 @@ bool compare_arrays(const std::vector<int> &arr1, const std::vector<int> &arr2) 
 int main (int argc, char **argv) {
 	std::vector<int> expr_vec = get_argument(argc, argv);
 	std::vector<int> sorted_by_algorithms = expr_vec;
-	expr_vec = PmergeMe<std::vector>::sort_vector(expr_vec);
+	expr_vec = PmergeMe<std::vector>::sort_cont(expr_vec);
 	std::deque<int> expr_deq(expr_vec.begin(), expr_vec.end());
-	PmergeMe<std::deque>::sort_vector(expr_deq);
+	PmergeMe<std::deque>::sort_cont(expr_deq);
 
 	std::sort(sorted_by_algorithms.begin(), sorted_by_algorithms.end());
 	if (compare_arrays(expr_vec, sorted_by_algorithms)) {
 		std::cout << "Sorted!\n";
-	} else {
+	} else
 		std::cout << "failed to sort\n";
-	}
 	return 0;
 }
-
-//TODO:
-//1. add jacobsthal
-//2. make sure us seconds are correct
-//3. one more check for error handling

@@ -32,7 +32,7 @@ private:
 
 public:
 	static void generate_jacobsthal();
-	static Container<int, std::allocator<int> > sort_vector(Container<int, std::allocator<int> > main_arg);
+	static Container<int, std::allocator<int> > sort_cont(Container<int, std::allocator<int> > main_arg);
 	static void _place_into_cont();
 	static void insertion_sort(Container<std::pair<int, int>, std::allocator<std::pair<int, int> > > &pair_line);
 	static void add_up_line();
@@ -77,7 +77,7 @@ bool PmergeMe<Container>::container_type(const Container<int, std::allocator<int
 }
 
 template <template <typename, typename> class Container>
-Container<int, std::allocator<int> >  PmergeMe<Container>::sort_vector(Container<int, std::allocator<int> > main_arg) {
+Container<int, std::allocator<int> >  PmergeMe<Container>::sort_cont(Container<int, std::allocator<int> > main_arg) {
 	cont_it a_it_b = main_arg.begin();
 	cont_it a_it_e = main_arg.end();
 
