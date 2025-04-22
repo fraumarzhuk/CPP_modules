@@ -29,8 +29,6 @@ void BitcoinExchange::parse_file(std::string filename, int type) {
 	std::getline(file, line);
 	std::string parsed[2];
 
-
-	// FileChecker::_correctline = true;
 	FileChecker::_line_num = 1;
 	FileChecker::is_correct_format(line, type);
 	while (std::getline(file, line)) {

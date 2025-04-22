@@ -63,13 +63,16 @@ struct tm FileChecker::get_date(std::string line, struct tm &date) {
 	std::string error = "";
 	if (line[line.length() - 1] == ' ')
 		line = line.substr(0, line.length() - 1);
-	if ((line[4] != '-' && line[7] != '-') || line.length() != 10)
+	if (line.length() != 10){
+		error_exit("incorrect formatting");
+		return date;
+	}
+	if ((line[4] != '-' && line[7] != '-'))
 	error = "date should be in YYYY-MM-DD format: " + line;
 
 	date.tm_year = std::atoi(line.substr(0, 4).c_str());
 	date.tm_mon = std::atoi(line.substr(5, 7).c_str());
 	date.tm_mday = std::atoi(line.substr(8, 9).c_str());
-
 	if (date.tm_year > CURRENT_YEAR || date.tm_year < BITCOIN_START_YEAR)
 		error = "invalid year: " + line;
 	if (!(date.tm_mon >= 1 && date.tm_mon <= 12))
