@@ -4,6 +4,11 @@
 #include "colors.hpp"
 #include "limits.h"
 
+//TODO:
+//change printed time
+//no scientific notation with 50 000 nums bitte
+
+
 void error_exit(std::string msg) {
 	std::cout << RED500 << msg << std::endl;
 	exit (1);
@@ -25,7 +30,7 @@ std::vector<int> get_argument(int argc, char **argv) {
 	return res;
 }
 
-bool	compare_arrays(const std::vector<int> &arr1, const std::vector<int> &arr2) {
+bool compare_arrays(const std::vector<int> &arr1, const std::vector<int> &arr2) {
 	if (arr1.size() != arr2.size())
 		return false;
 
